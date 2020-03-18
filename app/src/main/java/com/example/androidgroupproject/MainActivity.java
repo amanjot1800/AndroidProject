@@ -17,5 +17,10 @@ public class MainActivity extends AppCompatActivity {
             Intent nasa = new Intent(this, ImageryDatabase.class);
             startActivity(nasa);
         });
+//        Button ns11 = findViewById(R.id.nasa);
+//        ns.setOnClickListener(click ->{
+//            Intent nasa = new Intent(this, ImageryDatabase.class);
+//            startActivity(nasa);
+//        });
     }
 }
