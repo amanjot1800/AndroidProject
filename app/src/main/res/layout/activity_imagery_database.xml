@@ -7,8 +7,27 @@
     tools:context=".ImageryDatabase">
 
     <EditText
-
+        android:id="@+id/lat"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="@string/lat"
+        android:layout_centerHorizontal="true"
+        />
+    <EditText
+        android:id="@+id/lo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/lo"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/lat"
+        />
+    <Button
+        android:id="@+id/subm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/subm"
+        android:layout_centerInParent="true"
+
+        />
 
 </RelativeLayout>

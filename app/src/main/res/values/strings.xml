@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">AndroidGroupProject</string>
     <string name="nasa">Go to the Nasa Imagery Database</string>
+    <string name="lat">Enter the value of the Latitude</string>
+    <string name="lo">Enter the value of the Longitude</string>
+    <string name="subm">Click here to submit</string>
 </resources>
