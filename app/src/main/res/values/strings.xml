@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidGroupProject</string>
+    <string name="nasa">Go to the Nasa Imagery Database</string>
 </resources>
