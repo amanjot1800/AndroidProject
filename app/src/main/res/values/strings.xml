@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">AndroidGroupProject</string>
     <string name="nasa">Go to the Nasa Imagery Database</string>
+    <string name="save_article">Save article</string>
+    <string name="hideFrag">HIDE</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="GotoBBCnewsReader">BBC News Reader</string>
 </resources>
