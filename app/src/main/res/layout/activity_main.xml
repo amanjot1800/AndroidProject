@@ -12,7 +12,7 @@
        android:text="@string/nasa" />
 
    <Button
-       android:id="@+id/GoToBBCnewsReader"
+       android:id="@+id/goToBBCnewsReader"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_below="@+id/nasa"

@@ -18,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(nasa);
         });
 
+        Button goToBBCnewsReader = findViewById(R.id.goToBBCnewsReader);
+        goToBBCnewsReader.setOnClickListener(click ->{
+            Intent goTobbcNewsReader = new Intent(MainActivity.this, BBCnewsReader.class);
+            startActivity(goTobbcNewsReader);
+        });
 
     }
 }
