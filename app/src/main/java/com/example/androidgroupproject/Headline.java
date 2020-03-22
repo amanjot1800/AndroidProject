@@ -8,7 +8,7 @@ public class Headline {
     public long id;
 
 
-    Headline(String title, String description , String dateOfArticle, long id){
+    Headline(String title, String description , String dateOfArticle , long id){
         this.title= title;
         this.description = description;
         this.dateOfArticle = dateOfArticle;
@@ -30,4 +30,12 @@ public class Headline {
     public long getId() {
         return id;
     }
+
+    public void setTitle(String title) { this.title = title; }
+
+    public void setDescription(String description) { this.description = description; }
+
+    public void setDateOfArticle(String dateOfArticle) { this.dateOfArticle = dateOfArticle; }
+
+    public void setId(long id) { this.id = id; }
 }

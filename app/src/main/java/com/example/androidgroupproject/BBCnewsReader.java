@@ -1,7 +1,11 @@
 package com.example.androidgroupproject;
 
-import android.content.Intent;
+
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,10 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,21 +24,28 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class BBCnewsReader extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private HeadlineAdapter myAdapter;
     private ArrayList<Headline> list = new ArrayList<>();
+    SQLiteDatabase db;
+    private ProgressBar bar;
+    private TextView bbcTitle, bbcDescription, bbcDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bbc_news_reader);
 
         Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
-
         setSupportActionBar(tBar);
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
@@ -50,6 +61,17 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
 //                .beginTransaction()
 //                .replace(R.id.BBCframe, dFragment)
 //                .commit();
+
+        bbcTitle = findViewById(R.id.bbcTitle);
+        bbcDescription = findViewById(R.id.bbcDescription);
+        bbcDate = findViewById(R.id.bbcPubDate);
+        bar = findViewById(R.id.progressBar);
+        bar.setVisibility(View.VISIBLE);
+
+        HeadlineQuery req = new HeadlineQuery();
+        req.execute("http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml");
+        ListView headlines = findViewById(R.id.news_list);
+        headlines.setAdapter( myAdapter = new HeadlineAdapter());
     }
 
     @Override
@@ -82,7 +104,6 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         return false;
     }
 
@@ -109,9 +130,90 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
             Headline thisRow = getItem(position);
             //make a new row:
             View headlineView = inflater.inflate(R.layout.bbc_headline, parent, false);
-            TextView tView = headlineView.findViewById(R.id.bbcTitle);
-            tView.setText( thisRow.getTitle());
+            TextView titleView = headlineView.findViewById(R.id.bbcTitle);
+            titleView.setText( thisRow.getDescription());
+            TextView descriptionView = headlineView.findViewById(R.id.bbcDescription);
+            descriptionView.setText( thisRow.getDescription());
+            TextView dateView = headlineView.findViewById(R.id.bbcPubDate);
+            dateView.setText( thisRow.getDateOfArticle());
+
             return headlineView;
+        }
+    }
+    private class HeadlineQuery extends AsyncTask<String, Integer, String> {
+
+        String  title, description, date;
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                //get the string url:
+                String myUrl = params[0];
+
+                //create the network connection:
+                URL url = new URL(myUrl);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                InputStream inStream = conn.getInputStream();
+
+                //create a pull parser:
+                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+                factory.setNamespaceAware(false);
+                XmlPullParser xpp = factory.newPullParser();
+                xpp.setInput(inStream, "UTF-8");
+
+
+                //now loop over the XML:
+                while (xpp.getEventType() != XmlPullParser.END_DOCUMENT)
+                {
+                    if (xpp.getEventType() == XmlPullParser.START_TAG)
+                    {
+                        if(xpp.getName().equals("item")){
+                            if (xpp.getName().equals("title"))
+                            {
+                                title = xpp.nextText();
+                            }
+                            else if (xpp.getName().equals("description"))
+                            {
+                                description = xpp.nextText();
+                            }
+                            else if (xpp.getName().equals("pubDate"))
+                            {
+                                date = xpp.nextText();
+                            }
+                        }
+
+
+                        ContentValues newRowValues = new ContentValues();
+                        newRowValues.put(BBCmyOpener.COL_TITLE, title);
+                        newRowValues.put(BBCmyOpener.COL_DESCRIPTION, description);
+                        newRowValues.put(BBCmyOpener.COL_DATE, date);
+
+                        long newId = db.insert(BBCmyOpener.TABLE_NAME, null, newRowValues);
+                        list.add(new Headline(title, description , date, newId));
+                        }
+                    xpp.next(); //advance to next XML event
+                }
+
+            } catch (Exception ex) {
+            }
+
+            return "done";
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            bar.setVisibility(View.VISIBLE);
+            bar.setProgress(values[0]);
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+//            bbcTitle.setText(title);
+//            bbcDescription.setText(description);
+//            bbcDate.setText(date);
+            myAdapter.notifyDataSetChanged();
+            bar.setProgress(100);
+            bar.setVisibility(View.INVISIBLE);
         }
     }
 }
