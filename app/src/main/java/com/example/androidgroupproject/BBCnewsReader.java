@@ -1,7 +1,7 @@
 package com.example.androidgroupproject;
 
 
-import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,7 +38,10 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
     private ArrayList<Headline> list = new ArrayList<>();
     SQLiteDatabase db;
     private ProgressBar bar;
-    private TextView bbcTitle, bbcDescription, bbcDate;
+    public static final String TITLE = "TITLE";
+    public static final String DESCRIPTION = "DESCRIPTION";
+    public static final String LINK = "LINK";
+    public static final String DATE = "DATE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +65,6 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
 //                .replace(R.id.BBCframe, dFragment)
 //                .commit();
 
-        bbcTitle = findViewById(R.id.bbcTitle);
-        bbcDescription = findViewById(R.id.bbcDescription);
-        bbcDate = findViewById(R.id.bbcPubDate);
         bar = findViewById(R.id.progressBar);
         bar.setVisibility(View.VISIBLE);
 
@@ -72,6 +72,17 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
         req.execute("http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml");
         ListView headlines = findViewById(R.id.news_list);
         headlines.setAdapter( myAdapter = new HeadlineAdapter());
+        headlines.setOnItemClickListener((p, v, position, id)-> {
+            Bundle dataToPass = new Bundle();
+            dataToPass.putString(TITLE, list.get(position).getTitle());
+            dataToPass.putString(DESCRIPTION, list.get(position).getDescription());
+            dataToPass.putString(LINK, list.get(position).getLink());
+            dataToPass.putString(DATE, list.get(position).getDateOfArticle());
+
+            Intent nextActivity = new Intent(BBCnewsReader.this, HeadlineDetails.class);
+            nextActivity.putExtras(dataToPass);
+            startActivity(nextActivity); //make the transition
+        });
     }
 
     @Override
@@ -79,21 +90,6 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.bbc_menu, menu);
-
-
-	    /* slide 15 material:
-	    MenuItem searchItem = menu.findItem(R.id.search_item);
-        SearchView sView = (SearchView)searchItem.getActionView();
-        sView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-            }
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }  });
-
-	    */
 
         return true;
     }
@@ -131,18 +127,14 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
             //make a new row:
             View headlineView = inflater.inflate(R.layout.bbc_headline, parent, false);
             TextView titleView = headlineView.findViewById(R.id.bbcTitle);
-            titleView.setText( thisRow.getDescription());
-            TextView descriptionView = headlineView.findViewById(R.id.bbcDescription);
-            descriptionView.setText( thisRow.getDescription());
-            TextView dateView = headlineView.findViewById(R.id.bbcPubDate);
-            dateView.setText( thisRow.getDateOfArticle());
+            titleView.setText( thisRow.getTitle());
 
             return headlineView;
         }
     }
     private class HeadlineQuery extends AsyncTask<String, Integer, String> {
 
-        String  title, description, date;
+        String  title, description, link, date;
         @Override
         protected String doInBackground(String... params) {
             try {
@@ -160,41 +152,72 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
                 XmlPullParser xpp = factory.newPullParser();
                 xpp.setInput(inStream, "UTF-8");
 
+                int count = 1;
 
                 //now loop over the XML:
                 while (xpp.getEventType() != XmlPullParser.END_DOCUMENT)
                 {
-                    if (xpp.getEventType() == XmlPullParser.START_TAG)
-                    {
-                        if(xpp.getName().equals("item")){
-                            if (xpp.getName().equals("title"))
-                            {
-                                title = xpp.nextText();
-                            }
-                            else if (xpp.getName().equals("description"))
-                            {
-                                description = xpp.nextText();
-                            }
-                            else if (xpp.getName().equals("pubDate"))
-                            {
-                                date = xpp.nextText();
-                            }
-                        }
+                    switch (xpp.getEventType()) {
 
+                        case XmlPullParser.START_TAG:
+                            String name = xpp.getName();
+                            if (name.equals("title")) {
+                                xpp.next();
+                                String tempTitle = xpp.getText();
+                                if (!tempTitle.contains("BBC News - US & Canada")) {
+                                    title = tempTitle;
+                                    Log.i("Item", String.valueOf(count++));
+                                    Log.i("Title is:", title);
+                                    publishProgress(30);
+                                }
+                            }
+                            else if (name.equals("description")) {
+                                xpp.next();
+                                String tempDescription = xpp.getText();
+                                if(!tempDescription.contains("BBC News - US & Canada")){
+                                    description = tempDescription;
+                                    Log.i("Description is:", description);
+                                    publishProgress(30);
+                                }
+                            }
+                            else if (name.equals("link")) {
+                                xpp.next();
+                                String tempLink = xpp.getText();
+                                if(!tempLink.equals("https://www.bbc.co.uk/news/")){
+                                    link = tempLink;
+                                    Log.i("Link is:", link);
+                                    publishProgress(30);
+                                }
+                            }
+                            else if (name.equals("pubDate")) {
+                                xpp.next();
+                                date = xpp.getText();
+                                publishProgress(30);
+                                Log.i("Publish Date is: ", date);
+                                publishProgress(30);
+                            }
+                            if(title!=null && description!=null && date!=null) {
+//                                ContentValues newRowValues = new ContentValues();
+//                                newRowValues.put(BBCmyOpener.COL_TITLE, title);
+//                                newRowValues.put(BBCmyOpener.COL_DESCRIPTION, description);
+//                                newRowValues.put(BBCmyOpener.COL_LINK, link);
+//                                newRowValues.put(BBCmyOpener.COL_DATE, date);
+//                                long newId = db.insert(BBCmyOpener.TABLE_NAME, null, newRowValues);
 
-                        ContentValues newRowValues = new ContentValues();
-                        newRowValues.put(BBCmyOpener.COL_TITLE, title);
-                        newRowValues.put(BBCmyOpener.COL_DESCRIPTION, description);
-                        newRowValues.put(BBCmyOpener.COL_DATE, date);
-
-                        long newId = db.insert(BBCmyOpener.TABLE_NAME, null, newRowValues);
-                        list.add(new Headline(title, description , date, newId));
-                        }
-                    xpp.next(); //advance to next XML event
+                                list.add(new Headline(title, description, link, date));
+                                title = null;
+                                description = null;
+                                link = null;
+                                date = null;
+                            }
+                            break;
+                        case XmlPullParser.TEXT:
+                            break;
+                    }
+                    xpp.next();//look at next XML tag
                 }
-
-            } catch (Exception ex) {
-            }
+                publishProgress(100);
+            } catch (Exception ex) {}
 
             return "done";
         }
@@ -208,11 +231,8 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
 
         @Override
         protected void onPostExecute(String s) {
-//            bbcTitle.setText(title);
-//            bbcDescription.setText(description);
-//            bbcDate.setText(date);
             myAdapter.notifyDataSetChanged();
-            bar.setProgress(100);
+
             bar.setVisibility(View.INVISIBLE);
         }
     }

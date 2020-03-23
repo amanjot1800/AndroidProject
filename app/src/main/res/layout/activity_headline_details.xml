@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HeadlineDetails"
+    android:orientation="horizontal">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/detailsToolbar"/>
+
+    <TextView
+        android:id="@+id/DetailsTitle"
+        android:layout_below="@+id/detailsToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/DetailsDescription"
+        android:layout_below="@+id/DetailsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp" />
+    <TextView
+        android:id="@+id/DetailsLink"
+        android:layout_below="@+id/DetailsDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:textSize="15dp" />
+    <TextView
+        android:id="@+id/DetailsDate"
+        android:layout_below="@+id/DetailsLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp" />
+
+</RelativeLayout>

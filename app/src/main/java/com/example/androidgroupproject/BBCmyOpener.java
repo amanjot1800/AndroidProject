@@ -11,6 +11,7 @@ public class BBCmyOpener extends SQLiteOpenHelper {
     public final static String TABLE_NAME = "HEADLINE";
     public final static String COL_TITLE = "TITLE";
     public final static String COL_DESCRIPTION = "DESCRIPTION";
+    public final static String COL_LINK = "LINK";
     public final static String COL_DATE = "DATE";
     public final static String COL_ID = "_id";
 
@@ -28,6 +29,7 @@ public class BBCmyOpener extends SQLiteOpenHelper {
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COL_TITLE + " text,"
                 + COL_DESCRIPTION + " text,"
+                + COL_LINK + " text,"
                 + COL_DATE  + " text);");  // add or remove columns
     }
 
