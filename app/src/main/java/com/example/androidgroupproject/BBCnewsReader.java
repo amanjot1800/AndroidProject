@@ -16,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -82,6 +83,7 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
             Intent nextActivity = new Intent(BBCnewsReader.this, HeadlineDetails.class);
             nextActivity.putExtras(dataToPass);
             startActivity(nextActivity); //make the transition
+            Toast.makeText(this, "News no. "+(position+1), Toast.LENGTH_LONG).show();
         });
     }
 
