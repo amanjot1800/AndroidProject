@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Guardian">
 
     <androidx.appcompat.widget.Toolbar
@@ -16,7 +17,7 @@
         android:layout_height="match_parent"
         tools:openDrawer="start"
         android:id="@+id/drawerLayout">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -28,7 +29,6 @@
                 style="?android:attr/progressBarStyleHorizontal"/>
             <TextView
                 android:id="@+id/heading"
-                android:layout_below="@+id/toolBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="25dp"
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/search"
                 android:id="@+id/list"/>
-        </LinearLayout>
+        </RelativeLayout>
 
         <com.google.android.material.navigation.NavigationView
             android:layout_width="wrap_content"
@@ -66,4 +66,4 @@
 
     </androidx.drawerlayout.widget.DrawerLayout>
 
-</RelativeLayout>
+</LinearLayout>
