@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.androidgroupproject">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -15,6 +16,11 @@
         <activity android:name=".ImageOfDayLoading" />
         <activity android:name=".ImageOfTheDay" />
         <activity android:name=".ImageryDatabase" />
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".ImageryDatabase"></activity>
+        <activity android:name=".Guardian"></activity>
+        <activity android:name=".Article"></activity>
+        <activity android:name=".ArticleDetail"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

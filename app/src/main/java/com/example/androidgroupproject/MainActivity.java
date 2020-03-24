@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button ns = findViewById(R.id.nasa);
         ns.setOnClickListener(click ->{
-            Intent nasa = new Intent(this, ImageryDatabase.class);
+            Intent nasa = new Intent(this, Guardian.class);
             startActivity(nasa);
         });
 
