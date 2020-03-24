@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:orderInCategory="25"
+        android:title="The Guardian news article search"
+        app:showAsAction="always"
+        android:id="@+id/guardian"/>
+
+    <item android:id="@+id/nasaEarth"
+        android:orderInCategory="50"
+        app:showAsAction="always"
+        android:title="NASA earth imagery database"/>    <!-- This uses showAsAction=always, so look at icon= parameter -->
+
+
+    <item android:id="@+id/nasaImage"
+        android:title="@string/nasa_image_of_the_day_search"
+        app:showAsAction="always"
+        android:orderInCategory="75"/>
+
+    <item android:id="@+id/BBC"
+        android:title="@string/bbc_news_reader"
+        app:showAsAction="always"
+        android:orderInCategory="75"/>
+</menu>

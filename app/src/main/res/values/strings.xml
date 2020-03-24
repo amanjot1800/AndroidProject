@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">AndroidGroupProject</string>
-    <string name="nasa">Go to the Nasa Imagery Database</string>
+    <string name="guardianPage">Go to the Guardian News Search</string>
+    <string name="search_news_article_about">Search News Article About</string>
+    <string name="the_guardian_news">The Guardian News</string>
+    <string name="search">Search</string>
+    <string name="title">Title: </string>
+    <string name="click_this_url_to_open_the_article_in_browser">Click this Url to open the article in browser:</string>
+    <string name="url">url: </string>
+    <string name="bbc_news_reader">BBC News Reader</string>
+    <string name="nasa_image_of_the_day_search">NASA image of the day search</string>
+    <string name="author_jashanjot_pruthi">Author : Jashanjot Pruthi</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

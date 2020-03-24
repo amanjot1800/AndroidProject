@@ -14,13 +14,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button ns = findViewById(R.id.nasa);
         ns.setOnClickListener(click ->{
-            Intent nasa = new Intent(this, ImageryDatabase.class);
+            Intent nasa = new Intent(this, Guardian.class);
             startActivity(nasa);
         });
-//        Button ns11 = findViewById(R.id.nasa);
-//        ns.setOnClickListener(click ->{
-//            Intent nasa = new Intent(this, ImageryDatabase.class);
-//            startActivity(nasa);
-//        });
     }
 }
