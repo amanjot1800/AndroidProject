@@ -1,6 +1,7 @@
 package com.example.androidgroupproject;
 
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -97,11 +98,33 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case R.id.help:
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("Help")
+                        .setIcon(R.drawable.help)
+                        .setMessage("This App will bring you the latest news from BBC.")
+                        .setPositiveButton("Ok", (c,clk) -> {})
+                        .create().show();
+        }
+
         return true;
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+
+            case R.id.help:
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("Help")
+                        .setIcon(R.drawable.help)
+                        .setMessage("This App will bring you the latest news from BBC.")
+                        .setPositiveButton("Ok", (c,clk) -> {})
+                        .create().show();
+        }
         return false;
     }
 

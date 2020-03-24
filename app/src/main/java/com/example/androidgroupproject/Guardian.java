@@ -72,15 +72,11 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
         searchButton.setOnClickListener(cl -> {
             articles.clear();
             adapter.notifyDataSetChanged();
-//            Scraper thread = new Scraper();
-            if (topic.getText().toString().isEmpty())
-                Toast.makeText(this, "Please enter a Topic to search", Toast.LENGTH_LONG).show();
-                //  Snackbar.make(null, "Please enter a Topic to search", Snackbar.LENGTH_LONG).show();
-//                thread.execute("https://content.guardianapis.com/search?api-key=1fb36b70-1588-4259-b703-2570ea1fac6a&q=%22+topic.getText().toString());
-            else {
-                Scraper thread = new Scraper();
-                thread.execute("https://content.guardianapis.com/search?api-key=1fb36b70-1588-4259-b703-2570ea1fac6a&q=%22"+topic.getText().toString());
-            }
+            Scraper thread = new Scraper();
+            if (!topic.getText().toString().isEmpty())
+                thread.execute("https://content.guardianapis.com/search?api-key=1fb36b70-1588-4259-b703-2570ea1fac6a&q="+topic.getText().toString());
+            else
+                Toast.makeText(this, "Please enter a Topic to search", Toast.LENGTH_SHORT).show();
         });
 
         //listView.setOnItemLongClickListener();
