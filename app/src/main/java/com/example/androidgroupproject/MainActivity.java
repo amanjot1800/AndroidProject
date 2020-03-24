@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button ns = findViewById(R.id.nasa);
         ns.setOnClickListener(click ->{
-            Intent nasa = new Intent(this, Guardian.class);
+            Intent nasa = new Intent(this, ImageryDatabase.class);
             startActivity(nasa);
         });
 
@@ -23,6 +23,13 @@ public class MainActivity extends AppCompatActivity {
         nasaImageOfDay.setOnClickListener( click -> {
             Intent go = new Intent(MainActivity.this, ImageOfTheDay.class);
             startActivity(go);
+        });
+
+
+        Button goToBBCnewsReader = findViewById(R.id.goToBBCnewsReader);
+        goToBBCnewsReader.setOnClickListener(click ->{
+            Intent goTobbcNewsReader = new Intent(MainActivity.this, BBCnewsReader.class);
+            startActivity(goTobbcNewsReader);
         });
 
     }

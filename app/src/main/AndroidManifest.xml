@@ -24,6 +24,9 @@
         <activity android:name=".MainDatabase"></activity>
         <activity android:name=".ImageryNasaActivity" />
         <activity android:name=".ImageryDatabase" />
+        <activity android:name=".HeadlineDetails"/>
+        <activity android:name=".ImageryDatabase" />
+        <activity android:name=".BBCnewsReader" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
