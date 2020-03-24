@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/item4"
+        android:title="@string/help"
+        android:icon="@drawable/help"
+        android:orderInCategory="50"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/item1"
+        android:title="@string/imageryDatabase"
+        android:icon="@drawable/nasa"
+        android:orderInCategory="100"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/item2"
+        android:title="@string/bbc"
+        android:icon="@drawable/bbc"
+        android:orderInCategory="150"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/item3"
+        android:title="@string/guardian"
+        android:icon="@drawable/guardian"
+        android:orderInCategory="200"
+        app:showAsAction="ifRoom"/>
+
+
+
+</menu>
