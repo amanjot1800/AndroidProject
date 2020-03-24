@@ -8,8 +8,6 @@
     <string name="imageryDatabase">Nasa Earth Imagery</string>
     <string name="amanjot">Author: Amanjot Singh</string>
     <string name="activity_image_of_day">Nasa Image of the Day</string>
-    <string name="open"> Open </string>
-    <string name="close"> Close </string>
     <string name="acalendartext"> Select a date from below:  </string>
     <string name="Go"> Go ! </string>
     <string name="nasaMessage"> Select any date from the calendar to see the NASA Image of the day in HD format </string>
@@ -19,8 +17,6 @@
     <string name="header_date"> Date: </string>
     <string name="header_hdurl"> HD URL: </string>
     <string name="list_heading"> Select an item to view details </string>
-
-
     <string name="guardianPage">Go to the Guardian News Search</string>
     <string name="search_news_article_about">Search News Article About</string>
     <string name="the_guardian_news">The Guardian News</string>
@@ -31,8 +27,6 @@
     <string name="bbc_news_reader">BBC News Reader</string>
     <string name="nasa_image_of_the_day_search">NASA image of the day search</string>
     <string name="author_jashanjot_pruthi">Author : Jashanjot Pruthi</string>
-    <string name="open">Open</string>
-    <string name="close">Close</string>
     <string name="lat">Enter the value of the Latitude</string>
     <string name="lo">Enter the value of the Longitude</string>
     <string name="subm">Click here to submit</string>

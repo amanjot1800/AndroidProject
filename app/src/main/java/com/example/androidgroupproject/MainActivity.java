@@ -32,5 +32,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(goTobbcNewsReader);
         });
 
+        Button guardian = findViewById(R.id.guardianMain);
+        guardian.setOnClickListener(click ->{
+            Intent guardianGo = new Intent(MainActivity.this, Guardian.class);
+            startActivity(guardianGo);
+        });
+
     }
 }
