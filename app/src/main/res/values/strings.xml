@@ -33,4 +33,7 @@
     <string name="author_jashanjot_pruthi">Author : Jashanjot Pruthi</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="lat">Enter the value of the Latitude</string>
+    <string name="lo">Enter the value of the Longitude</string>
+    <string name="subm">Click here to submit</string>
 </resources>
