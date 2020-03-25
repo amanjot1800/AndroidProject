@@ -28,6 +28,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -245,6 +246,8 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
 
         @Override
         protected void onProgressUpdate(Integer... values) {
+            if (articles.isEmpty())
+                Snackbar.make(findViewById(R.id.list), "No Articles found", Snackbar.LENGTH_LONG).show();
             progressBar.setVisibility(View.VISIBLE);
             progressBar.setProgress(100);
         }
