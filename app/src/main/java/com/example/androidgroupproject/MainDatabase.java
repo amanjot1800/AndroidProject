@@ -27,24 +27,44 @@ public class MainDatabase extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_database);
         Intent fromMain = getIntent();
-        nasa.clear();
+         nasa.clear();
         loadDataFromDatabase();
         String dt = fromMain.getStringExtra("u");
         String la = fromMain.getStringExtra("s");
         String lon = fromMain.getStringExtra("h");
         ListView ls = findViewById(R.id.theListView);
-
         ls.setAdapter(myAdapter = new MyChat());
+        boolean xits = false;
+        for (ArrayClass s: nasa ) {
+            if (s.getDate().equals(dt)) {
+                xits = true;
+            }
+
+
+            if (!xits) {
+                ContentValues newRowValues = new ContentValues();
+                newRowValues.put(DatabaseNasa.COL_LAT, la);
+                newRowValues.put(DatabaseNasa.COL_LONG, lon);
+                newRowValues.put(DatabaseNasa.COL_DATE, dt);
+                long newId = db.insert(DatabaseNasa.IMAGERY_TABLE, null, newRowValues);
+                nasa.add(new ArrayClass(la, lon, dt, newId));
+                myAdapter.notifyDataSetChanged();
+            }
+        }
 
 
 
-        ContentValues newRowValues = new ContentValues();
+
+
+
+
+     /*   ContentValues newRowValues = new ContentValues();
         newRowValues.put(DatabaseNasa.COL_LAT, la);
         newRowValues.put(DatabaseNasa.COL_LONG, lon);
         newRowValues.put(DatabaseNasa.COL_DATE, dt);
         long newId = db.insert(DatabaseNasa.IMAGERY_TABLE, null, newRowValues);
         nasa.add(new ArrayClass(la, lon, dt, newId));
-        myAdapter.notifyDataSetChanged();
+        myAdapter.notifyDataSetChanged();*/
 
 
         ls.setOnItemLongClickListener((a, b, c, d) -> {
@@ -121,7 +141,7 @@ public class MainDatabase extends AppCompatActivity {
 
 
         // We want to get all of the columns. Look at MyOpener.java for the definitions:
-        String[] columns = {DatabaseNasa.COL_LAT, DatabaseNasa.COL_LONG, DatabaseNasa.COL_DATE};
+        String[] columns = {DatabaseNasa.COL_ID,DatabaseNasa.COL_LAT, DatabaseNasa.COL_LONG, DatabaseNasa.COL_DATE};
         //query all the results from the database:
         Cursor results = db.query(false, DatabaseNasa.IMAGERY_TABLE, columns, null, null, null, null, null, null);
 
@@ -131,19 +151,20 @@ public class MainDatabase extends AppCompatActivity {
         int nameCollat = results.getColumnIndex(DatabaseNasa.COL_LAT);
         int idColLong = results.getColumnIndex(DatabaseNasa.COL_LONG);
         int date = results.getColumnIndex(DatabaseNasa.COL_DATE);
+        int id = results.getColumnIndex(DatabaseNasa.COL_ID);
 
         //iterate over the results, return true if there is a next item:
         while (results.moveToNext()) {
             String lat = results.getString(nameCollat);
             String lon = results.getString(idColLong);
             String da = results.getString(date);
-
+            long ids = results.getLong(id);
 
             //add the new Contact to the array list:
-            nasa.add(new ArrayClass(lat, lon, da));
+            nasa.add(new ArrayClass(lat, lon, da,id));
         }
     }
     protected void deleteContact(ArrayClass c) {
-        db.delete(DatabaseNasa.IMAGERY_TABLE, DatabaseNasa.COL_ID + "= ?", new String[]{Long.toString(c.getId())});
+        db.delete(DatabaseNasa.IMAGERY_TABLE, DatabaseNasa.COL_DATE + "= ?", new String[]{Long.toString(c.getId())});
     }
 }
