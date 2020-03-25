@@ -34,5 +34,6 @@ public class ArrayClass {
     public  String getDate() {
         return date;
     }
+    //dshbchsf
 }
 
