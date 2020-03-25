@@ -106,16 +106,19 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
         switch (item.getItemId()){
 
             case R.id.item1:
-                Intent go = new Intent(this, Class.class);
+                Intent go = new Intent(this, ImageryDatabase.class);
                 startActivity(go);
+                break;
 
             case R.id.item2:
-                Intent go2 = new Intent(this, Class.class);
+                Intent go2 = new Intent(this, BBCnewsReader.class);
                 startActivity(go2);
+                break;
 
             case R.id.item3:
-                Intent go3 = new Intent(this, Class.class);
+                Intent go3 = new Intent(this, Guardian.class);
                 startActivity(go3);
+                break;
 
             case R.id.item4:
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -126,6 +129,7 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
                         .setPositiveButton("Ok", (c,clk) -> {
 
                         }).create().show();
+                break;
         }
 
         return true;
@@ -137,16 +141,19 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
         switch (menuItem.getItemId()){
 
             case R.id.item1:
-                Intent go = new Intent(this, Class.class);
+                Intent go = new Intent(this, ImageryDatabase.class);
                 startActivity(go);
+                break;
 
             case R.id.item2:
-                Intent go2 = new Intent(this, Class.class);
+                Intent go2 = new Intent(this, BBCnewsReader.class);
                 startActivity(go2);
+                break;
 
             case R.id.item3:
-                Intent go3 = new Intent(this, Class.class);
+                Intent go3 = new Intent(this, Guardian.class);
                 startActivity(go3);
+                break;
 
             case R.id.item4:
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -157,6 +164,7 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
                         .setPositiveButton("Ok", (c,clk) -> {
 
                         }).create().show();
+                break;
         }
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer);
