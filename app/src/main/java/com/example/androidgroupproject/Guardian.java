@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -82,13 +83,27 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
 
         //listView.setOnItemLongClickListener();
         listView.setOnItemClickListener((parent, view, pos, id)->{
-            Intent goToArticleDetail = new Intent(Guardian.this, ArticleDetail.class);
-            Article selectedArticle = articles.get(pos);
-            goToArticleDetail.putExtra("title",selectedArticle.getTitle());
-            goToArticleDetail.putExtra("url", selectedArticle.getUrl());
-            goToArticleDetail.putExtra("sectionName", selectedArticle.getSectionName());
-            goToArticleDetail.putExtra("id", selectedArticle.getId());
-            startActivity(goToArticleDetail);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Do you want to leave this page?")
+                    .setPositiveButton("Confirm",(click,arg)->{
+//                        Article selectedArticle = adapter.getItem(pos);
+                        Intent goToArticleDetail = new Intent(Guardian.this, ArticleDetail.class);
+                        Article selectedArticle = articles.get(pos);
+                        goToArticleDetail.putExtra("title",selectedArticle.getTitle());
+                        goToArticleDetail.putExtra("url", selectedArticle.getUrl());
+                        goToArticleDetail.putExtra("sectionName", selectedArticle.getSectionName());
+                        goToArticleDetail.putExtra("id", selectedArticle.getId());
+                        startActivity(goToArticleDetail);
+                    }).create().show();
+            //           showContact(pos);
+
+//            Intent goToArticleDetail = new Intent(Guardian.this, ArticleDetail.class);
+//            Article selectedArticle = articles.get(pos);
+//            goToArticleDetail.putExtra("title",selectedArticle.getTitle());
+//            goToArticleDetail.putExtra("url", selectedArticle.getUrl());
+//            goToArticleDetail.putExtra("sectionName", selectedArticle.getSectionName());
+//            goToArticleDetail.putExtra("id", selectedArticle.getId());
+//            startActivity(goToArticleDetail);
         });
 //        listView.setOnItemLongClickListener((parent, view, pos, id)-> {
 //            Article selectedArticle = adapter.getItem(pos);
