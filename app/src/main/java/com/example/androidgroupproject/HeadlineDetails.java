@@ -12,6 +12,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+
+import static com.google.android.material.snackbar.Snackbar.*;
 
 public class HeadlineDetails extends AppCompatActivity{
 
@@ -54,6 +57,10 @@ public class HeadlineDetails extends AppCompatActivity{
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.save :
+                Snackbar.make(findViewById(R.id.detailsToolbar), "Article Saved", Snackbar.LENGTH_LONG).show();
+        }
         return true;
     }
 }

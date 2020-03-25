@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -72,10 +74,10 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
             articles.clear();
             adapter.notifyDataSetChanged();
             Scraper thread = new Scraper();
-           // if (!topic.getText().toString().isEmpty())
+            if (!topic.getText().toString().isEmpty())
                 thread.execute("https://content.guardianapis.com/search?api-key=1fb36b70-1588-4259-b703-2570ea1fac6a&q="+topic.getText().toString());
-//            else
-//                Snackbar.make(null, "Please enter a Topic to search", Snackbar.LENGTH_LONG).show();
+            else
+                Toast.makeText(this, "Please enter a Topic to search", Toast.LENGTH_SHORT).show();
         });
 
         //listView.setOnItemLongClickListener();
@@ -244,6 +246,8 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
 
         @Override
         protected void onProgressUpdate(Integer... values) {
+            if (articles.isEmpty())
+                Snackbar.make(findViewById(R.id.list), "No Articles found", Snackbar.LENGTH_LONG).show();
             progressBar.setVisibility(View.VISIBLE);
             progressBar.setProgress(100);
         }
