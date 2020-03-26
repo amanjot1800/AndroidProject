@@ -38,4 +38,9 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="listTitle">BBC Latest News</string>
+    <string name="guardianNewsSearch">Guardian News Search</string>
+    <string name="nasaImaginaryDatabase">Nasa Imaginary Database</string>
+    <string name="bbcTitle">BBC News Reader (RSS)</string>
+    <string name="bbcVersion">v1.0.1</string>
+    <string name="bbcAuthor">Author: Priyank Patel</string>
 </resources>

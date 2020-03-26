@@ -2,9 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/help"
-        android:icon="@drawable/globe"
+    <item android:id="@+id/goToGuardian"
+        android:icon="@drawable/guardian_news_search"
         android:orderInCategory="50"
+        app:showAsAction="always"
+        android:title="@string/guardianNewsSearch"/>
+
+    <item android:id="@+id/goToNasaImageOfTheDay"
+        android:icon="@drawable/imaginary_database"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="@string/nasaImageofDay"/>
+
+    <item android:id="@+id/goToNasaImageOfTheDaybbc"
+        android:icon="@drawable/nasa_image_of_the_day"
+        android:orderInCategory="150"
+        app:showAsAction="always"
+        android:title="@string/nasaImaginaryDatabase"/>
+
+    <item android:id="@+id/help"
+        android:icon="@drawable/info"
+        android:orderInCategory="200"
         app:showAsAction="never"
         android:title="@string/help_article"/>
 

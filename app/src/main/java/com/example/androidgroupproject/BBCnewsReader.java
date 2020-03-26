@@ -98,33 +98,74 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        String message = null;
         switch (item.getItemId()){
 
+            case R.id.goToGuardian:
+                message = "Guardian News Search";
+                Intent gotoGuardian = new Intent(BBCnewsReader.this, Guardian.class);
+                startActivity(gotoGuardian);
+                break;
+
+            case R.id.goToNasaImageOfTheDay:
+                message = "Nasa Image of the Day";
+                Intent gotoImageOfTheDay = new Intent(BBCnewsReader.this, ImageOfTheDay.class);
+                startActivity(gotoImageOfTheDay);
+                break;
+
+            case R.id.goToNasaImageOfTheDaybbc:
+                message = "Imaginary Database";
+                Intent gotoImaginaryDatabase = new Intent(BBCnewsReader.this, ImageryDatabase.class);
+                startActivity(gotoImaginaryDatabase);
+                break;
+
             case R.id.help:
+                message = "Help";
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setTitle("Help")
-                        .setIcon(R.drawable.help)
-                        .setMessage("This App will bring you the latest news from BBC.")
+                        .setIcon(R.drawable.info)
+                        .setMessage("This App will bring the latest news from BBC.")
                         .setPositiveButton("Ok", (c,clk) -> {})
                         .create().show();
+                break;
         }
-
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         return true;
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        String message = null;
         switch (item.getItemId()){
+
+            case R.id.goToGuardian:
+                message = "Guardian News Search";
+                Intent gotoGuardian = new Intent(BBCnewsReader.this, Guardian.class);
+                startActivity(gotoGuardian);
+                break;
+
+            case R.id.goToNasaImageOfTheDay:
+                message = "Nasa Image of the Day";
+                Intent gotoImageOfTheDay = new Intent(BBCnewsReader.this, ImageOfTheDay.class);
+                startActivity(gotoImageOfTheDay);
+                break;
+
+            case R.id.goToNasaImageOfTheDaybbc:
+                message = "Imaginary Database";
+                Intent gotoImaginaryDatabase = new Intent(BBCnewsReader.this, ImageryDatabase.class);
+                startActivity(gotoImaginaryDatabase);
+                break;
 
             case R.id.help:
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setTitle("Help")
                         .setIcon(R.drawable.help)
-                        .setMessage("This App will bring you the latest news from BBC.")
+                        .setMessage("This App will bring the latest news from BBC.")
                         .setPositiveButton("Ok", (c,clk) -> {})
                         .create().show();
+                break;
         }
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         return false;
     }
 
