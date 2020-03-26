@@ -9,6 +9,7 @@ public class MyOpener extends SQLiteOpenHelper {
     protected final static String DATABASE_NAME = "ArticleDB";
     protected final static int VERSION_NUM = 1;
     public final static String TABLE_NAME = "ARTICLE";
+    public final static String TABLE_FAV = "FAVOURITE";
     public final static String COL_TITLE = "TITLE";
     public final static String COL_URL = "URL";
     public final static String COL_SECT = "SECTION_NAME";
@@ -26,11 +27,18 @@ public class MyOpener extends SQLiteOpenHelper {
                 + COL_TITLE + " text,"
                 + COL_URL + " text,"
                 + COL_SECT + " text);");
+
+//        db.execSQL("CREATE TABLE " + TABLE_FAV + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+//                + COL_TITLE + " text,"
+//                + COL_URL + " text,"
+//                + COL_SECT + " text);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL(" DROP TABLE IF EXISTS " + TABLE_FAV);
         onCreate(db);
     }
+
 }
