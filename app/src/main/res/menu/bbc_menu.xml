@@ -20,9 +20,15 @@
         app:showAsAction="always"
         android:title="@string/nasaImaginaryDatabase"/>
 
+    <item android:id="@+id/goToSavedArticle"
+        android:icon="@drawable/save_article"
+        android:orderInCategory="200"
+        app:showAsAction="never"
+        android:title="@string/saved_article"/>
+
     <item android:id="@+id/help"
         android:icon="@drawable/info"
-        android:orderInCategory="200"
+        android:orderInCategory="250"
         app:showAsAction="never"
         android:title="@string/help_article"/>
 

@@ -4,37 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BBC_HeadlineDetails"
-    android:orientation="horizontal">
-
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/detailsToolbar"/>
+    tools:context=".BBC_SavedArticlesDetails">
 
     <TextView
-        android:id="@+id/DetailsTitle"
-        android:layout_below="@+id/detailsToolbar"
+        android:id="@+id/SavedDetailsTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:textSize="40dp"
         android:textStyle="bold"/>
     <TextView
-        android:id="@+id/DetailsDescription"
-        android:layout_below="@+id/DetailsTitle"
+        android:id="@+id/SavedDetailsDescription"
+        android:layout_below="@+id/SavedDetailsTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30dp" />
     <TextView
-        android:id="@+id/DetailsLink"
-        android:layout_below="@+id/DetailsDescription"
+        android:id="@+id/SavedDetailsLink"
+        android:layout_below="@+id/SavedDetailsDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autoLink="web"
         android:textSize="15dp" />
     <TextView
-        android:id="@+id/DetailsDate"
-        android:layout_below="@+id/DetailsLink"
+        android:id="@+id/SavedDetailsDate"
+        android:layout_below="@+id/SavedDetailsLink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15dp" />

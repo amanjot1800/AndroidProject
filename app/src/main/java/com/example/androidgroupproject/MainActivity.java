@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button goToBBCnewsReader = findViewById(R.id.goToBBCnewsReader);
         goToBBCnewsReader.setOnClickListener(click ->{
-            Intent goTobbcNewsReader = new Intent(MainActivity.this, BBCnewsReader.class);
+            Intent goTobbcNewsReader = new Intent(MainActivity.this, BBC_NewsReader.class);
             startActivity(goTobbcNewsReader);
         });
 

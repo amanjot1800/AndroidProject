@@ -1,7 +1,7 @@
 package com.example.androidgroupproject;
 
 
-public class Headline {
+public class BBC_SavedArticle {
     private String title;
     private String description;
     private String link;
@@ -9,11 +9,12 @@ public class Headline {
     private long id;
 
 
-    Headline(String title, String description, String link , String dateOfArticle ){
+    BBC_SavedArticle(String title, String description, String link , String dateOfArticle, long id ){
         this.title= title;
         this.description = description;
         this.link = link;
         this.dateOfArticle = dateOfArticle;
+        this.id = id;
     }
 
     public String getTitle() {

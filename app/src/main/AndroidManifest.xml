@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.androidgroupproject">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -10,18 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ImageOfDayList"></activity>
+        <activity android:name=".BBC_Saved_Articles_List"></activity>
+        <activity android:name=".ImageOfDayList" />
         <activity android:name=".ImageOfDayLoading" />
         <activity android:name=".ImageOfTheDay" />
         <activity android:name=".ImageryDatabase" />
-        <activity android:name=".Guardian"></activity>
-        <activity android:name=".Article"></activity>
-        <activity android:name=".ArticleDetail"></activity>
-        <activity android:name=".MainDatabase"></activity>
+        <activity android:name=".Guardian" />
+        <activity android:name=".Article" />
+        <activity android:name=".ArticleDetail" />
+        <activity android:name=".MainDatabase" />
         <activity android:name=".ImageryNasaActivity" />
-        <activity android:name=".HeadlineDetails"/>
-        <activity android:name=".BBCnewsReader" />
-
+        <activity android:name=".BBC_HeadlineDetails" />
+        <activity android:name=".BBC_NewsReader" />
+        <activity android:name=".BBC_SavedArticlesDetails" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

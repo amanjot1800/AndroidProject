@@ -1,6 +1,5 @@
 package com.example.androidgroupproject;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -10,13 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -34,7 +31,7 @@ import java.util.ArrayList;
 public class BBC_news_list extends Fragment {
 
     private HeadlineAdapter myAdapter;
-    private ArrayList<Headline> list = new ArrayList<>();
+    private ArrayList<BBC_Headline> list = new ArrayList<>();
     SQLiteDatabase db;
     private ProgressBar bar;
     public static final String TITLE = "TITLE";
@@ -53,6 +50,7 @@ public class BBC_news_list extends Fragment {
 
         HeadlineQuery req = new HeadlineQuery();
         req.execute("http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml");
+
         ListView headlines = result.findViewById(R.id.news_list);
         headlines.setAdapter( myAdapter = new HeadlineAdapter());
         headlines.setOnItemClickListener((p, v, position, id)-> {
@@ -65,10 +63,10 @@ public class BBC_news_list extends Fragment {
 //            Intent nextActivity = new Intent(BBC_news_list.this, HeadlineDetails.class);
 //            nextActivity.putExtras(dataToPass);
 //            startActivity(nextActivity); //make the transition
-            Intent nextActivity = new Intent();
-            nextActivity.setClass(getActivity(), HeadlineDetails.class);
-            nextActivity.putExtras(dataToPass);
-            getActivity().startActivity(nextActivity);
+            Intent goToHeadlineDetails = new Intent();
+            goToHeadlineDetails.setClass(getActivity(), BBC_HeadlineDetails.class);
+            goToHeadlineDetails.putExtras(dataToPass);
+            getActivity().startActivity(goToHeadlineDetails);
             Toast.makeText(getActivity(), "News no. "+(position+1), Toast.LENGTH_LONG).show();
         });
 
@@ -84,7 +82,7 @@ public class BBC_news_list extends Fragment {
         }
 
         @Override
-        public Headline getItem(int position) {
+        public BBC_Headline getItem(int position) {
             return list.get(position);
         }
 
@@ -96,7 +94,7 @@ public class BBC_news_list extends Fragment {
 
             LayoutInflater inflater = getLayoutInflater();
 
-            Headline thisRow = getItem(position);
+            BBC_Headline thisRow = getItem(position);
             //make a new row:
             View headlineView = inflater.inflate(R.layout.bbc_headline, parent, false);
             TextView titleView = headlineView.findViewById(R.id.bbcTitle);
@@ -177,7 +175,7 @@ public class BBC_news_list extends Fragment {
 //                                newRowValues.put(BBCmyOpener.COL_DATE, date);
 //                                long newId = db.insert(BBCmyOpener.TABLE_NAME, null, newRowValues);
 
-                                list.add(new Headline(title, description, link, date));
+                                list.add(new BBC_Headline(title, description, link, date));
                                 title = null;
                                 description = null;
                                 link = null;

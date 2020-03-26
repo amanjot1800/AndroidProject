@@ -3,7 +3,10 @@ package com.example.androidgroupproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.Menu;
@@ -11,13 +14,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import static com.google.android.material.snackbar.Snackbar.*;
+public class BBC_HeadlineDetails extends AppCompatActivity{
 
-public class HeadlineDetails extends AppCompatActivity{
-
+    String title, description, link, date;
+    SQLiteDatabase db;
+    ContentValues newRowValues;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +32,10 @@ public class HeadlineDetails extends AppCompatActivity{
         Intent fromNewsReader = getIntent();
         Bundle extras = fromNewsReader.getExtras();
 
-        String title = extras.getString(BBCnewsReader.TITLE);
-        String description = extras.getString(BBCnewsReader.DESCRIPTION);
-        String link = extras.getString(BBCnewsReader.LINK);
-        String date = extras.getString(BBCnewsReader.DATE);
+        title = extras.getString(BBC_news_list.TITLE);
+        description = extras.getString(BBC_news_list.DESCRIPTION);
+        link = extras.getString(BBC_news_list.LINK);
+        date = extras.getString(BBC_news_list.DATE);
 
         TextView bbcTitle = findViewById(R.id.DetailsTitle);
         bbcTitle.setText(title);
@@ -43,7 +46,6 @@ public class HeadlineDetails extends AppCompatActivity{
         bbcLink.setMovementMethod(LinkMovementMethod.getInstance());
         TextView bbcDate = findViewById(R.id.DetailsDate);
         bbcDate.setText(date);
-
 
     }
 
@@ -59,6 +61,14 @@ public class HeadlineDetails extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.save :
+                BBC_MyOpener dbOpener = new BBC_MyOpener(this);
+                db = dbOpener.getWritableDatabase();
+                newRowValues = new ContentValues();
+                newRowValues.put(BBC_MyOpener.COL_TITLE, title);
+                newRowValues.put(BBC_MyOpener.COL_DESCRIPTION, description);
+                newRowValues.put(BBC_MyOpener.COL_LINK, link);
+                newRowValues.put(BBC_MyOpener.COL_DATE, date);
+                long newId = db.insert(BBC_MyOpener.TABLE_NAME, null, newRowValues);
                 Snackbar.make(findViewById(R.id.detailsToolbar), "Article Saved", Snackbar.LENGTH_LONG).show();
         }
         return true;

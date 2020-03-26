@@ -4,19 +4,11 @@ package com.example.androidgroupproject;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -26,23 +18,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
-public class BBCnewsReader extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class BBC_NewsReader extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    private ArrayList<Headline> list = new ArrayList<>();
-    SQLiteDatabase db;
-    private ProgressBar bar;
-    public static final String TITLE = "TITLE";
-    public static final String DESCRIPTION = "DESCRIPTION";
-    public static final String LINK = "LINK";
-    public static final String DATE = "DATE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,20 +62,26 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
 
             case R.id.goToGuardian:
                 message = "Guardian News Search";
-                Intent gotoGuardian = new Intent(BBCnewsReader.this, Guardian.class);
+                Intent gotoGuardian = new Intent(BBC_NewsReader.this, Guardian.class);
                 startActivity(gotoGuardian);
                 break;
 
             case R.id.goToNasaImageOfTheDay:
                 message = "Nasa Image of the Day";
-                Intent gotoImageOfTheDay = new Intent(BBCnewsReader.this, ImageOfTheDay.class);
+                Intent gotoImageOfTheDay = new Intent(BBC_NewsReader.this, ImageOfTheDay.class);
                 startActivity(gotoImageOfTheDay);
                 break;
 
             case R.id.goToNasaImageOfTheDaybbc:
                 message = "Imaginary Database";
-                Intent gotoImaginaryDatabase = new Intent(BBCnewsReader.this, ImageryDatabase.class);
+                Intent gotoImaginaryDatabase = new Intent(BBC_NewsReader.this, ImageryDatabase.class);
                 startActivity(gotoImaginaryDatabase);
+                break;
+
+            case R.id.goToSavedArticle:
+                message = "Saved Articles";
+                Intent gotoSavedArticles = new Intent(BBC_NewsReader.this, BBC_Saved_Articles_List.class);
+                startActivity(gotoSavedArticles);
                 break;
 
             case R.id.help:
@@ -104,7 +89,7 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setTitle("Help")
                         .setIcon(R.drawable.info)
-                        .setMessage("This App will bring the latest news from BBC. You can also save and delete your favorite articles.")
+                        .setMessage("This App will bring the latest news from BBC. You can also save and delete your favorite articles.fhe")
                         .setPositiveButton("Ok", (c,clk) -> {})
                         .create().show();
                 break;
@@ -120,20 +105,26 @@ public class BBCnewsReader extends AppCompatActivity implements NavigationView.O
 
             case R.id.goToGuardian:
                 message = "Guardian News Search";
-                Intent gotoGuardian = new Intent(BBCnewsReader.this, Guardian.class);
+                Intent gotoGuardian = new Intent(BBC_NewsReader.this, Guardian.class);
                 startActivity(gotoGuardian);
                 break;
 
             case R.id.goToNasaImageOfTheDay:
                 message = "Nasa Image of the Day";
-                Intent gotoImageOfTheDay = new Intent(BBCnewsReader.this, ImageOfTheDay.class);
+                Intent gotoImageOfTheDay = new Intent(BBC_NewsReader.this, ImageOfTheDay.class);
                 startActivity(gotoImageOfTheDay);
                 break;
 
             case R.id.goToNasaImageOfTheDaybbc:
                 message = "Imaginary Database";
-                Intent gotoImaginaryDatabase = new Intent(BBCnewsReader.this, ImageryDatabase.class);
+                Intent gotoImaginaryDatabase = new Intent(BBC_NewsReader.this, ImageryDatabase.class);
                 startActivity(gotoImaginaryDatabase);
+                break;
+
+            case R.id.goToSavedArticle:
+                message = "Saved Articles";
+                Intent gotoSavedArticles = new Intent(BBC_NewsReader.this, BBC_Saved_Articles_List.class);
+                startActivity(gotoSavedArticles);
                 break;
 
             case R.id.help:
