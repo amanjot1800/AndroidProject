@@ -3,7 +3,9 @@ package com.example.androidgroupproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +23,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class BBC_Saved_Articles_List extends AppCompatActivity {
+
+
     private ArrayList<BBC_SavedArticle> list = new ArrayList<>();
     private SavedHeadlineAdapter myAdapter;
     SQLiteDatabase db;
@@ -28,6 +33,9 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
     public static final String DESCRIPTION = "DESCRIPTION";
     public static final String LINK = "LINK";
     public static final String DATE = "DATE";
+    SharedPreferences prefs = null;
+    EditText typeField;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +70,27 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
             nextActivity.putExtras(dataToPass);
             startActivity(nextActivity); //make the transition
             Toast.makeText(this, "Saved article no. "+(position+1), Toast.LENGTH_LONG).show();
+        });
+
+        TextView favName = findViewById(R.id.savedArticlesTitle);
+        prefs = getSharedPreferences("Name", Context.MODE_PRIVATE);
+        String savedString = prefs.getString("name", "Bond") +"'s";
+        typeField = findViewById(R.id.enterYourName);
+        typeField.setText(savedString.substring(0,savedString.length()-2));
+        favName.setText(savedString+" Saved Articles");
+
+
+        EditText name =findViewById(R.id.enterYourName);
+        Button enter =findViewById(R.id.enter);
+        enter.setOnClickListener(click -> {
+            String userGivenName = name.getText().toString();
+            if(userGivenName.length()==0){
+                Toast.makeText(this, "Please Enter Your Name", Toast.LENGTH_SHORT).show();
+            }
+            if(userGivenName!=null && userGivenName.length()!=0){
+                favName.setText(userGivenName + "'s Saved Articles");
+            }
+            saveSharedPrefs( typeField.getText().toString());
         });
     }
 
@@ -127,5 +156,12 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
 
             return SavedheadlineView;
         }
+    }
+
+    private void saveSharedPrefs(String stringToSave)
+    {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("name", stringToSave);
+        editor.commit();
     }
 }
