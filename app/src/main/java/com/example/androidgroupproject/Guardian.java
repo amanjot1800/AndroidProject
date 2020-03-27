@@ -174,7 +174,7 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(go1);
                 break;
             case R.id.BBC:
-                Intent go2 = new Intent(this, BBCnewsReader.class);
+                Intent go2 = new Intent(this, BBC_NewsReader.class);
                 startActivity(go2);
                 break;
         }
@@ -208,7 +208,7 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(go1);
                 break;
             case R.id.BBC:
-                Intent go2 = new Intent(this, BBCnewsReader.class);
+                Intent go2 = new Intent(this, BBC_NewsReader.class);
                 startActivity(go2);
                 break;
         }

@@ -12,7 +12,7 @@
     <item android:id="@+id/nasaEarth"
         android:orderInCategory="50"
         app:showAsAction="always"
-        android:icon="@drawable/globe"
+        android:icon="@drawable/info"
         android:title="NASA earth imagery database"/>    <!-- This uses showAsAction=always, so look at icon= parameter -->
 
 
