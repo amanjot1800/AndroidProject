@@ -31,28 +31,34 @@
                 android:id="@+id/heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="25dp"
+                android:textSize="35dp"
                 android:text="@string/the_guardian_news"
                 android:textAlignment="center"
                 android:fontFamily="sans-serif-condensed-light"/>
             <EditText
                 android:layout_below="@+id/heading"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/search"
                 android:hint="@string/search_news_article_about"/>
-            <Button
+            <ImageButton
                 android:layout_below="@+id/heading"
-                android:layout_toRightOf="@+id/search"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_height="wrap_content"
-                android:text="@string/search"
+                android:src="@drawable/search"
                 android:id="@+id/srchBtn"/>
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/search"
                 android:id="@+id/list"/>
+            <Button
+                android:id="@+id/favouriteButton"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Favourite Articles"/>
         </RelativeLayout>
 
         <com.google.android.material.navigation.NavigationView

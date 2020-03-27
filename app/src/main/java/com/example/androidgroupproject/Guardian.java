@@ -16,12 +16,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -38,6 +40,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Guard;
 import java.util.ArrayList;
 
 public class Guardian extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -63,14 +66,19 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
         NavigationView nv = findViewById(R.id.navigation);
         nv.setNavigationItemSelectedListener(this);
 
+        Button fav = findViewById(R.id.favouriteButton);
+        Intent goToFav = new Intent(Guardian.this, Favourite.class);
+        fav.setOnClickListener(b->startActivity(goToFav));
         EditText topic = findViewById(R.id.search);
-        Button searchButton = findViewById(R.id.srchBtn);
+        ImageButton searchButton = findViewById(R.id.srchBtn);
         ListView listView = findViewById(R.id.list);
         listView.setAdapter(adapter = new MyAdapter());
         progressBar = findViewById(R.id.progBar);
         progressBar.setVisibility(View.VISIBLE);
 
         searchButton.setOnClickListener(cl -> {
+            db.execSQL(" DROP TABLE IF EXISTS " + MyOpener.TABLE_NAME);
+            new MyOpener(this).onCreate(db);
             articles.clear();
             adapter.notifyDataSetChanged();
             Scraper thread = new Scraper();
@@ -82,26 +90,31 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
 
         //listView.setOnItemLongClickListener();
         listView.setOnItemClickListener((parent, view, pos, id)->{
-            Intent goToArticleDetail = new Intent(Guardian.this, ArticleDetail.class);
-            Article selectedArticle = articles.get(pos);
-            goToArticleDetail.putExtra("title",selectedArticle.getTitle());
-            goToArticleDetail.putExtra("url", selectedArticle.getUrl());
-            goToArticleDetail.putExtra("sectionName", selectedArticle.getSectionName());
-            goToArticleDetail.putExtra("id", selectedArticle.getId());
-            startActivity(goToArticleDetail);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Do you want to leave this page?")
+                    .setPositiveButton("Confirm",(click,arg)->{
+//                        Article selectedArticle = adapter.getItem(pos);
+                        Intent goToArticleDetail = new Intent(Guardian.this, ArticleDetail.class);
+                        Article selectedArticle = articles.get(pos);
+                        goToArticleDetail.putExtra("title",selectedArticle.getTitle());
+                        goToArticleDetail.putExtra("url", selectedArticle.getUrl());
+                        goToArticleDetail.putExtra("sectionName", selectedArticle.getSectionName());
+                        goToArticleDetail.putExtra("id", selectedArticle.getId());
+                        startActivity(goToArticleDetail);
+                    }).create().show();
         });
-//        listView.setOnItemLongClickListener((parent, view, pos, id)-> {
-//            Article selectedArticle = adapter.getItem(pos);
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            builder.setTitle("Do You want to Delete This?")
-//                    .setMessage("The selected row is: "+pos + "\tThe database id id:"+id)
-//                    .setPositiveButton("Confirm",(click,arg)->{
-//                        articles.remove(pos);adapter.notifyDataSetChanged();
-//                        deleteArticle(selectedArticle);})
-//                    .setNegativeButton("",(click,arg)->{}).create().show();
-//            //           showContact(pos);
-//            return true;
-//        });
+        listView.setOnItemLongClickListener((parent, view, pos, id)-> {
+            Article selectedArticle = adapter.getItem(pos);
+            ContentValues newRowValues = new ContentValues();
+
+            newRowValues.put(MyOpener.COL_TITLE, selectedArticle.getTitle());
+            newRowValues.put(MyOpener.COL_URL, selectedArticle.getUrl());
+            newRowValues.put(MyOpener.COL_SECT, selectedArticle.getSectionName());
+            //Now insert in the database:
+            long newId = db.insert(MyOpener.TABLE_FAV, null, newRowValues);
+            Toast.makeText(this, "Added to favourites", Toast.LENGTH_LONG).show();
+            return true;
+        });
     }
 
     protected void deleteArticle(Article article)
@@ -113,6 +126,7 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
         //get a database connection:
         MyOpener dbOpener = new MyOpener(this);
         db = dbOpener.getWritableDatabase();
+       // dbOpener.onUpgrade(db,MyOpener.VERSION_NUM, 2);
 
 
         // We want to get all of the columns. Look at MyOpener.java for the definitions:
@@ -152,16 +166,16 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(goToGuardian);
                 break;
             case R.id.nasaImage:
-//                Intent goToWeather = new Intent(TestToolBar.this, WeatherForecast.class);
-//                startActivity(goToWeather);
+                Intent go = new Intent(this, ImageOfTheDay.class);
+                startActivity(go);
                 break;
             case R.id.nasaEarth:
-//                Intent goToChat = new Intent(TestToolBar.this, chatRoomActivity.class);
-//                startActivity(goToChat);
+                Intent go1 = new Intent(this, ImageryDatabase.class);
+                startActivity(go1);
                 break;
             case R.id.BBC:
-//                Intent goToChat = new Intent(TestToolBar.this, chatRoomActivity.class);
-//                startActivity(goToChat);
+                Intent go2 = new Intent(this, BBCnewsReader.class);
+                startActivity(go2);
                 break;
         }
 
@@ -186,17 +200,18 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(goToGuardian);
                 break;
             case R.id.nasaImage:
-//                Intent goToWeather = new Intent(TestToolBar.this, WeatherForecast.class);
-//                startActivity(goToWeather);
+                Intent go = new Intent(this, ImageOfTheDay.class);
+                startActivity(go);
                 break;
             case R.id.nasaEarth:
-//                Intent goToChat = new Intent(TestToolBar.this, chatRoomActivity.class);
-//                startActivity(goToChat);
+                Intent go1 = new Intent(this, ImageryDatabase.class);
+                startActivity(go1);
                 break;
             case R.id.BBC:
-//                Intent goToChat = new Intent(TestToolBar.this, chatRoomActivity.class);
-//                startActivity(goToChat);
-                break;}
+                Intent go2 = new Intent(this, BBCnewsReader.class);
+                startActivity(go2);
+                break;
+        }
             return true;
     }
 
