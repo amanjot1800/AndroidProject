@@ -48,9 +48,10 @@ public class ImageryNasaActivity extends AppCompatActivity {
        la =fromMain.getDoubleExtra("shubham", 0);
        lng =fromMain.getDoubleExtra("sharma", 0);
         nasaImg = new NasaImagery();
-        String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=bG34muTPpUTPQvU5VJ6wUB9EdBWSnJ9Fhn5g5QFx";
-        //String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=DEMO_KEY";
-        //String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon=100.75&lat=1.5&date=2014-02-01&api_key=DEMO_KEY";
+       // String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=bG34muTPpUTPQvU5VJ6wUB9EdBWSnJ9Fhn5g5QFx";
+        String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=CgKHgdvrK5UxpWaugKZYYqIt9pBVcKrff0cYkMvM";
+       // String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=DEMO_KEY";
+      //  String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon=100.75&lat=1.5&date=2014-02-01&api_key=DEMO_KEY";
         nasaImg.execute(ur);
         data = findViewById(R.id.datas);
 
@@ -64,9 +65,10 @@ public class ImageryNasaActivity extends AppCompatActivity {
     private class NasaImagery extends AsyncTask<String, Integer, String> {
         Bitmap image = null;
         String ss = "";
-        String ret = "";
+
         String line = null;
         String date ="";
+        String imgUrl;
 
         @Override
         protected String doInBackground(String... args) {
@@ -87,7 +89,7 @@ public class ImageryNasaActivity extends AppCompatActivity {
                 JSONObject nasas = new JSONObject(result);
 
                  date = nasas.getString("date");
-                String imgUrl = nasas.getString("url");
+                 imgUrl = nasas.getString("url");
                 String fileName = date+".png";
 
                 FileInputStream fis;
@@ -152,6 +154,7 @@ public class ImageryNasaActivity extends AppCompatActivity {
                 database.putExtra("s",tt.getText().toString());
                 database.putExtra("h",th.getText().toString());
                 database.putExtra("u", lw.getText().toString());
+                database.putExtra("b",imgUrl);
                 startActivity(database);
             });
 

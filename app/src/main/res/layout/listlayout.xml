@@ -7,11 +7,14 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/yow"
+        android:id="@+id/y"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         tools:layout_editor_absoluteX="25dp"
         tools:layout_editor_absoluteY="47dp" />
+    <ImageView
+        android:id="@+id/aa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

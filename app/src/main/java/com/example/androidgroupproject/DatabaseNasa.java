@@ -6,12 +6,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
     public class DatabaseNasa extends SQLiteOpenHelper {
      protected final static String DATABASE_NASA ="ImageryDataba";
-        protected final static int VERSION_NUM = 1;
+        protected final static int VERSION_NUM = 3;
       public final static String IMAGERY_TABLE = "Imagery";
   public final static String COL_LAT ="laitude";
         public final static String COL_ID = "_id";
    public final static String COL_LONG ="Longitude";
    public final static String COL_DATE ="date";
+        public final static String COL_URL ="rr";
 
     public DatabaseNasa(Context ctx) {
         super(ctx, DATABASE_NASA, null, VERSION_NUM);
@@ -22,7 +23,7 @@ import android.database.sqlite.SQLiteOpenHelper;
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + IMAGERY_TABLE + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COL_LAT  + " text,"  + COL_LONG + " text,"  + COL_DATE + " text);");  // add or remove columns
+                + COL_LAT  + " text,"  + COL_LONG + " text," + COL_URL+ " text,"  + COL_DATE + " text);");  // add or remove columns
     }
 
 
