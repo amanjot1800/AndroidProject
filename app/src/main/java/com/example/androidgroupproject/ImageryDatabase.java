@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,13 +49,22 @@ public class ImageryDatabase extends AppCompatActivity {
 
         Button btn = findViewById(R.id.subm);
         btn.setOnClickListener(click -> {
-            Intent gotoMain = new Intent(this, ImageryNasaActivity.class);
-            gotoMain.putExtra("shubham", Double.parseDouble(latitude.getText().toString()));
-            gotoMain.putExtra("sharma", Double.parseDouble(longitude.getText().toString()));
-            startActivity(gotoMain);
-
+            if(!latitude.getText().toString().isEmpty() && !longitude.getText().toString().isEmpty()) {
+                Intent gotoMain = new Intent(this, ImageryNasaActivity.class);
+                gotoMain.putExtra("shubham", Double.parseDouble(latitude.getText().toString()));
+                gotoMain.putExtra("sharma", Double.parseDouble(longitude.getText().toString()));
+                startActivity(gotoMain);
+            }else
+            {
+                Toast.makeText(this,"No value should be empty",Toast.LENGTH_LONG).show();
+            }
         });
-
+        Button cc = findViewById(R.id.wqq);
+        cc.setOnClickListener( click -> {
+            ;
+            Intent q = new Intent(this, MainDatabase.class);
+            startActivity(q);
+        });
     }
 
 

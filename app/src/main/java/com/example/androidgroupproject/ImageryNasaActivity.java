@@ -48,8 +48,8 @@ public class ImageryNasaActivity extends AppCompatActivity {
        la =fromMain.getDoubleExtra("shubham", 0);
        lng =fromMain.getDoubleExtra("sharma", 0);
         nasaImg = new NasaImagery();
-       // String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=bG34muTPpUTPQvU5VJ6wUB9EdBWSnJ9Fhn5g5QFx";
-        String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=CgKHgdvrK5UxpWaugKZYYqIt9pBVcKrff0cYkMvM";
+        String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=bG34muTPpUTPQvU5VJ6wUB9EdBWSnJ9Fhn5g5QFx";
+       // String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=CgKHgdvrK5UxpWaugKZYYqIt9pBVcKrff0cYkMvM";
        // String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=DEMO_KEY";
       //  String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon=100.75&lat=1.5&date=2014-02-01&api_key=DEMO_KEY";
         nasaImg.execute(ur);
@@ -75,9 +75,11 @@ public class ImageryNasaActivity extends AppCompatActivity {
             try {
                 URL url = new URL(args[0]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                InputStream response = urlConnection.getInputStream();
+               InputStream response = urlConnection.getInputStream();
+
                 //JSON reading:
                 //Build the entire string response:
+               // BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
                 StringBuilder sb = new StringBuilder();
 

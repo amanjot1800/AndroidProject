@@ -28,4 +28,12 @@
         android:hint="@string/subm"
         android:layout_centerInParent="true" />
 
+    <Button
+        android:id="@+id/wqq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Go to the Favourites"
+        android:layout_toEndOf="@id/subm"
+        android:layout_centerInParent="true" />
+
 </RelativeLayout>
