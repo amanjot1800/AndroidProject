@@ -31,23 +31,35 @@ public class Favourite extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
+        boolean isTablet = findViewById(R.id.fragmentLocation)!=null;
 
         ListView listView = findViewById(R.id.listV);
         listView.setAdapter(adapter = new MyAdapter());
         loadDataFromDatabase();
 
         listView.setOnItemClickListener((parent, view, pos, id)->{
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Do you want to leave this page?")
-                    .setPositiveButton("Confirm",(click,arg)->{
-                        Intent goToArticleDetail = new Intent(Favourite.this, ArticleDetail.class);
-                        Article selectedArticle = articles.get(pos);
-                        goToArticleDetail.putExtra("title",selectedArticle.getTitle());
-                        goToArticleDetail.putExtra("url", selectedArticle.getUrl());
-                        goToArticleDetail.putExtra("sectionName", selectedArticle.getSectionName());
-                        goToArticleDetail.putExtra("id", selectedArticle.getId());
-                        startActivity(goToArticleDetail);
-                    }).create().show();
+            Bundle dataToPass = new Bundle();
+            Article selectedArticle = articles.get(pos);
+            dataToPass.putString("title",selectedArticle.getTitle());
+            dataToPass.putString("url", selectedArticle.getUrl());
+            dataToPass.putString("sectionName", selectedArticle.getSectionName());
+            dataToPass.putLong("id", selectedArticle.getId());
+
+            if(isTablet){
+                ArticleDetail fragment = new ArticleDetail();
+                fragment.setArguments(dataToPass);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentLocation, fragment)
+                        .addToBackStack("")
+                        .commit();
+            }
+            else//isPhone
+            {
+                Intent goToArticleDetail = new Intent(Favourite.this, Phone.class);
+                goToArticleDetail.putExtras(dataToPass);
+                startActivity(goToArticleDetail);
+            }
         });
 
         listView.setOnItemLongClickListener((parent, view, pos, id)-> {

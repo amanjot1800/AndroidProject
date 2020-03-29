@@ -119,7 +119,7 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
             }
             else//isPhone
             {
-                Intent goToArticleDetail = new Intent(Guardian.this, .class);
+                Intent goToArticleDetail = new Intent(Guardian.this, Phone.class);
                 goToArticleDetail.putExtras(dataToPass);
                 startActivity(goToArticleDetail);
             }
