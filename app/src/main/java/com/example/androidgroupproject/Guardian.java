@@ -1,7 +1,9 @@
 package com.example.androidgroupproject;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -43,6 +45,11 @@ import java.net.URL;
 import java.security.Guard;
 import java.util.ArrayList;
 
+import static com.example.androidgroupproject.MyOpener.COL_SECT;
+import static com.example.androidgroupproject.MyOpener.COL_TITLE;
+import static com.example.androidgroupproject.MyOpener.COL_URL;
+import static com.example.androidgroupproject.MyOpener.TABLE_FAV;
+
 public class Guardian extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private ArrayList<Article> articles = new ArrayList<>();
@@ -50,12 +57,15 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
     private SQLiteDatabase db;
     Cursor results;
     private ProgressBar progressBar;
+    SharedPreferences prefs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guardian);
         loadDataFromDatabase();
+        boolean isTablet = findViewById(R.id.fragmentLocation)!=null;
+
         Toolbar tBar = findViewById(R.id.toolBar);
         setSupportActionBar(tBar);
         DrawerLayout drawer = findViewById(R.id.drawerLayout);
@@ -77,6 +87,7 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
         progressBar.setVisibility(View.VISIBLE);
 
         searchButton.setOnClickListener(cl -> {
+            saveSharedPrefs( topic.getText().toString());
             db.execSQL(" DROP TABLE IF EXISTS " + MyOpener.TABLE_NAME);
             new MyOpener(this).onCreate(db);
             articles.clear();
@@ -90,31 +101,44 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
 
         //listView.setOnItemLongClickListener();
         listView.setOnItemClickListener((parent, view, pos, id)->{
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Do you want to leave this page?")
-                    .setPositiveButton("Confirm",(click,arg)->{
-//                        Article selectedArticle = adapter.getItem(pos);
-                        Intent goToArticleDetail = new Intent(Guardian.this, ArticleDetail.class);
-                        Article selectedArticle = articles.get(pos);
-                        goToArticleDetail.putExtra("title",selectedArticle.getTitle());
-                        goToArticleDetail.putExtra("url", selectedArticle.getUrl());
-                        goToArticleDetail.putExtra("sectionName", selectedArticle.getSectionName());
-                        goToArticleDetail.putExtra("id", selectedArticle.getId());
-                        startActivity(goToArticleDetail);
-                    }).create().show();
+            Bundle dataToPass = new Bundle();
+            Article selectedArticle = articles.get(pos);
+            dataToPass.putString("title",selectedArticle.getTitle());
+            dataToPass.putString("url", selectedArticle.getUrl());
+            dataToPass.putString("sectionName", selectedArticle.getSectionName());
+            dataToPass.putLong("id", selectedArticle.getId());
+
+            if(isTablet){
+                ArticleDetail fragment = new ArticleDetail();
+                fragment.setArguments(dataToPass);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentLocation, fragment)
+                        .addToBackStack("")
+                        .commit();
+            }
+            else//isPhone
+            {
+                Intent goToArticleDetail = new Intent(Guardian.this, .class);
+                goToArticleDetail.putExtras(dataToPass);
+                startActivity(goToArticleDetail);
+            }
         });
         listView.setOnItemLongClickListener((parent, view, pos, id)-> {
             Article selectedArticle = adapter.getItem(pos);
             ContentValues newRowValues = new ContentValues();
 
-            newRowValues.put(MyOpener.COL_TITLE, selectedArticle.getTitle());
-            newRowValues.put(MyOpener.COL_URL, selectedArticle.getUrl());
-            newRowValues.put(MyOpener.COL_SECT, selectedArticle.getSectionName());
+            newRowValues.put(COL_TITLE, selectedArticle.getTitle());
+            newRowValues.put(COL_URL, selectedArticle.getUrl());
+            newRowValues.put(COL_SECT, selectedArticle.getSectionName());
             //Now insert in the database:
-            long newId = db.insert(MyOpener.TABLE_FAV, null, newRowValues);
+            long newId = db.insert(TABLE_FAV, null, newRowValues);
             Toast.makeText(this, "Added to favourites", Toast.LENGTH_LONG).show();
             return true;
         });
+        prefs = getSharedPreferences("Topic", Context.MODE_PRIVATE);
+        String savedString = prefs.getString("topic", "Tesla");
+        topic.setText(savedString);
     }
 
     protected void deleteArticle(Article article)
@@ -128,17 +152,16 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
         db = dbOpener.getWritableDatabase();
        // dbOpener.onUpgrade(db,MyOpener.VERSION_NUM, 2);
 
-
         // We want to get all of the columns. Look at MyOpener.java for the definitions:
-        String [] columns = {MyOpener.COL_ID, MyOpener.COL_TITLE, MyOpener.COL_URL, MyOpener.COL_SECT};
+        String [] columns = {MyOpener.COL_ID, COL_TITLE, COL_URL, COL_SECT};
         //query all the results from the database:
         results = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
 
         //Now the results object has rows of results that match the query.
         //find the column indices:
-        int titleColumnIndex = results.getColumnIndex(MyOpener.COL_TITLE);
-        int urlColIndex = results.getColumnIndex(MyOpener.COL_URL);
-        int sectColIndex = results.getColumnIndex(MyOpener.COL_SECT);
+        int titleColumnIndex = results.getColumnIndex(COL_TITLE);
+        int urlColIndex = results.getColumnIndex(COL_URL);
+        int sectColIndex = results.getColumnIndex(COL_SECT);
         int idColIndex = results.getColumnIndex(MyOpener.COL_ID);
 
         //iterate over the results, return true if there is a next item:
@@ -161,10 +184,7 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
 
         switch(item.getItemId())
         {
-            case R.id.guardian:
-                Intent goToGuardian = new Intent(Guardian.this, Guardian.class);
-                startActivity(goToGuardian);
-                break;
+
             case R.id.nasaImage:
                 Intent go = new Intent(this, ImageOfTheDay.class);
                 startActivity(go);
@@ -195,10 +215,6 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId())
         {
-            case R.id.guardian:
-                Intent goToGuardian = new Intent(Guardian.this, Guardian.class);
-                startActivity(goToGuardian);
-                break;
             case R.id.nasaImage:
                 Intent go = new Intent(this, ImageOfTheDay.class);
                 startActivity(go);
@@ -241,9 +257,9 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
                     String sectionName = articleObject.getString("sectionName");
                     ContentValues newRowValues = new ContentValues();
 
-                    newRowValues.put(MyOpener.COL_TITLE, title);
-                    newRowValues.put(MyOpener.COL_URL, articleUrl);
-                    newRowValues.put(MyOpener.COL_SECT, sectionName);
+                    newRowValues.put(COL_TITLE, title);
+                    newRowValues.put(COL_URL, articleUrl);
+                    newRowValues.put(COL_SECT, sectionName);
                     //Now insert in the database:
                     long newId = db.insert(MyOpener.TABLE_NAME, null, newRowValues);
                     Article article = new Article(title, articleUrl, sectionName,newId);
@@ -298,6 +314,12 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
         public long getItemId(int position) {
             return (getItem(position).getId());
         }
+    }
+    private void saveSharedPrefs(String stringToSave)
+    {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("topic", stringToSave);
+        editor.commit();
     }
 
 }

@@ -16,6 +16,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.example.androidgroupproject.MyOpener.COL_SECT;
+import static com.example.androidgroupproject.MyOpener.COL_TITLE;
+import static com.example.androidgroupproject.MyOpener.COL_URL;
+import static com.example.androidgroupproject.MyOpener.TABLE_FAV;
+
 public class Favourite extends AppCompatActivity {
     private ArrayList<Article> articles = new ArrayList<>();
     private MyAdapter adapter;
@@ -90,17 +95,16 @@ public class Favourite extends AppCompatActivity {
         MyOpener dbOpener = new MyOpener(this);
         db = dbOpener.getWritableDatabase();
 
-
         // We want to get all of the columns. Look at MyOpener.java for the definitions:
-        String [] columns = {MyOpener.COL_ID, MyOpener.COL_TITLE, MyOpener.COL_URL, MyOpener.COL_SECT};
+        String [] columns = {MyOpener.COL_ID, COL_TITLE, COL_URL, COL_SECT};
         //query all the results from the database:
-        results = db.query(false, MyOpener.TABLE_FAV, columns, null, null, null, null, null, null);
+        results = db.query(false, TABLE_FAV, columns, null, null, null, null, null, null);
 
         //Now the results object has rows of results that match the query.
         //find the column indices:
-        int titleColumnIndex = results.getColumnIndex(MyOpener.COL_TITLE);
-        int urlColIndex = results.getColumnIndex(MyOpener.COL_URL);
-        int sectColIndex = results.getColumnIndex(MyOpener.COL_SECT);
+        int titleColumnIndex = results.getColumnIndex(COL_TITLE);
+        int urlColIndex = results.getColumnIndex(COL_URL);
+        int sectColIndex = results.getColumnIndex(COL_SECT);
         int idColIndex = results.getColumnIndex(MyOpener.COL_ID);
 
         //iterate over the results, return true if there is a next item:
@@ -119,6 +123,6 @@ public class Favourite extends AppCompatActivity {
     }
     protected void deleteArticle(Article article)
     {
-        db.delete(MyOpener.TABLE_FAV, MyOpener.COL_ID + "= ?", new String[] {Long.toString(article.getId())});
+        db.delete(TABLE_FAV, MyOpener.COL_ID + "= ?", new String[] {Long.toString(article.getId())});
     }
 }
