@@ -1,24 +1,26 @@
 package com.example.androidgroupproject;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -29,7 +31,9 @@ public class ImageOfDayLoading extends AppCompatActivity {
     private final String URL = "https://api.nasa.gov/planetary/apod?api_key=DgPLcIlnmN0Cwrzcg3e9NraFaYLIDI68Ysc6Zh3d&date=";
     private TextView turl, thdurl, tdate;
     private ProgressBar tprogressBar;
+    private ImageView timage;
     String url, date, hdurl;
+    Bitmap image;
 
 
 
@@ -45,7 +49,7 @@ public class ImageOfDayLoading extends AppCompatActivity {
         thdurl = (TextView) findViewById(R.id.hdurl);
         turl = (TextView) findViewById(R.id.url);
         tprogressBar = (ProgressBar) findViewById(R.id.progressBar);
-
+        timage = (ImageView) findViewById(R.id.imageViewNASA);
 
         String date2 = getIntent().getStringExtra("date");
 
@@ -61,8 +65,6 @@ public class ImageOfDayLoading extends AppCompatActivity {
             startActivityForResult(intent, 101);
 
         });
-
-
     }
 
     private class ReadData extends AsyncTask<String, Integer, String> {
@@ -74,13 +76,13 @@ public class ImageOfDayLoading extends AppCompatActivity {
 
                 String myUrl = params[0];
 
-                publishProgress(25);
+                publishProgress(10);
 
                 URL url2 = new URL(myUrl);
                 HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
                 InputStream inStream = conn.getInputStream();
 
-                publishProgress(50);
+                publishProgress(25);
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inStream, "UTF-8"), 8);
                 StringBuilder sb = new StringBuilder();
@@ -91,9 +93,8 @@ public class ImageOfDayLoading extends AppCompatActivity {
                     sb.append(line + "\n");
                 }
                 String result = sb.toString();
-                Log.i("test", result);
 
-                publishProgress(75);
+                publishProgress(35);
 
                 JSONObject imageData = new JSONObject(result);
 
@@ -101,10 +102,24 @@ public class ImageOfDayLoading extends AppCompatActivity {
                 url = imageData.getString("url");
                 hdurl = imageData.getString("hdurl");
 
+                publishProgress(65);
+
+                URL imageURL = new URL(url);
+                HttpURLConnection connection = (HttpURLConnection) imageURL.openConnection();
+                connection.connect();
+
+                publishProgress(75);
+
+                if (connection.getResponseCode() == 200){
+                    image = BitmapFactory.decodeStream(connection.getInputStream());
+                }
+
+                FileOutputStream outputStream = openFileOutput(date, Context.MODE_PRIVATE);
+                image.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                outputStream.flush();
+                outputStream.close();
 
                 publishProgress(100);
-
-
             }
             catch (Exception ex){
                 ex.printStackTrace();
@@ -125,6 +140,7 @@ public class ImageOfDayLoading extends AppCompatActivity {
             turl.setText(url);
             thdurl.setText(hdurl);
             tprogressBar.setVisibility(View.INVISIBLE);
+            timage.setImageBitmap(image);
 
         }
 

@@ -56,6 +56,17 @@ public class ImageOfDayList extends AppCompatActivity {
             myAdapter.notifyDataSetChanged();
         }
 
+        list.setOnItemClickListener( (list2, view, position ,id) ->
+        {
+            Bundle data = new Bundle();
+            data.putString("date", imageInformation.get(position).getDate());
+            data.putString("url", imageInformation.get(position).getUrl());
+            data.putString("hdurl", imageInformation.get(position).getHdurl());
+            Intent nextActivity = new Intent(ImageOfDayList.this, EmptyActivity.class);
+            nextActivity.putExtras(data);
+            startActivity(nextActivity);
+        });
+
     }
 
 

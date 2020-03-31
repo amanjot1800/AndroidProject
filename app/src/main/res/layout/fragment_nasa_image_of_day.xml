@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NasaImageOfDayFragment">
+
+    <RelativeLayout
+
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/tdate"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:textSize="20sp"
+            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content"
+            android:text="@string/header_date"/>
+
+        <TextView
+            android:id="@+id/frag_date"
+            android:layout_below="@+id/tdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/turl"
+            android:layout_below="@id/frag_date"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:text="@string/header_url"/>
+
+        <TextView
+            android:id="@+id/frag_url"
+            android:layout_below="@id/turl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="web"/>
+
+        <TextView
+            android:id="@+id/thdurl"
+            android:layout_below="@id/frag_url"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:text="@string/header_hdurl"/>
+
+        <TextView
+            android:id="@+id/frag_hdurl"
+            android:layout_below="@id/thdurl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="web"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_below="@id/frag_hdurl"
+            android:layout_marginTop="25dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/imageViewNASA"
+            android:layout_marginTop="25dp"
+            android:layout_below="@id/frag_hdurl"
+            android:layout_above="@+id/nasaHide"
+            android:contentDescription="@string/nasaImageDescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/nasaHide"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/nasaHide"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+</FrameLayout>
