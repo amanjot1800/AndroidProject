@@ -47,14 +47,14 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
         savedArticles.setOnItemLongClickListener((p, v, position, id)-> {
             BBC_SavedArticle selectedContact = list.get(position);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Remove?")
-                    .setMessage("Remove from Saved Articles?")
-                    .setPositiveButton("Delete", (click, arg) -> {
+            alertDialogBuilder.setTitle(R.string.Remove)
+                    .setMessage(R.string.RemoveFromSavedArticles)
+                    .setPositiveButton(R.string.delete, (click, arg) -> {
                         deleteContact(selectedContact);
                         list.remove(position);
                         myAdapter.notifyDataSetChanged();
                     })
-                    .setNeutralButton("Cancel", (click, arg) -> {})
+                    .setNeutralButton(R.string.cancel, (click, arg) -> {})
                     .create().show();
             return true;
         });
@@ -69,7 +69,7 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
             Intent nextActivity = new Intent(BBC_Saved_Articles_List.this, BBC_SavedArticlesDetails.class);
             nextActivity.putExtras(dataToPass);
             startActivity(nextActivity); //make the transition
-            Toast.makeText(this, "Saved article no. "+(position+1), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Saved Article no. "+(position+1), Toast.LENGTH_LONG).show();
         });
 
         TextView favName = findViewById(R.id.savedArticlesTitle);
@@ -77,7 +77,7 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
         String savedString = prefs.getString("name", "Bond") +"'s";
         typeField = findViewById(R.id.enterYourName);
         typeField.setText(savedString.substring(0,savedString.length()-2));
-        favName.setText(savedString+" Saved Articles");
+        favName.setText(savedString+ " Saved Article");
 
 
         EditText name =findViewById(R.id.enterYourName);
@@ -85,10 +85,10 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
         enter.setOnClickListener(click -> {
             String userGivenName = name.getText().toString();
             if(userGivenName.length()==0){
-                Toast.makeText(this, "Please Enter Your Name", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.pleaseEnterYourName, Toast.LENGTH_SHORT).show();
             }
             if(userGivenName!=null && userGivenName.length()!=0){
-                favName.setText(userGivenName + "'s Saved Articles");
+                favName.setText(userGivenName + "'s "+ R.string.saved_article);
             }
             saveSharedPrefs( typeField.getText().toString());
         });

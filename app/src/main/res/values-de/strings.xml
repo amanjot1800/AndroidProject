@@ -1,7 +1,7 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">AndroidGroupProject</string>
     <string name="nasa">Go to the Nasa Imagery Database</string>
-    <string name="nasaImageofDay">Nasa Image of the day</string>
+    <string name="nasaImageofDay">Nasa Bild des Tages</string>
     <string name="help">Help</string>
     <string name="bbc">BBC News Reader</string>
     <string name="guardian">Guardian News</string>
@@ -30,28 +30,28 @@
     <string name="lat">Enter the value of the Latitude</string>
     <string name="lo">Enter the value of the Longitude</string>
     <string name="subm">Click here to submit</string>
-    <string name="save_article">Save article</string>
-    <string name="help_article">Help</string>
+    <string name="save_article">Artikel speichern</string>
+    <string name="help_article">Hilfe</string>
     <string name="hideFrag">HIDE</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="GotoBBCnewsReader">BBC News Reader</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="listTitle">BBC Latest News</string>
-    <string name="guardianNewsSearch">Guardian News Search</string>
-    <string name="nasaImaginaryDatabase">Nasa Imaginary Database</string>
+    <string name="listTitle">BBC Neueste Nachrichten</string>
+    <string name="guardianNewsSearch">Guardian News Suche</string>
+    <string name="nasaImaginaryDatabase">Nasa Imaginäre Datenbank</string>
     <string name="bbcTitle">BBC News Reader (RSS)</string>
     <string name="bbcVersion">v1.0.1</string>
-    <string name="bbcAuthor">Author: Priyank Patel</string>
-    <string name="saved_article">Saved Articles</string>
-    <string name="enterYourName">Enter your Name</string>
-    <string name="enter">Enter</string>
-    <string name="pleaseEnterYourName" tools:ignore="MissingTranslation">Please Enter Your Name</string>
-    <string name="cancel">Cancel</string>
-    <string name="delete">Delete</string>
-    <string name="RemoveFromSavedArticles">Remove from Saved Articles?</string>
-    <string name="Remove">Remove?</string>
-    <string name="saveddd_article">Saved Articles</string>
-    <string name="bbc_help">This App will bring the latest news from BBC. You can also save and delete your favorite articles</string>
-    <string name="ArticleSaved">Article Saved</string>
+    <string name="bbcAuthor">Verfasser: Priyank Patel</string>
+    <string name="saved_article">Gespeicherte Artikel</string>
+    <string name="enterYourName">Gib deinen Namen ein</string>
+    <string name="enter">Eingeben</string>
+    <string name="pleaseEnterYourName" translatable="false">Bitte geben Sie Ihren Namen ein</string>
+    <string name="cancel">Stornieren</string>
+    <string name="delete">Löschen</string>
+    <string name="RemoveFromSavedArticles">Aus gespeicherten Artikeln entfernen?</string>
+    <string name="Remove">Entfernen?</string>
+    <string name="saveddd_article">Gespeicherte Artikel</string>
+    <string name="bbc_help">Diese App bringt die neuesten Nachrichten von BBC. Sie können auch Ihre Lieblingsartikel speichern und löschen</string>
+    <string name="ArticleSaved">Artikel gespeichert</string>
 </resources>

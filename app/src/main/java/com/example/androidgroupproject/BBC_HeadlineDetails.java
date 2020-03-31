@@ -69,7 +69,7 @@ public class BBC_HeadlineDetails extends AppCompatActivity{
                 newRowValues.put(BBC_MyOpener.COL_LINK, link);
                 newRowValues.put(BBC_MyOpener.COL_DATE, date);
                 long newId = db.insert(BBC_MyOpener.TABLE_NAME, null, newRowValues);
-                Snackbar.make(findViewById(R.id.detailsToolbar), "Article Saved", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(findViewById(R.id.detailsToolbar), R.string.ArticleSaved, Snackbar.LENGTH_LONG).show();
         }
         return true;
     }

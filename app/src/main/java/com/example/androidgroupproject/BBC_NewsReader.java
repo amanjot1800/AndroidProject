@@ -89,7 +89,7 @@ public class BBC_NewsReader extends AppCompatActivity implements NavigationView.
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setTitle("Help")
                         .setIcon(R.drawable.info)
-                        .setMessage("This App will bring the latest news from BBC. You can also save and delete your favorite articles.fhe")
+                        .setMessage(R.string.bbc_help)
                         .setPositiveButton("Ok", (c,clk) -> {})
                         .create().show();
                 break;
@@ -128,11 +128,11 @@ public class BBC_NewsReader extends AppCompatActivity implements NavigationView.
                 break;
 
             case R.id.help:
-                message = "Saved Articles";
+                message = "Help";
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setTitle("Help")
                         .setIcon(R.drawable.help)
-                        .setMessage("This App will bring the latest news from BBC. You can also save and delete your favorite articles.")
+                        .setMessage(R.string.bbc_help)
                         .setPositiveButton("Ok", (c,clk) -> {})
                         .create().show();
                 break;
