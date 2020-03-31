@@ -194,8 +194,16 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(go1);
                 break;
             case R.id.BBC:
-                Intent go2 = new Intent(this, BBC_NewsReader.class);
-                startActivity(go2);
+            Intent go2 = new Intent(this, BBC_NewsReader.class);
+            startActivity(go2);
+            break;
+            case R.id.help:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Instructions for How to Use the Interface")
+                        .setMessage("Enter a topic to search articles about\nHit the search button to fetch the articles\n" +
+                                "Long click an article to save it to your favourite article list\n" +
+                                "Click an article to open the deatils of that article")
+                        .setPositiveButton("Close",(click,arg)->{}).create().show();
                 break;
         }
 
@@ -226,6 +234,14 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.BBC:
                 Intent go2 = new Intent(this, BBC_NewsReader.class);
                 startActivity(go2);
+                break;
+            case R.id.help:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Instructions for How to Use the Interface")
+                        .setMessage("Enter a topic to search articles about\nHit the search button to fetch the articles\n" +
+                                "Long click an article to save it to your favourite article list\n" +
+                                "Click an article to open the deatils of that article")
+                        .setPositiveButton("Close",(click,arg)->{}).create().show();
                 break;
         }
             return true;
