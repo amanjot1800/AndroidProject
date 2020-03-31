@@ -54,4 +54,8 @@
     <string name="saveddd_article">Gespeicherte Artikel</string>
     <string name="bbc_help">Diese App bringt die neuesten Nachrichten von BBC. Sie können auch Ihre Lieblingsartikel speichern und löschen</string>
     <string name="ArticleSaved">Artikel gespeichert</string>
+    <string name="favourite_articles">Favourite Articles</string>
+    <string name="helpAlert">Enter a topic to search articles about\nHit the search button to fetch the articles\n</string>
+    <string name="helpAlert2">Long click an article to save it to your favourite article list\n</string>
+    <string name="helpAlert3">Click an article to open the deatils of that article</string>
 </resources>
