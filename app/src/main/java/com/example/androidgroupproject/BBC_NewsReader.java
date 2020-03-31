@@ -128,7 +128,7 @@ public class BBC_NewsReader extends AppCompatActivity implements NavigationView.
                 break;
 
             case R.id.help:
-                message = "Saved Articles";
+                message = "Help";
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setTitle("Help")
                         .setIcon(R.drawable.help)
