@@ -49,6 +49,8 @@
     <string name="enter">Enter</string>
     <string name="nasaImageDescription">Regular Image Url</string>
     <string name="nasaHint">Seelct a date</string>
+    <string name="nasaImageDescription">Regular Image Url</string>
+    <string name="nasaHint">Seelct a date</string>
     <string name="pleaseEnterYourName" tools:ignore="MissingTranslation">Please Enter Your Name</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>

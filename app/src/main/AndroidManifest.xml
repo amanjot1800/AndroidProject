@@ -13,6 +13,8 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".EmptyActivity"></activity>
         <activity android:name=".Favourite" />
+        <activity android:name=".EmptyActivity"></activity>
+        <activity android:name=".Favourite" />
         <activity android:name=".Phone"></activity>
         <activity android:name=".Favourite" />
         <activity android:name=".ImageOfDayList" />
