@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -23,7 +24,8 @@ import com.example.androidgroupproject.R;
 public class ImageryDatabase extends AppCompatActivity {
     EditText latitude;
     EditText longitude;
-
+    SharedPreferences shared = null;
+    SharedPreferences sha = null;
     AsyncTask<String, Integer, String> nasaImg;
     ProgressBar mProgressBar;
 
@@ -31,17 +33,24 @@ public class ImageryDatabase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagery_database);
+        shared = getSharedPreferences("NasaImg", Context.MODE_PRIVATE);
+        sha = getSharedPreferences("ss", Context.MODE_PRIVATE);
+
         androidx.appcompat.widget.Toolbar tBar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
 
         //This loads the toolbar, which calls onCreateOptionsMenu below:
         setSupportActionBar(tBar);
         latitude = findViewById(R.id.lati);
+        String savedLat = shared.getString("ReserveName", "");
+        latitude.setText(savedLat);
         longitude = findViewById(R.id.loni);
-
-
+        String savedlong = sha.getString("Reserve", "");
+       longitude.setText(savedlong);
         Button btn = findViewById(R.id.subm);
         btn.setOnClickListener(click -> {
             if(!latitude.getText().toString().isEmpty() && !longitude.getText().toString().isEmpty()) {
+                saveShared( latitude.getText().toString());
+               save( longitude.getText().toString());
                 Intent gotoMain = new Intent(this, ImageryNasaActivity.class);
                 gotoMain.putExtra("shubham", Double.parseDouble(latitude.getText().toString()));
                 gotoMain.putExtra("sharma", Double.parseDouble(longitude.getText().toString()));
@@ -67,5 +76,17 @@ public class ImageryDatabase extends AppCompatActivity {
         return true;
     }
 
+    private void saveShared(String stringToSave)
+    {
+        SharedPreferences.Editor editor = shared.edit();
+        editor.putString("ReserveName", stringToSave);
+        editor.commit();
+    }
+    private void save(String stringToSave)
+    {
+        SharedPreferences.Editor editor = sha.edit();
+        editor.putString("Reserve", stringToSave);
+        editor.commit();
+    }
 
 }
