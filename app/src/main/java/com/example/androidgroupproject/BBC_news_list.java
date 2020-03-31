@@ -168,12 +168,6 @@ public class BBC_news_list extends Fragment {
                                 publishProgress(30);
                             }
                             if(title!=null && description!=null && date!=null) {
-//                                ContentValues newRowValues = new ContentValues();
-//                                newRowValues.put(BBCmyOpener.COL_TITLE, title);
-//                                newRowValues.put(BBCmyOpener.COL_DESCRIPTION, description);
-//                                newRowValues.put(BBCmyOpener.COL_LINK, link);
-//                                newRowValues.put(BBCmyOpener.COL_DATE, date);
-//                                long newId = db.insert(BBCmyOpener.TABLE_NAME, null, newRowValues);
 
                                 list.add(new BBC_Headline(title, description, link, date));
                                 title = null;

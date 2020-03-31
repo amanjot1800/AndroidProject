@@ -23,7 +23,7 @@
 
     <item android:id="@+id/item3"
         android:title="@string/guardian"
-        android:icon="@drawable/guardian"
+        android:icon="@drawable/guardian_news_search"
         android:orderInCategory="200"
         app:showAsAction="ifRoom"/>
 

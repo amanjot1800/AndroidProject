@@ -49,10 +49,16 @@
                 android:src="@drawable/search"
                 android:id="@+id/srchBtn"/>
             <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="500dp"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/search"
                 android:id="@+id/list"/>
+            <FrameLayout
+                android:id="@+id/fragmentLocation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/srchBtn"
+                android:layout_toRightOf="@+id/list"/>
             <Button
                 android:id="@+id/favouriteButton"
                 android:layout_alignParentBottom="true"

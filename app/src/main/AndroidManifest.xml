@@ -11,8 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".BBC_Saved_Articles_List"></activity>
+        <activity android:name=".Phone"></activity>
+        <activity android:name=".Favourite" />
         <activity android:name=".ImageOfDayList" />
+        <activity android:name=".BBC_Saved_Articles_List" />
         <activity android:name=".ImageOfDayLoading" />
         <activity android:name=".ImageOfTheDay" />
         <activity android:name=".ImageryDatabase" />
