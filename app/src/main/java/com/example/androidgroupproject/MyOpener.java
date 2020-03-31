@@ -28,10 +28,10 @@ public class MyOpener extends SQLiteOpenHelper {
                 + COL_URL + " text,"
                 + COL_SECT + " text);");
 
-        db.execSQL("CREATE TABLE " + TABLE_FAV + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COL_TITLE + " text,"
-                + COL_URL + " text,"
-                + COL_SECT + " text);");
+//        db.execSQL("CREATE TABLE " + TABLE_FAV + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+//                + COL_TITLE + " text,"
+//                + COL_URL + " text,"
+//                + COL_SECT + " text);");
     }
 
     @Override

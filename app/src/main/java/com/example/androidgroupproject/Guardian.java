@@ -200,9 +200,9 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.help:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Instructions for How to Use the Interface")
-                        .setMessage("Enter a topic to search articles about\nHit the search button to fetch the articles\n" +
-                                "Long click an article to save it to your favourite article list\n" +
-                                "Click an article to open the deatils of that article")
+                        .setMessage(getString(R.string.helpAlert) +
+                                getString(R.string.helpAlert2) +
+                                getString(R.string.helpAlert3))
                         .setPositiveButton("Close",(click,arg)->{}).create().show();
                 break;
         }
@@ -238,9 +238,9 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.help:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Instructions for How to Use the Interface")
-                        .setMessage("Enter a topic to search articles about\nHit the search button to fetch the articles\n" +
-                                "Long click an article to save it to your favourite article list\n" +
-                                "Click an article to open the deatils of that article")
+                        .setMessage(getString(R.string.helpAlert) +
+                                getString(R.string.helpAlert2) +
+                                getString(R.string.helpAlert3))
                         .setPositiveButton("Close",(click,arg)->{}).create().show();
                 break;
         }
