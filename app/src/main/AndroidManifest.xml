@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainDatabase"></activity>
+        <activity android:name=".MainDatabase" />
         <activity android:name=".ImageryNasaActivity" />
         <activity android:name=".ImageryDatabase" />
         <activity android:name=".MainActivity">

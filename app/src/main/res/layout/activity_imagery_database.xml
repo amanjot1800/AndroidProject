@@ -6,11 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ImageryDatabase">
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"/>
+
     <EditText
         android:id="@+id/lati"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/lat"
+        android:layout_below="@id/toolbar"
         android:layout_centerHorizontal="true"
         />
     <EditText
