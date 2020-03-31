@@ -47,16 +47,7 @@
     <string name="enterYourName">Enter your Name</string>
     <string name="nasaHide">Back </string>
     <string name="enter">Enter</string>
-    <string name="nasaImageDescription">Regular Image Url</string>
     <string name="nasaHint">Seelct a date</string>
     <string name="nasaImageDescription">Regular Image Url</string>
-    <string name="nasaHint">Seelct a date</string>
     <string name="pleaseEnterYourName" tools:ignore="MissingTranslation">Please Enter Your Name</string>
-    <string name="cancel">Cancel</string>
-    <string name="delete">Delete</string>
-    <string name="RemoveFromSavedArticles">Remove from Saved Articles?</string>
-    <string name="Remove">Remove?</string>
-    <string name="saveddd_article">Saved Articles</string>
-    <string name="bbc_help">This App will bring the latest news from BBC. You can also save and delete your favorite articles</string>
-    <string name="ArticleSaved">Article Saved</string>
 </resources>
