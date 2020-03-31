@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginTop="40dp"
+    android:layout_marginTop="20dp"
     android:layout_marginStart="20dp"
     android:layout_marginEnd="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbar"/>
-
 
     <TextView
+        android:id="@+id/tdate"
         android:layout_width="match_parent"
         android:layout_marginTop="15dp"
         android:textSize="20sp"
+        android:layout_alignParentTop="true"
         android:layout_height="wrap_content"
         android:text="@string/header_date"/>
 
     <TextView
         android:id="@+id/date"
+        android:layout_below="@+id/tdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/turl"
+        android:layout_below="@id/date"
         android:layout_width="match_parent"
         android:layout_marginTop="15dp"
         android:textSize="20sp"
@@ -35,35 +36,51 @@
 
     <TextView
         android:id="@+id/url"
+        android:layout_below="@id/turl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autoLink="web"/>
 
     <TextView
+        android:id="@+id/thdurl"
+        android:layout_below="@id/url"
         android:layout_width="match_parent"
         android:layout_marginTop="15dp"
         android:textSize="20sp"
         android:layout_height="wrap_content"
         android:text="@string/header_hdurl"/>
 
-
     <TextView
         android:id="@+id/hdurl"
+        android:layout_below="@id/thdurl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autoLink="web"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
+        android:layout_below="@id/hdurl"
         android:layout_marginTop="25dp"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <ImageView
+        android:id="@+id/imageViewNASA"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/hdurl"
+        android:layout_above="@+id/saveAndGoToDatabase"
+        android:contentDescription="@string/nasaImageDescription"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <Button
         android:id="@+id/saveAndGoToDatabase"
+        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="25dp"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:text="@string/savetoDatabase"/>
@@ -76,4 +93,4 @@
         android:layout_height="wrap_content"
         android:text="@string/saveOnly"/>-->
 
-</LinearLayout>
+</RelativeLayout>

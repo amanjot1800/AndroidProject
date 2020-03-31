@@ -74,8 +74,7 @@ public class ImageryNasaActivity extends AppCompatActivity {
                 URL url = new URL(args[0]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream response = urlConnection.getInputStream();
-                //JSON reading:
-                //Build the entire string response:
+
                 BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
                 StringBuilder sb = new StringBuilder();
 
@@ -83,7 +82,7 @@ public class ImageryNasaActivity extends AppCompatActivity {
                 while ((line = reader.readLine()) != null) {
                     sb.append(line + "\n");
                 }
-                String result = sb.toString(); //result is the whole string
+                String result = sb.toString();
                 JSONObject nasas = new JSONObject(result);
 
                  date = nasas.getString("date");
@@ -117,7 +116,7 @@ public class ImageryNasaActivity extends AppCompatActivity {
             } catch (JSONException je) {
                 ss = "JSON exception";
             }
-            //What is returned here will be passed as a parameter to onPostExecute:
+
             return ss;
 
 
@@ -127,16 +126,12 @@ public class ImageryNasaActivity extends AppCompatActivity {
 
         }
 
-        //Type3
         public void onPostExecute(String fromDoInBackground) {
 
             ImageView nasaImg = findViewById(R.id.imageView3);
             nasaImg.setImageBitmap(image);
             TextView lw =findViewById(R.id.da);
             lw.setText("date -"+ date );
-
-           /* String ss = new Double(la).toString();
-            tt.setText("latiTude -" +ss);*/
 
             String sd= new Double(lng).toString();
             th.setText("longitude -:" +sd);
@@ -154,7 +149,6 @@ public class ImageryNasaActivity extends AppCompatActivity {
                 database.putExtra("u", lw.getText().toString());
                 startActivity(database);
             });
-
 
         }
 
