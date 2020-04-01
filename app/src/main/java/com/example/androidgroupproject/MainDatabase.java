@@ -32,15 +32,15 @@ public class MainDatabase extends AppCompatActivity {
         Intent fromMain = getIntent();
          nasa.clear();
         loadDataFromDatabase();
-        String dt = fromMain.getStringExtra("u");
+       // String dt = fromMain.getStringExtra("u");
         String la = fromMain.getStringExtra("s");
         String lon = fromMain.getStringExtra("h");
         String url = fromMain.getStringExtra("b");
         ListView ls = findViewById(R.id.theListView);
         ls.setAdapter(myAdapter = new MyChat());
         boolean xits = false;
-        for (ArrayClass s: nasa ) {
-            if (s.getDate().equals(dt)) {
+        for (ArrayClass ss: nasa ) {
+            if (ss.getLongitude().equals(lon) && ss.getLatitude().equals(la) ) {
                 xits = true;
             }
         }
@@ -49,10 +49,10 @@ public class MainDatabase extends AppCompatActivity {
                 ContentValues newRowValues = new ContentValues();
                 newRowValues.put(DatabaseNasa.COL_LAT, la);
                 newRowValues.put(DatabaseNasa.COL_LONG, lon);
-                newRowValues.put(DatabaseNasa.COL_DATE, dt);
+               // newRowValues.put(DatabaseNasa.COL_DATE, dt);
                 newRowValues.put(DatabaseNasa.COL_URL, url);
                 long newId = db.insert(DatabaseNasa.IMAGERY_TABLE, null, newRowValues);
-                nasa.add(new ArrayClass(la, lon, url, dt, newId));
+                nasa.add(new ArrayClass(la, lon, url, newId));
                 myAdapter.notifyDataSetChanged();
             }
 
@@ -85,7 +85,7 @@ public class MainDatabase extends AppCompatActivity {
             rowName.setText("Latitude : " + selectedContact.getLatitude());
             rowNam.setText("Latitude : " + selectedContact.getLongitude());
             rowId.setText("id:" + selectedContact.getId());
-            dd.setText("DATE - "+ selectedContact.getDate());
+          //  dd.setText("DATE - "+ selectedContact.getDate());
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             //alertDialogBuilder.setTitle("A title")
@@ -134,12 +134,11 @@ public class MainDatabase extends AppCompatActivity {
             TextView text = newView.findViewById(R.id.y);
             text.setText(nasa.get(position).getLatitude().toString());
             ImageView img = newView.findViewById(R.id.aa);
-            if (getItem(position).toString() != null) {
+          // if (getItem(position).toString() != null) {
                 Picasso.get().load(getItem(position).toString()).into(img);
-                // Picasso.get().load("https://earthengine.googleapis.com/api/thumb?thumbid=a36d12a495624c09ddfff5cec1d39afb&token=e1dbd920320f88e885c2a062cebe66ec").into(img);
+                // Picasso.get().load("http://dev.virtualearth.net/REST/V1/Imagery/Map/Birdseye/45.350492,-75.7557243/20?dir=180&ms=500,500&key=AnBLrUpzidXWn25-HE-WmfVmd0QGYfAC8SWc2BSzTFTi2VqebHjb14It1VrPTnfN").into(img);
                 return newView;
-            } else
-                return newView;
+
 
         }
     }
@@ -151,7 +150,7 @@ public class MainDatabase extends AppCompatActivity {
 
 
         // We want to get all of the columns. Look at MyOpener.java for the definitions:
-        String[] columns = {DatabaseNasa.COL_ID,DatabaseNasa.COL_LAT, DatabaseNasa.COL_LONG, DatabaseNasa.COL_URL, DatabaseNasa.COL_DATE};
+        String[] columns = {DatabaseNasa.COL_ID,DatabaseNasa.COL_LAT, DatabaseNasa.COL_LONG, DatabaseNasa.COL_URL};
         //query all the results from the database:
         Cursor results = db.query(false, DatabaseNasa.IMAGERY_TABLE, columns, null, null, null, null, null, null);
 
@@ -161,7 +160,7 @@ public class MainDatabase extends AppCompatActivity {
         int nameCollat = results.getColumnIndex(DatabaseNasa.COL_LAT);
         int idColLong = results.getColumnIndex(DatabaseNasa.COL_LONG);
         int ww = results.getColumnIndex(DatabaseNasa.COL_URL);
-        int date = results.getColumnIndex(DatabaseNasa.COL_DATE);
+      //  int date = results.getColumnIndex(DatabaseNasa.COL_DATE);
         int id = results.getColumnIndex(DatabaseNasa.COL_ID);
 
         //iterate over the results, return true if there is a next item:
@@ -169,11 +168,11 @@ public class MainDatabase extends AppCompatActivity {
             String lat = results.getString(nameCollat);
             String lon = results.getString(idColLong);
             String aa = results.getString(ww);
-            String da = results.getString(date);
+            //String da = results.getString(date);
             long ids = results.getLong(id);
 
             //add the new Contact to the array list:
-            nasa.add(new ArrayClass(lat, lon, aa, da,ids));
+            nasa.add(new ArrayClass(lat, lon, aa, ids));
         }
     }
     protected void deleteContact(ArrayClass c) {

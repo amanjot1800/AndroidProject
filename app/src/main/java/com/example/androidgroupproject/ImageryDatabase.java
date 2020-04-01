@@ -62,9 +62,9 @@ public class ImageryDatabase extends AppCompatActivity {
         });
         Button cc = findViewById(R.id.wqq);
         cc.setOnClickListener( click -> {
-            ;
-            Intent q = new Intent(this, MainDatabase.class);
-            startActivity(q);
+
+            Intent qq = new Intent(this, Test.class);
+            startActivity(qq);
         });
 
     }
