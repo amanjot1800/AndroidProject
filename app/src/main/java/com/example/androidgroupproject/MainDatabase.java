@@ -12,45 +12,70 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class MainDatabase extends AppCompatActivity {
-    private MyChat myAdapter;
+  //  private MyChat myAdapter;
     SQLiteDatabase db;
     public static ArrayList<ArrayClass> nasa = new ArrayList<ArrayClass>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_database);
+       // setContentView(R.layout.activity_main_database);
         Intent fromMain = getIntent();
-        nasa.clear();
+         nasa.clear();
         loadDataFromDatabase();
-        String dt = fromMain.getStringExtra("u");
+       // String dt = fromMain.getStringExtra("u");
         String la = fromMain.getStringExtra("s");
         String lon = fromMain.getStringExtra("h");
-        ListView ls = findViewById(R.id.theListView);
+        String url = fromMain.getStringExtra("b");
+      //  ListView ls = findViewById(R.id.theListView);
+      //  ls.setAdapter(myAdapter = new MyChat());
+        boolean xits = false;
+        for (ArrayClass ss: nasa ) {
+            if (ss.getLongitude().equals(lon) && ss.getLatitude().equals(la) ) {
+                xits = true;
+            }
+        }
 
-        ls.setAdapter(myAdapter = new MyChat());
+            if (!xits) {
+                ContentValues newRowValues = new ContentValues();
+                newRowValues.put(DatabaseNasa.COL_LAT, la);
+                newRowValues.put(DatabaseNasa.COL_LONG, lon);
+               // newRowValues.put(DatabaseNasa.COL_DATE, dt);
+                newRowValues.put(DatabaseNasa.COL_URL, url);
+                long newId = db.insert(DatabaseNasa.IMAGERY_TABLE, null, newRowValues);
+                nasa.add(new ArrayClass(la, lon, url, newId));
+               // myAdapter.notifyDataSetChanged();
+            }
+
+
+  setResult(500);
+  finish();
 
 
 
-        ContentValues newRowValues = new ContentValues();
+
+     /*   ContentValues newRowValues = new ContentValues();
         newRowValues.put(DatabaseNasa.COL_LAT, la);
         newRowValues.put(DatabaseNasa.COL_LONG, lon);
         newRowValues.put(DatabaseNasa.COL_DATE, dt);
         long newId = db.insert(DatabaseNasa.IMAGERY_TABLE, null, newRowValues);
         nasa.add(new ArrayClass(la, lon, dt, newId));
-        myAdapter.notifyDataSetChanged();
+        myAdapter.notifyDataSetChanged();*/
 
 
-        ls.setOnItemLongClickListener((a, b, c, d) -> {
+      /*  ls.setOnItemLongClickListener((a, b, c, d) -> {
             ArrayClass selectedContact = nasa.get(c);
             View contact_view = getLayoutInflater().inflate(R.layout.alertlayout, null);
-            View sss = getLayoutInflater().inflate(R.layout.activity_imagery_database,null);
+
             //get the TextViews
             TextView rowId = contact_view.findViewById(R.id.id);
             TextView rowName = contact_view.findViewById(R.id.name);
@@ -60,7 +85,7 @@ public class MainDatabase extends AppCompatActivity {
             rowName.setText("Latitude : " + selectedContact.getLatitude());
             rowNam.setText("Latitude : " + selectedContact.getLongitude());
             rowId.setText("id:" + selectedContact.getId());
-            dd.setText("DATE - "+ selectedContact.getDate());
+          //  dd.setText("DATE - "+ selectedContact.getDate());
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             //alertDialogBuilder.setTitle("A title")
@@ -70,7 +95,7 @@ public class MainDatabase extends AppCompatActivity {
                     .setPositiveButton("Delete", (click, s) -> {
                         deleteContact(selectedContact); //remove the contact from database
                         nasa.remove(c); //remove the contact from contact list
-                        myAdapter.notifyDataSetChanged(); //there is one less item so update the list
+                     //   myAdapter.notifyDataSetChanged(); //there is one less item so update the list
                     })
 
                     .setNegativeButton("Cancel", (click, s) -> {
@@ -80,11 +105,11 @@ public class MainDatabase extends AppCompatActivity {
             return true;
 
 
-        });
+        });*/
     }
 
 
-    private class MyChat extends BaseAdapter {
+   /* private class MyChat extends BaseAdapter {
         @Override
         public int getCount() {
             return nasa.size();
@@ -92,7 +117,7 @@ public class MainDatabase extends AppCompatActivity {
 
         @Override
         public Object getItem(int position) {
-            return nasa.get(position).getLatitude();
+            return nasa.get(position).getUrl();
         }
 
         @Override
@@ -106,13 +131,17 @@ public class MainDatabase extends AppCompatActivity {
 
             LayoutInflater inflater = getLayoutInflater();
             View newView = inflater.inflate(R.layout.listlayout, parent, false);
-            TextView text = newView.findViewById(R.id.yow);
-            text.setText(getItem(position).toString());
-            return newView;
+            TextView text = newView.findViewById(R.id.y);
+            text.setText(nasa.get(position).getLatitude().toString());
+            ImageView img = newView.findViewById(R.id.aa);
+          // if (getItem(position).toString() != null) {
+                Picasso.get().load(getItem(position).toString()).into(img);
+                // Picasso.get().load("http://dev.virtualearth.net/REST/V1/Imagery/Map/Birdseye/45.350492,-75.7557243/20?dir=180&ms=500,500&key=AnBLrUpzidXWn25-HE-WmfVmd0QGYfAC8SWc2BSzTFTi2VqebHjb14It1VrPTnfN").into(img);
+                return newView;
 
 
         }
-    }
+    }*/
 
     private void loadDataFromDatabase() {
         //get a database connection:
@@ -121,7 +150,7 @@ public class MainDatabase extends AppCompatActivity {
 
 
         // We want to get all of the columns. Look at MyOpener.java for the definitions:
-        String[] columns = {DatabaseNasa.COL_LAT, DatabaseNasa.COL_LONG, DatabaseNasa.COL_DATE};
+        String[] columns = {DatabaseNasa.COL_ID,DatabaseNasa.COL_LAT, DatabaseNasa.COL_LONG, DatabaseNasa.COL_URL};
         //query all the results from the database:
         Cursor results = db.query(false, DatabaseNasa.IMAGERY_TABLE, columns, null, null, null, null, null, null);
 
@@ -130,20 +159,24 @@ public class MainDatabase extends AppCompatActivity {
 
         int nameCollat = results.getColumnIndex(DatabaseNasa.COL_LAT);
         int idColLong = results.getColumnIndex(DatabaseNasa.COL_LONG);
-        int date = results.getColumnIndex(DatabaseNasa.COL_DATE);
+        int ww = results.getColumnIndex(DatabaseNasa.COL_URL);
+      //  int date = results.getColumnIndex(DatabaseNasa.COL_DATE);
+        int id = results.getColumnIndex(DatabaseNasa.COL_ID);
 
         //iterate over the results, return true if there is a next item:
         while (results.moveToNext()) {
             String lat = results.getString(nameCollat);
             String lon = results.getString(idColLong);
-            String da = results.getString(date);
-
+            String aa = results.getString(ww);
+            //String da = results.getString(date);
+            long ids = results.getLong(id);
 
             //add the new Contact to the array list:
-            nasa.add(new ArrayClass(lat, lon, da));
+            nasa.add(new ArrayClass(lat, lon, aa, ids));
         }
+
     }
-    protected void deleteContact(ArrayClass c) {
+   /* protected void deleteContact(ArrayClass c) {
         db.delete(DatabaseNasa.IMAGERY_TABLE, DatabaseNasa.COL_ID + "= ?", new String[]{Long.toString(c.getId())});
-    }
+    }*/
 }

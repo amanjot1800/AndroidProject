@@ -10,9 +10,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,9 +53,11 @@ public class ImageryNasaActivity extends AppCompatActivity {
        la =fromMain.getDoubleExtra("shubham", 0);
        lng =fromMain.getDoubleExtra("sharma", 0);
         nasaImg = new NasaImagery();
-        String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=bG34muTPpUTPQvU5VJ6wUB9EdBWSnJ9Fhn5g5QFx";
-        //String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=DEMO_KEY";
-        //String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon=100.75&lat=1.5&date=2014-02-01&api_key=DEMO_KEY";
+      //  String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=bG34muTPpUTPQvU5VJ6wUB9EdBWSnJ9Fhn5g5QFx";
+       // String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=CgKHgdvrK5UxpWaugKZYYqIt9pBVcKrff0cYkMvM";
+       // String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=DEMO_KEY";
+      //  String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon=100.75&lat=1.5&date=2014-02-01&api_key=DEMO_KEY";
+        String ur = "http://dev.virtualearth.net/REST/V1/Imagery/Map/Birdseye/"+la+","+lng+"/20?dir=180&ms=500,500&key=AnBLrUpzidXWn25-HE-WmfVmd0QGYfAC8SWc2BSzTFTi2VqebHjb14It1VrPTnfN";
         nasaImg.execute(ur);
         data = findViewById(R.id.datas);
 
@@ -64,37 +71,41 @@ public class ImageryNasaActivity extends AppCompatActivity {
     private class NasaImagery extends AsyncTask<String, Integer, String> {
         Bitmap image = null;
         String ss = "";
-        String ret = "";
+        URL url ;
         String line = null;
         String date ="";
+        String imgUrl;
 
         @Override
         protected String doInBackground(String... args) {
             try {
-                URL url = new URL(args[0]);
+                 url = new URL(args[0]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                InputStream response = urlConnection.getInputStream();
+               InputStream response = urlConnection.getInputStream();
 
+                //JSON reading:
+                //Build the entire string response:
+               // BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
                 StringBuilder sb = new StringBuilder();
 
 
-                while ((line = reader.readLine()) != null) {
+             /*   while ((line = reader.readLine()) != null) {
                     sb.append(line + "\n");
                 }
-                String result = sb.toString();
+                String result = sb.toString(); //result is the whole string
                 JSONObject nasas = new JSONObject(result);
 
-                 date = nasas.getString("date");
-                String imgUrl = nasas.getString("url");
+                // date = nasas.getString("date");
+                 imgUrl = nasas.getString("imageUrl");*/
                 String fileName = date+".png";
 
-                FileInputStream fis;
+              /*  FileInputStream fis;
                 if (fileExistance(fileName)) {
                     fis = openFileInput(fileName);
                     image = BitmapFactory.decodeStream(fis);
-                } else {
-                    URL urlImg = new URL(imgUrl);
+                } else {*/
+                    URL urlImg = new URL(args[0]);
                     HttpURLConnection connection = (HttpURLConnection) urlImg.openConnection();
                     connection.connect();
                     int responseCode = connection.getResponseCode();
@@ -104,7 +115,7 @@ public class ImageryNasaActivity extends AppCompatActivity {
                         image.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
                         outputStream.flush();
                         outputStream.close();
-                    }
+                    //}
                 }
                 return "s";
             } catch (MalformedURLException mfe) {
@@ -113,10 +124,8 @@ public class ImageryNasaActivity extends AppCompatActivity {
                 ss = "Can not find file.";
             } catch (IOException ioe) {
                 ss = "IO Exception. Is the Wifi connected?";
-            } catch (JSONException je) {
-                ss = "JSON exception";
             }
-
+            //What is returned here will be passed as a parameter to onPostExecute:
             return ss;
 
 
@@ -126,12 +135,15 @@ public class ImageryNasaActivity extends AppCompatActivity {
 
         }
 
+        //Type3
         public void onPostExecute(String fromDoInBackground) {
 
             ImageView nasaImg = findViewById(R.id.imageView3);
             nasaImg.setImageBitmap(image);
-            TextView lw =findViewById(R.id.da);
-            lw.setText("date -"+ date );
+
+
+           /* String ss = new Double(la).toString();
+            tt.setText("latiTude -" +ss);*/
 
             String sd= new Double(lng).toString();
             th.setText("longitude -:" +sd);
@@ -143,19 +155,34 @@ public class ImageryNasaActivity extends AppCompatActivity {
 
             data.setOnClickListener(click ->{
                 Intent database = new Intent(ImageryNasaActivity.this, MainDatabase.class);
-
+               // LinearLayout ln = findViewById(R.id.real);
+                //
                 database.putExtra("s",tt.getText().toString());
                 database.putExtra("h",th.getText().toString());
-                database.putExtra("u", lw.getText().toString());
-                startActivity(database);
+              //  database.putExtra("u", lw.getText().toString());
+
+                database.putExtra("b",url.toString());
+
+                startActivityForResult(database,400);
+                Toast.makeText(ImageryNasaActivity.this,"Save to the database",Toast.LENGTH_LONG);
             });
 
+
         }
 
-        public boolean fileExistance(String fname) {
+      /*  public boolean fileExistance(String fname) {
             File file = getBaseContext().getFileStreamPath(fname);
             return file.exists();
-        }
+        }*/
 
     }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 500) {
+            finish();
+        }
+    }
+
 }
