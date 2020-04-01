@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/real"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -19,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:text="Current temperature" />
+
     <TextView
         android:id="@+id/sha"
         android:layout_width="wrap_content"
@@ -43,4 +45,5 @@
         android:layout_centerHorizontal="true"
         android:text="Go to The Database"/>
     </RelativeLayout>
+
 </LinearLayout>

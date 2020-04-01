@@ -21,14 +21,14 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class MainDatabase extends AppCompatActivity {
-    private MyChat myAdapter;
+  //  private MyChat myAdapter;
     SQLiteDatabase db;
     public static ArrayList<ArrayClass> nasa = new ArrayList<ArrayClass>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_database);
+       // setContentView(R.layout.activity_main_database);
         Intent fromMain = getIntent();
          nasa.clear();
         loadDataFromDatabase();
@@ -36,8 +36,8 @@ public class MainDatabase extends AppCompatActivity {
         String la = fromMain.getStringExtra("s");
         String lon = fromMain.getStringExtra("h");
         String url = fromMain.getStringExtra("b");
-        ListView ls = findViewById(R.id.theListView);
-        ls.setAdapter(myAdapter = new MyChat());
+      //  ListView ls = findViewById(R.id.theListView);
+      //  ls.setAdapter(myAdapter = new MyChat());
         boolean xits = false;
         for (ArrayClass ss: nasa ) {
             if (ss.getLongitude().equals(lon) && ss.getLatitude().equals(la) ) {
@@ -53,12 +53,12 @@ public class MainDatabase extends AppCompatActivity {
                 newRowValues.put(DatabaseNasa.COL_URL, url);
                 long newId = db.insert(DatabaseNasa.IMAGERY_TABLE, null, newRowValues);
                 nasa.add(new ArrayClass(la, lon, url, newId));
-                myAdapter.notifyDataSetChanged();
+               // myAdapter.notifyDataSetChanged();
             }
 
 
-
-
+  setResult(500);
+  finish();
 
 
 
@@ -72,7 +72,7 @@ public class MainDatabase extends AppCompatActivity {
         myAdapter.notifyDataSetChanged();*/
 
 
-        ls.setOnItemLongClickListener((a, b, c, d) -> {
+      /*  ls.setOnItemLongClickListener((a, b, c, d) -> {
             ArrayClass selectedContact = nasa.get(c);
             View contact_view = getLayoutInflater().inflate(R.layout.alertlayout, null);
 
@@ -95,7 +95,7 @@ public class MainDatabase extends AppCompatActivity {
                     .setPositiveButton("Delete", (click, s) -> {
                         deleteContact(selectedContact); //remove the contact from database
                         nasa.remove(c); //remove the contact from contact list
-                        myAdapter.notifyDataSetChanged(); //there is one less item so update the list
+                     //   myAdapter.notifyDataSetChanged(); //there is one less item so update the list
                     })
 
                     .setNegativeButton("Cancel", (click, s) -> {
@@ -105,11 +105,11 @@ public class MainDatabase extends AppCompatActivity {
             return true;
 
 
-        });
+        });*/
     }
 
 
-    private class MyChat extends BaseAdapter {
+   /* private class MyChat extends BaseAdapter {
         @Override
         public int getCount() {
             return nasa.size();
@@ -141,7 +141,7 @@ public class MainDatabase extends AppCompatActivity {
 
 
         }
-    }
+    }*/
 
     private void loadDataFromDatabase() {
         //get a database connection:
@@ -174,8 +174,9 @@ public class MainDatabase extends AppCompatActivity {
             //add the new Contact to the array list:
             nasa.add(new ArrayClass(lat, lon, aa, ids));
         }
+
     }
-    protected void deleteContact(ArrayClass c) {
+   /* protected void deleteContact(ArrayClass c) {
         db.delete(DatabaseNasa.IMAGERY_TABLE, DatabaseNasa.COL_ID + "= ?", new String[]{Long.toString(c.getId())});
-    }
+    }*/
 }

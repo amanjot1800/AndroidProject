@@ -10,9 +10,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -150,12 +155,16 @@ public class ImageryNasaActivity extends AppCompatActivity {
 
             data.setOnClickListener(click ->{
                 Intent database = new Intent(ImageryNasaActivity.this, MainDatabase.class);
-
+               // LinearLayout ln = findViewById(R.id.real);
+                //
                 database.putExtra("s",tt.getText().toString());
                 database.putExtra("h",th.getText().toString());
               //  database.putExtra("u", lw.getText().toString());
+
                 database.putExtra("b",url.toString());
-                startActivity(database);
+
+                startActivityForResult(database,400);
+                Toast.makeText(ImageryNasaActivity.this,"Save to the database",Toast.LENGTH_LONG);
             });
 
 
@@ -167,4 +176,13 @@ public class ImageryNasaActivity extends AppCompatActivity {
         }*/
 
     }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 500) {
+            finish();
+        }
+    }
+
 }

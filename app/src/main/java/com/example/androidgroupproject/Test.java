@@ -1,5 +1,6 @@
 package com.example.androidgroupproject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
@@ -53,6 +54,40 @@ public class Test extends AppCompatActivity {
 
 //        new ArrayClass(la, lon, url, dt, newId)
 
+        ls.setOnItemLongClickListener((a, b, c, d) -> {
+            ArrayClass selectedContact = nasa.get(c);
+            View contact_view = getLayoutInflater().inflate(R.layout.alertlayout, null);
+
+            //get the TextViews
+            TextView rowId = contact_view.findViewById(R.id.id);
+            TextView rowName = contact_view.findViewById(R.id.name);
+            TextView rowNam = contact_view.findViewById(R.id.na);
+            TextView dd = contact_view.findViewById(R.id.s);
+
+            rowName.setText("Latitude : " + selectedContact.getLatitude());
+            rowNam.setText("Latitude : " + selectedContact.getLongitude());
+            rowId.setText("id:" + selectedContact.getId());
+            //  dd.setText("DATE - "+ selectedContact.getDate());
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            //alertDialogBuilder.setTitle("A title")
+            alertDialogBuilder.setTitle("You clicked on item #" + c)
+                    .setView(contact_view)
+                    .setMessage("Do you want to delete it")
+                    .setPositiveButton("Delete", (click, s) -> {
+                        deleteContact(selectedContact); //remove the contact from database
+                        nasa.remove(c); //remove the contact from contact list
+                        myAdapter.notifyDataSetChanged(); //there is one less item so update the list
+                    })
+
+                    .setNegativeButton("Cancel", (click, s) -> {
+
+                    })
+                    .create().show();
+            return true;
+
+
+        });
 
 
     }
@@ -88,6 +123,9 @@ public class Test extends AppCompatActivity {
 
 
         }
+    }
+    protected void deleteContact(ArrayClass c) {
+        db.delete(DatabaseNasa.IMAGERY_TABLE, DatabaseNasa.COL_ID + "= ?", new String[]{Long.toString(c.getId())});
     }
 
 }
