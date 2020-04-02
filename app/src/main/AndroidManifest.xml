@@ -10,23 +10,31 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".EmptyActivity"></activity>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true">
+
+        <activity android:name=".EmptyActivity"/>
         <activity android:name=".Favourite" />
-        <activity android:name=".EmptyActivity"></activity>
-        <activity android:name=".Favourite" />
-        <activity android:name=".Phone"></activity>
-        <activity android:name=".Favourite" />
+
+
+        <activity android:name=".Phone"/>
+
         <activity android:name=".ImageOfDayList" />
         <activity android:name=".BBC_Saved_Articles_List" />
         <activity android:name=".ImageOfDayLoading" />
         <activity android:name=".ImageOfTheDay" />
+
+
+
+        <activity android:name=".Test" />
+        <activity android:name=".MainDatabase" />
+        <activity android:name=".ImageryNasaActivity" />
         <activity android:name=".ImageryDatabase" />
         <activity android:name=".Guardian" />
         <activity android:name=".Article" />
         <activity android:name=".ArticleDetail" />
-        <activity android:name=".MainDatabase" />
-        <activity android:name=".ImageryNasaActivity" />
+
+
         <activity android:name=".BBC_HeadlineDetails" />
         <activity android:name=".BBC_NewsReader" />
         <activity android:name=".BBC_SavedArticlesDetails" />

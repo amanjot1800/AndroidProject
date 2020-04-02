@@ -59,4 +59,11 @@
     <string name="saveddd_article">Saved Articles</string>
     <string name="bbc_help">This App will bring the latest news from BBC. You can also save and delete your favorite articles</string>
     <string name="ArticleSaved">Article Saved</string>
+    <string name="favourite_articles">Favourite Articles</string>
+    <string name="helpAlert">Enter a topic to search articles about\nHit the search button to fetch the articles\n</string>
+    <string name="helpAlert2">Long click an article to save it to your favourite article list\n</string>
+    <string name="helpAlert3">Click an article to open the deatils of that article</string>
+    <string name="nasaHint">Select a Date</string>
+    <string name="nasaImageDescription">Regular Image Url</string>
+    <string name="nasaHide">Back</string>
 </resources>

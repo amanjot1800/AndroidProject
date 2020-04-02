@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/real"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,7 +11,7 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
         app:srcCompat="@android:drawable/alert_light_frame" />
 
@@ -19,16 +20,12 @@
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:text="Current temperature" />
+
     <TextView
         android:id="@+id/sha"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:text="Minimum temperature" />
-    <TextView
-        android:id="@+id/da"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:text="Maximum temperature" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -48,4 +45,5 @@
         android:layout_centerHorizontal="true"
         android:text="Go to The Database"/>
     </RelativeLayout>
+
 </LinearLayout>
