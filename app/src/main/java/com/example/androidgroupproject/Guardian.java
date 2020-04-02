@@ -131,6 +131,7 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
             newRowValues.put(COL_TITLE, selectedArticle.getTitle());
             newRowValues.put(COL_URL, selectedArticle.getUrl());
             newRowValues.put(COL_SECT, selectedArticle.getSectionName());
+
             //Now insert in the database:
             long newId = db.insert(TABLE_FAV, null, newRowValues);
             Toast.makeText(this, "Added to favourites", Toast.LENGTH_LONG).show();

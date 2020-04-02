@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DbOpener extends SQLiteOpenHelper {
 
     protected final static String DATABASE_NAME = "NasaDB";
-    protected final static int VERSION_NUM = 1;
+    protected final static int VERSION_NUM = 2;
     public final static String TABLE_NAME = "INFORMATION";
     public final static String URL = "URL";
     public final static String DATE = "DATE";

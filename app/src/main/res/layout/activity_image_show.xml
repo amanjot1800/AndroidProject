@@ -60,7 +60,7 @@
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_below="@id/hdurl"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -69,28 +69,28 @@
         android:id="@+id/imageViewNASA"
         android:layout_marginTop="25dp"
         android:layout_below="@id/hdurl"
-        android:layout_above="@+id/saveAndGoToDatabase"
+        android:layout_above="@+id/saveToDatabase"
         android:contentDescription="@string/nasaImageDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <Button
+        android:id="@+id/saveToDatabase"
+        android:layout_above="@id/saveAndGoToDatabase"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:text="@string/saveOnly"/>
+
+    <Button
         android:id="@+id/saveAndGoToDatabase"
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="15dp"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:text="@string/savetoDatabase"/>
 
-   <!-- <Button
-        android:id="@+id/saveToDatabase"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:text="@string/saveOnly"/>-->
 
 </RelativeLayout>
