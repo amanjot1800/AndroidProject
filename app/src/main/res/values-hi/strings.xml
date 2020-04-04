@@ -62,4 +62,5 @@
     <string name="list_heading">विवरण देखने के लिए किसी तारीख का चयन करें</string>
     <string name="nasaImageDescription">Regular Image Url</string>
     <string name="nasaHide">Peeche</string>
+    <string name="viewSaved">View Saved Images</string>
 </resources>

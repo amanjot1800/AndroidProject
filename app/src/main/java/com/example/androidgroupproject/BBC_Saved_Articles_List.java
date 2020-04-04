@@ -88,7 +88,7 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
                 Toast.makeText(this, R.string.pleaseEnterYourName, Toast.LENGTH_SHORT).show();
             }
             if(userGivenName!=null && userGivenName.length()!=0){
-                favName.setText(userGivenName + "'s "+ R.string.saved_article);
+                favName.setText(userGivenName + "'s "+ "Saved Article");
             }
             saveSharedPrefs( typeField.getText().toString());
         });
@@ -106,7 +106,6 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
         int DescriptionColIndex = results.getColumnIndex(BBC_MyOpener.COL_DESCRIPTION);
         int LinkColIndex = results.getColumnIndex(BBC_MyOpener.COL_LINK);
         int DateColIndex = results.getColumnIndex(BBC_MyOpener.COL_DATE);
-
 
 
         while(results.moveToNext())
