@@ -61,4 +61,9 @@
     <string name="nasaHint">Select a Date</string>
     <string name="nasaImageDescription">Regular Image Url</string>
     <string name="nasaHide">Back</string>
+    <string name ="athr">author-Shubham Sharma</string>
+    <string name ="email">Email - shar0514@algonquinlive.com</string>
+    <string name ="yo">You have to fill the right longitude and latitude and you fill get the image according to the coordinated that you type</string>
+    <string name ="sa">Save to the database</string>
+    <string name ="qq">No value should be empty</string>
 </resources>

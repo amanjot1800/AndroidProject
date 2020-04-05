@@ -59,6 +59,7 @@ public class ImageryNasaActivity extends AppCompatActivity {
       //  String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon=100.75&lat=1.5&date=2014-02-01&api_key=DEMO_KEY";
         String ur = "http://dev.virtualearth.net/REST/V1/Imagery/Map/Birdseye/"+la+","+lng+"/20?dir=180&ms=500,500&key=AnBLrUpzidXWn25-HE-WmfVmd0QGYfAC8SWc2BSzTFTi2VqebHjb14It1VrPTnfN";
         nasaImg.execute(ur);
+        http://dev.virtualearth.net/REST/V1/Imagery/Map/Birdseye/37.802297,-122.405844/20?dir=180&ms=500,500&key=YOURKEY
         data = findViewById(R.id.datas);
 
 
@@ -155,7 +156,7 @@ public class ImageryNasaActivity extends AppCompatActivity {
 
             data.setOnClickListener(click ->{
                 Intent database = new Intent(ImageryNasaActivity.this, MainDatabase.class);
-               // LinearLayout ln = findViewById(R.id.real);
+               LinearLayout ln = findViewById(R.id.real);
                 //
                 database.putExtra("s",tt.getText().toString());
                 database.putExtra("h",th.getText().toString());
@@ -164,7 +165,8 @@ public class ImageryNasaActivity extends AppCompatActivity {
                 database.putExtra("b",url.toString());
 
                 startActivityForResult(database,400);
-                Toast.makeText(ImageryNasaActivity.this,"Save to the database",Toast.LENGTH_LONG);
+                //Toast.makeText(ImageryNasaActivity.this,"Save to the database",Toast.LENGTH_LONG).show();
+                Snackbar.make(ln,R.string.sa,Snackbar.LENGTH_LONG).show();
             });
 
 

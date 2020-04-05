@@ -62,10 +62,9 @@ public class Test extends AppCompatActivity {
             TextView rowId = contact_view.findViewById(R.id.id);
             TextView rowName = contact_view.findViewById(R.id.name);
             TextView rowNam = contact_view.findViewById(R.id.na);
-            TextView dd = contact_view.findViewById(R.id.s);
 
             rowName.setText("Latitude : " + selectedContact.getLatitude());
-            rowNam.setText("Latitude : " + selectedContact.getLongitude());
+            rowNam.setText("Longitude : " + selectedContact.getLongitude());
             rowId.setText("id:" + selectedContact.getId());
             //  dd.setText("DATE - "+ selectedContact.getDate());
 

@@ -24,12 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
         android:text="name :"
-        android:textSize="18sp" />
-    <TextView
-        android:id="@+id/s"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/na"
-        android:text="name :"
-        android:textSize="18sp" />
+        android:textSize="18sp"/>
+
 </RelativeLayout>

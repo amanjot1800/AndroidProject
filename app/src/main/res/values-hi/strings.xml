@@ -61,4 +61,10 @@
     <string name="list_heading">विवरण देखने के लिए किसी तारीख का चयन करें</string>
     <string name="nasaImageDescription">Regular Image Url</string>
     <string name="nasaHide">Peeche</string>
+    <string name ="athr">Naam - Shubham Sharma</string>
+    <string name ="email">ईमेल - shar0514@algonquinlive.com</string>
+    <string name ="yo">आपको सही देशांतर और अक्षांश को भरना होगा और आप उस समन्वित के अनुसार छवि प्राप्त करेंगे जिसे आप टाइप करते हैं</string>
+    <string name ="sa">डेटाबेस में सहेजें</string>
+    <string name ="qq">
+कोई मान रिक्त नहीं होना चाहिए</string>
 </resources>
