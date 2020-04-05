@@ -11,7 +11,7 @@ public class EmptyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empty);
 
-        NasaImageOfDayFragment dFragment = new NasaImageOfDayFragment();
+        ImageOfDayFragment dFragment = new ImageOfDayFragment();
         dFragment.setArguments(getIntent().getExtras());
 
         getSupportFragmentManager()

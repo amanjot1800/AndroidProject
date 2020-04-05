@@ -27,6 +27,12 @@
         android:orderInCategory="200"
         app:showAsAction="ifRoom"/>
 
+    <item android:id="@+id/gotolist"
+        android:title="@string/viewSaved"
+        android:icon="@drawable/save_article"
+        android:orderInCategory="75"
+        app:showAsAction="never"/>
+
 
 
 </menu>

@@ -115,12 +115,17 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
                 startActivity(go3);
                 break;
 
+            case R.id.gotolist:
+                Intent go4 = new Intent(this, ImageOfDayList.class);
+                go4.putExtra("addingData", false);
+                startActivity(go4);
+                break;
+
             case R.id.item4:
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setTitle("Help")
                         .setIcon(R.drawable.help)
-                        .setMessage("This page will help you to see the Image of day posted by NASA. You can select any date" +
-                                " from the date picker and see get the url of thr image.")
+                        .setMessage(R.string.nasaHelp)
                         .setPositiveButton("Ok", (c,clk) -> {
 
                         }).create().show();
@@ -150,12 +155,17 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
                 startActivity(go3);
                 break;
 
+            case R.id.gotolist:
+                Intent go4 = new Intent(this, ImageOfDayList.class);
+                go4.putExtra("addingData", false);
+                startActivity(go4);
+                break;
+
             case R.id.item4:
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setTitle("Help")
                         .setIcon(R.drawable.help)
-                        .setMessage("This page will help you to see the Image of day posted by NASA. You can select any date" +
-                                " from the date picker and see get the url of thr image.")
+                        .setMessage(R.string.nasaHelp)
                         .setPositiveButton("Ok", (c,clk) -> {
 
                         }).create().show();

@@ -16,11 +16,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -53,21 +55,35 @@ public class ImageOfDayLoading extends AppCompatActivity {
 
         String date2 = getIntent().getStringExtra("date");
 
-        ReadData data = new ReadData();
+        DownloadData data = new DownloadData();
         data.execute(URL + date2);
 
         Button saveAndGoToDatabase = findViewById(R.id.saveAndGoToDatabase);
         saveAndGoToDatabase.setOnClickListener( clk -> {
+
+            try {
+                FileOutputStream outputStream = openFileOutput(date, Context.MODE_PRIVATE);
+                image.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                outputStream.flush();
+                outputStream.close();
+            }
+            catch (IOException ex){
+                ex.printStackTrace();
+            }
+
             Intent intent = new Intent(ImageOfDayLoading.this, ImageOfDayList.class);
+            intent.putExtra("addingData", true);
             intent.putExtra("date", date);
             intent.putExtra("url", url);
             intent.putExtra("hdurl", hdurl);
+
+            Toast.makeText(this, "Image Information Saved", Toast.LENGTH_LONG).show();
             startActivityForResult(intent, 101);
 
         });
     }
 
-    private class ReadData extends AsyncTask<String, Integer, String> {
+    private class DownloadData extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -113,11 +129,6 @@ public class ImageOfDayLoading extends AppCompatActivity {
                 if (connection.getResponseCode() == 200){
                     image = BitmapFactory.decodeStream(connection.getInputStream());
                 }
-
-                FileOutputStream outputStream = openFileOutput(date, Context.MODE_PRIVATE);
-                image.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                outputStream.flush();
-                outputStream.close();
 
                 publishProgress(100);
             }
