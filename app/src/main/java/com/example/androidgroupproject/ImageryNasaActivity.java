@@ -53,13 +53,10 @@ public class ImageryNasaActivity extends AppCompatActivity {
        la =fromMain.getDoubleExtra("shubham", 0);
        lng =fromMain.getDoubleExtra("sharma", 0);
         nasaImg = new NasaImagery();
-      //  String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=bG34muTPpUTPQvU5VJ6wUB9EdBWSnJ9Fhn5g5QFx";
-       // String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=CgKHgdvrK5UxpWaugKZYYqIt9pBVcKrff0cYkMvM";
-       // String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=DEMO_KEY";
-      //  String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon=100.75&lat=1.5&date=2014-02-01&api_key=DEMO_KEY";
+
         String ur = "http://dev.virtualearth.net/REST/V1/Imagery/Map/Birdseye/"+la+","+lng+"/20?dir=180&ms=500,500&key=AnBLrUpzidXWn25-HE-WmfVmd0QGYfAC8SWc2BSzTFTi2VqebHjb14It1VrPTnfN";
         nasaImg.execute(ur);
-        http://dev.virtualearth.net/REST/V1/Imagery/Map/Birdseye/37.802297,-122.405844/20?dir=180&ms=500,500&key=YOURKEY
+
         data = findViewById(R.id.datas);
 
 
