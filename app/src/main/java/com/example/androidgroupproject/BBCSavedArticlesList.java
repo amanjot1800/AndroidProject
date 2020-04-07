@@ -78,7 +78,7 @@ public class BBCSavedArticlesList extends AppCompatActivity {
 
         TextView favName = findViewById(R.id.savedArticlesTitle);
         prefs = getSharedPreferences("Name", Context.MODE_PRIVATE);
-        String savedString = prefs.getString("name", "");
+        String savedString = prefs.getString("name", "Bond") +"'s";
         typeField = findViewById(R.id.enterYourName);
         typeField.setText(savedString.substring(0,savedString.length()-2));
         favName.setText(savedString+ " Saved Article");
