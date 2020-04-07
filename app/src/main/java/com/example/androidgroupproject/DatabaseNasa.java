@@ -29,8 +29,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
     @Override
+    //this function gets called if the database version on your device is higher than VERSION_NUM
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //Drop the old table:
         db.execSQL( "DROP TABLE IF EXISTS " + IMAGERY_TABLE);
+        //Create the new table:
         onCreate(db);
 
     }

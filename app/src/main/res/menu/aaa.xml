@@ -9,7 +9,7 @@
         app:showAsAction="always" />
 
     <item android:id="@+id/shubhamsearch"
-        android:title="Saved"
+        android:title="@string/qwe"
         app:showAsAction="never"
         />
 

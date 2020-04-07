@@ -49,12 +49,14 @@ public class ImageryNasaActivity extends AppCompatActivity {
         mProgressBar = findViewById(R.id.progressBar);
          tt = findViewById(R.id.sh);
          th = findViewById(R.id.sha);
-        Intent fromMain = getIntent();
+        Intent fromMain = getIntent(); // using intent to go to different activity
+        // value in the string
        la =fromMain.getDoubleExtra("shubham", 0);
        lng =fromMain.getDoubleExtra("sharma", 0);
         nasaImg = new NasaImagery();
-
+       // Saving url in the string
         String ur = "http://dev.virtualearth.net/REST/V1/Imagery/Map/Birdseye/"+la+","+lng+"/20?dir=180&ms=500,500&key=AnBLrUpzidXWn25-HE-WmfVmd0QGYfAC8SWc2BSzTFTi2VqebHjb14It1VrPTnfN";
+      // Used to call the async task
         nasaImg.execute(ur);
 
         data = findViewById(R.id.datas);
@@ -81,28 +83,15 @@ public class ImageryNasaActivity extends AppCompatActivity {
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                InputStream response = urlConnection.getInputStream();
 
-                //JSON reading:
-                //Build the entire string response:
-               // BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
+               // used to read the dat from the url
                 BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
                 StringBuilder sb = new StringBuilder();
 
 
-             /*   while ((line = reader.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-                String result = sb.toString(); //result is the whole string
-                JSONObject nasas = new JSONObject(result);
 
-                // date = nasas.getString("date");
-                 imgUrl = nasas.getString("imageUrl");*/
                 String fileName = date+".png";
 
-              /*  FileInputStream fis;
-                if (fileExistance(fileName)) {
-                    fis = openFileInput(fileName);
-                    image = BitmapFactory.decodeStream(fis);
-                } else {*/
+                // Downloading the image fron the given Url
                     URL urlImg = new URL(args[0]);
                     HttpURLConnection connection = (HttpURLConnection) urlImg.openConnection();
                     connection.connect();
@@ -116,6 +105,7 @@ public class ImageryNasaActivity extends AppCompatActivity {
                     //}
                 }
                 return "s";
+                    // Catchhing the different exception
             } catch (MalformedURLException mfe) {
                 ss = "Malformed URL exception";
             } catch (FileNotFoundException e) {
@@ -134,15 +124,15 @@ public class ImageryNasaActivity extends AppCompatActivity {
         }
 
         //Type3
+        // After background method the data is passed here
         public void onPostExecute(String fromDoInBackground) {
 
             ImageView nasaImg = findViewById(R.id.imageView3);
             nasaImg.setImageBitmap(image);
 
 
-           /* String ss = new Double(la).toString();
-            tt.setText("latiTude -" +ss);*/
 
+          // Setting the data from url in the text Views
             String sd= new Double(lng).toString();
             th.setText("longitude -:" +sd);
 
@@ -157,24 +147,21 @@ public class ImageryNasaActivity extends AppCompatActivity {
                 //
                 database.putExtra("s",tt.getText().toString());
                 database.putExtra("h",th.getText().toString());
-              //  database.putExtra("u", lw.getText().toString());
+
 
                 database.putExtra("b",url.toString());
 
                 startActivityForResult(database,400);
                 //Toast.makeText(ImageryNasaActivity.this,"Save to the database",Toast.LENGTH_LONG).show();
-                Snackbar.make(ln,R.string.sa,Snackbar.LENGTH_LONG).show();
+                Snackbar.make(ln,R.string.sa,Snackbar.LENGTH_LONG).show(); // to show the information using the snackbar
             });
 
 
         }
 
-      /*  public boolean fileExistance(String fname) {
-            File file = getBaseContext().getFileStreamPath(fname);
-            return file.exists();
-        }*/
 
     }
+    // used to come to the previous activity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 
