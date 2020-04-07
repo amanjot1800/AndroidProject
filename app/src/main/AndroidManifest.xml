@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Lastempty"></activity>
+        <activity android:name=".Lastempty"/>
         <activity android:name=".EmptyActivity" />
         <activity android:name=".Favourite" />
         <activity android:name=".Phone" />

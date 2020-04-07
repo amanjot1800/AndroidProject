@@ -30,11 +30,29 @@ import java.net.URL;
 
 public class ImageOfDayLoading extends AppCompatActivity {
 
+    /***
+     * The base url from which data is downloaded
+     */
     private final String URL = "https://api.nasa.gov/planetary/apod?api_key=DgPLcIlnmN0Cwrzcg3e9NraFaYLIDI68Ysc6Zh3d&date=";
+    /**
+     * These are all the textviews that show image information
+     */
     private TextView turl, thdurl, tdate;
+    /**
+     * Progresbar that updates as the data is downloaded
+     */
     private ProgressBar tprogressBar;
+    /**
+     * Image where the doenloaded image is saved
+     */
     private ImageView timage;
+    /**
+     * Temporary strings used to handle daya
+     */
     String url, date, hdurl;
+    /**
+     * Bitmap used to set image to the ImageView in activity layout
+     */
     Bitmap image;
 
 
@@ -83,6 +101,10 @@ public class ImageOfDayLoading extends AppCompatActivity {
         });
     }
 
+    /**
+     * This AsyncTask class downloads data from the website API. It runs in the baclground thread
+     * and initializes all the firlds and fills the textviews after comletion
+     */
     private class DownloadData extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -138,12 +160,20 @@ public class ImageOfDayLoading extends AppCompatActivity {
             return null;
         }
 
+        /**
+         * This method updates the progressBar
+         * @param values the values uses to display bar length
+         */
         @Override
         protected void onProgressUpdate(Integer... values) {
             tprogressBar.setVisibility(View.VISIBLE);
             tprogressBar.setProgress(values[0]);
         }
 
+        /**
+         * This mehtod sets data to all the textviews after the data has been doenloaded
+         * @param s ---?
+         */
         @Override
         protected void onPostExecute(String s) {
 
@@ -157,6 +187,11 @@ public class ImageOfDayLoading extends AppCompatActivity {
 
     }
 
+    /**
+     * This methods inflates the options menu
+     * @param menu the menu to be inflated
+     * @return boolean
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
