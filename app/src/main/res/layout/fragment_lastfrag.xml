@@ -19,11 +19,11 @@
         android:id="@+id/pp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Shubham" />
+         />
     <TextView
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="mdxd" />
+        />
     </LinearLayout>
 </FrameLayout>
