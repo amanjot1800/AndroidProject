@@ -24,6 +24,13 @@ public class ArticleDetail extends Fragment {
     }
 
 
+    /**
+     * This method inflates the view and gets data from intent
+     * @param inflater the layout
+     * @param container the container
+     * @param savedInstanceState the bundle
+     * @return The view created
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,6 +60,10 @@ public class ArticleDetail extends Fragment {
         }
     }
 
+    /**
+     * called when the fragment is first attached to its context
+     * @param context  will be called after this
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -61,6 +72,9 @@ public class ArticleDetail extends Fragment {
         parentActivity = (AppCompatActivity)context;
     }
 
+    /**
+     * Called when the fragment is no longer attached to its activity.
+     */
     @Override
     public void onDetach() {
         super.onDetach();
