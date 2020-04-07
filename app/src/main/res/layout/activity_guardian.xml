@@ -69,7 +69,8 @@
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             app:menu="@menu/navigation_menu"
-            android:id="@+id/navigation"/>
+            android:id="@+id/navigation"
+            android:background="@drawable/back"/>
 
     </androidx.drawerlayout.widget.DrawerLayout>
 

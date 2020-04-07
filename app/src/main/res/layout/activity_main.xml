@@ -4,19 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background">
-   <Button
-       android:layout_centerHorizontal="true"
-       android:layout_centerInParent="true"
-       android:id="@+id/nasa"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text ="@string/nasa"/>
+
+    <Button
+        android:id="@+id/nasa"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/nasaImageofDay"
+        android:text="@string/nasa"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/nasaImageofDay"
-        android:layout_width="201dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/nasa"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:layout_centerInParent="true"
         android:layout_marginTop="0dp"
         android:text="@string/nasaImageofDay" />
@@ -24,8 +28,10 @@
 
     <Button
         android:id="@+id/goToBBCnewsReader"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:layout_below="@+id/nasaImageofDay"
         android:layout_centerInParent="true"
         android:layout_marginTop="0dp"
@@ -33,8 +39,10 @@
 
     <Button
         android:id="@+id/guardianMain"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:layout_below="@+id/goToBBCnewsReader"
         android:layout_centerInParent="true"
         android:layout_marginTop="0dp"

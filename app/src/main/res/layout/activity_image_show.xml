@@ -7,7 +7,8 @@
     android:layout_marginEnd="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/back">
 
 
     <TextView
@@ -69,19 +70,12 @@
         android:id="@+id/imageViewNASA"
         android:layout_marginTop="25dp"
         android:layout_below="@id/hdurl"
-        android:layout_above="@+id/saveToDatabase"
+        android:layout_above="@+id/saveAndGoToDatabase"
         android:contentDescription="@string/nasaImageDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <Button
-        android:id="@+id/saveToDatabase"
-        android:layout_above="@id/saveAndGoToDatabase"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content"
-        android:text="@string/saveOnly"/>
+
 
     <Button
         android:id="@+id/saveAndGoToDatabase"
