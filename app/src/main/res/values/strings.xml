@@ -45,12 +45,9 @@
     <string name="bbcAuthor">Author: Priyank Patel</string>
     <string name="saved_article">Saved Articles</string>
     <string name="enterYourName">Enter your Name</string>
-    <string name="nasaHide">Back </string>
     <string name="nasaHelp">Select any date from the date picker and tap go to see the NASA image of the day. Press \'save and view\' to save the image and urls\' for later viewing</string>
     <string name="enter">Enter</string>
     <string name="viewSaved">View Saved Images</string>
-    <string name="nasaImageDescription">Regular Image Url</string>
-    <string name="nasaHint">Seelct a date</string>
     <string name="pleaseEnterYourName" tools:ignore="MissingTranslation">Please Enter Your Name</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
