@@ -27,6 +27,10 @@ public class Favourite extends AppCompatActivity {
     private SQLiteDatabase db;
     Cursor results;
 
+    /**
+     * This method inflates a listView and populating it with the data in the favourite article table
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +105,10 @@ public class Favourite extends AppCompatActivity {
             return (getItem(position).getId());
         }
     }
+
+    /**
+     * This method is called in the onCreate method, which loads all the articles from the table in database into the listView.
+     */
     private void loadDataFromDatabase()
     {
         //get a database connection:
@@ -133,6 +141,10 @@ public class Favourite extends AppCompatActivity {
 
         //At this point, the contactsList array has loaded every row from the cursor.
     }
+
+    /**This method takes in an article and deletes it from the current database
+     * @param article object of type article which is to be deleted
+     */
     protected void deleteArticle(Article article)
     {
         db.delete(TABLE_FAV, MyOpener.COL_ID + "= ?", new String[] {Long.toString(article.getId())});
