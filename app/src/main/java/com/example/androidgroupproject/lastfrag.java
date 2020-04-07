@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -32,7 +33,8 @@ public class lastfrag extends Fragment {
         View view = inflater.inflate(R.layout.fragment_lastfrag, container, false);
         ImageView img = view.findViewById(R.id.zz);
         Picasso.get().load(dataFromActivity.getString(Test.IMAGEURL).toString()).into(img);
-
+        TextView message = view.findViewById(R.id.pp);
+        message.setText("Longitude - "+dataFromActivity.getString(Test.ITEM_LONG));
         return view;
     }
 }

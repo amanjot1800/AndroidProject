@@ -33,7 +33,7 @@ public class Test extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-
+        boolean isTablet = findViewById(R.id.fragment) != null;
         ListView ls = findViewById(R.id.list);
         db=new DatabaseNasa(this).getReadableDatabase();
 
@@ -59,6 +59,7 @@ public class Test extends AppCompatActivity {
         ls.setAdapter(myAdapter = new MyChat());
 
 //        new ArrayClass(la, lon, url, dt, newId)
+
         ls.setOnItemClickListener((list, view, position, q) -> {
                     Bundle dataToPass = new Bundle();
                     dataToPass.putString(ITEM_LAT, nasa.get(position).getLatitude());
@@ -66,10 +67,19 @@ public class Test extends AppCompatActivity {
                     dataToPass.putString(IMAGEURL, nasa.get(position).getUrl());
                      dataToPass.putInt(ITEM_POSITION, position);
                     dataToPass.putLong(ID, q);
-
-            Intent nextActivity = new Intent(Test.this, Lastempty.class);
-            nextActivity.putExtras(dataToPass); //send data to next activity
-            startActivity(nextActivity); //make the transition
+            if (isTablet) {
+                lastfrag dFragment = new lastfrag(); //add a DetailFragment
+                dFragment.setArguments(dataToPass);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment, dFragment) //Add the fragment in FrameLayout
+                        .commit(); //actually load the fragment.
+            }
+            else {
+                Intent nextActivity = new Intent(Test.this, Lastempty.class);
+                nextActivity.putExtras(dataToPass); //send data to next activity
+                startActivity(nextActivity); //make the transition
+            }
                 });
 
 
@@ -82,8 +92,8 @@ public class Test extends AppCompatActivity {
             TextView rowName = contact_view.findViewById(R.id.name);
             TextView rowNam = contact_view.findViewById(R.id.na);
 
-            rowName.setText("Latitude : " + selectedContact.getLatitude());
-            rowNam.setText("Longitude : " + selectedContact.getLongitude());
+            rowName.setText(selectedContact.getLatitude());
+            rowNam.setText(selectedContact.getLongitude());
             rowId.setText("id:" + selectedContact.getId());
             //  dd.setText("DATE - "+ selectedContact.getDate());
 
@@ -136,7 +146,7 @@ public class Test extends AppCompatActivity {
             ImageView img = newView.findViewById(R.id.aa);
 
                 Picasso.get().load(getItem(position).toString()).into(img);
-            // Picasso.get().load("https://earthengine.googleapis.com/api/thumb?thumbid=a36d12a495624c09ddfff5cec1d39afb&token=e1dbd920320f88e885c2a062cebe66ec").into(img);
+
                 return newView;
 
 
