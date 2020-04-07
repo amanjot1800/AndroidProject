@@ -16,11 +16,17 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-public class BBC_HeadlineDetails extends AppCompatActivity{
+public class BBCHeadlineDetails extends AppCompatActivity{
 
     String title, description, link, date;
     SQLiteDatabase db;
     ContentValues newRowValues;
+
+
+    /**
+     * This onCreate Method creates a View to and sets title, description, date, and link.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +38,10 @@ public class BBC_HeadlineDetails extends AppCompatActivity{
         Intent fromNewsReader = getIntent();
         Bundle extras = fromNewsReader.getExtras();
 
-        title = extras.getString(BBC_news_list.TITLE);
-        description = extras.getString(BBC_news_list.DESCRIPTION);
-        link = extras.getString(BBC_news_list.LINK);
-        date = extras.getString(BBC_news_list.DATE);
+        title = extras.getString(BBCNewsList.TITLE);
+        description = extras.getString(BBCNewsList.DESCRIPTION);
+        link = extras.getString(BBCNewsList.LINK);
+        date = extras.getString(BBCNewsList.DATE);
 
         TextView bbcTitle = findViewById(R.id.DetailsTitle);
         bbcTitle.setText(title);
@@ -49,6 +55,12 @@ public class BBC_HeadlineDetails extends AppCompatActivity{
 
     }
 
+    /**
+     * This inflates a toolbar which contains buttons for user to interact with.
+     * Specifically it contains a save button to save the particular article.
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -57,18 +69,27 @@ public class BBC_HeadlineDetails extends AppCompatActivity{
 
         return true;
     }
+
+    /**
+     * This contains a option to save a particular article. It saves the article in the
+     * database so that it can be viewed by the user later.
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
+
+            // Save button to save the article in the SQLiDatabase
             case R.id.save :
-                BBC_MyOpener dbOpener = new BBC_MyOpener(this);
+                BBCMyOpener dbOpener = new BBCMyOpener(this);
                 db = dbOpener.getWritableDatabase();
                 newRowValues = new ContentValues();
-                newRowValues.put(BBC_MyOpener.COL_TITLE, title);
-                newRowValues.put(BBC_MyOpener.COL_DESCRIPTION, description);
-                newRowValues.put(BBC_MyOpener.COL_LINK, link);
-                newRowValues.put(BBC_MyOpener.COL_DATE, date);
-                long newId = db.insert(BBC_MyOpener.TABLE_NAME, null, newRowValues);
+                newRowValues.put(BBCMyOpener.COL_TITLE, title);
+                newRowValues.put(BBCMyOpener.COL_DESCRIPTION, description);
+                newRowValues.put(BBCMyOpener.COL_LINK, link);
+                newRowValues.put(BBCMyOpener.COL_DATE, date);
+                long newId = db.insert(BBCMyOpener.TABLE_NAME, null, newRowValues);
                 Snackbar.make(findViewById(R.id.detailsToolbar), R.string.ArticleSaved, Snackbar.LENGTH_LONG).show();
         }
         return true;

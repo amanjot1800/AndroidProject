@@ -106,7 +106,7 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
                 break;
 
             case R.id.item2:
-                Intent go2 = new Intent(this, BBC_NewsReader.class);
+                Intent go2 = new Intent(this, BBCNewsReader.class);
                 startActivity(go2);
                 break;
 
@@ -146,7 +146,7 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
                 break;
 
             case R.id.item2:
-                Intent go2 = new Intent(this, BBC_NewsReader.class);
+                Intent go2 = new Intent(this, BBCNewsReader.class);
                 startActivity(go2);
                 break;
 

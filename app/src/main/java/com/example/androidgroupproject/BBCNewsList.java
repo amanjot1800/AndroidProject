@@ -28,10 +28,10 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BBC_news_list extends Fragment {
+public class BBCNewsList extends Fragment {
 
     private HeadlineAdapter myAdapter;
-    private ArrayList<BBC_Headline> list = new ArrayList<>();
+    private ArrayList<BBCHeadline> list = new ArrayList<>();
     SQLiteDatabase db;
     private ProgressBar bar;
     public static final String TITLE = "TITLE";
@@ -39,6 +39,16 @@ public class BBC_news_list extends Fragment {
     public static final String LINK = "LINK";
     public static final String DATE = "DATE";
 
+    /**
+     *
+     * This shows the ListView with all the articles in it.
+     * It goes to the next activity whenever user click on any one of the List item to show the
+     * details of the Article.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,11 +70,11 @@ public class BBC_news_list extends Fragment {
             dataToPass.putString(LINK, list.get(position).getLink());
             dataToPass.putString(DATE, list.get(position).getDateOfArticle());
 
-//            Intent nextActivity = new Intent(BBC_news_list.this, HeadlineDetails.class);
+//            Intent nextActivity = new Intent(BBCNewsList.this, HeadlineDetails.class);
 //            nextActivity.putExtras(dataToPass);
 //            startActivity(nextActivity); //make the transition
             Intent goToHeadlineDetails = new Intent();
-            goToHeadlineDetails.setClass(getActivity(), BBC_HeadlineDetails.class);
+            goToHeadlineDetails.setClass(getActivity(), BBCHeadlineDetails.class);
             goToHeadlineDetails.putExtras(dataToPass);
             getActivity().startActivity(goToHeadlineDetails);
             Toast.makeText(getActivity(), "News no. "+(position+1), Toast.LENGTH_LONG).show();
@@ -82,19 +92,26 @@ public class BBC_news_list extends Fragment {
         }
 
         @Override
-        public BBC_Headline getItem(int position) {
+        public BBCHeadline getItem(int position) {
             return list.get(position);
         }
 
         @Override
         public long getItemId(int position) { return getItem(position).getId(); }
 
+        /**
+         * This sets the Listview Item to only show the Title of the article.
+         * @param position
+         * @param convertView
+         * @param parent
+         * @return
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
             LayoutInflater inflater = getLayoutInflater();
 
-            BBC_Headline thisRow = getItem(position);
+            BBCHeadline thisRow = getItem(position);
             //make a new row:
             View headlineView = inflater.inflate(R.layout.bbc_headline, parent, false);
             TextView titleView = headlineView.findViewById(R.id.bbcTitle);
@@ -106,6 +123,14 @@ public class BBC_news_list extends Fragment {
     private class HeadlineQuery extends AsyncTask<String, Integer, String> {
 
         String  title, description, link, date;
+
+        /**
+         * This method is the heart of the application. It gets all the data from the
+         * source and populates the list.
+         *
+         * @param params
+         * @return
+         */
         @Override
         protected String doInBackground(String... params) {
             try {
@@ -169,7 +194,7 @@ public class BBC_news_list extends Fragment {
                             }
                             if(title!=null && description!=null && date!=null) {
 
-                                list.add(new BBC_Headline(title, description, link, date));
+                                list.add(new BBCHeadline(title, description, link, date));
                                 title = null;
                                 description = null;
                                 link = null;
@@ -187,6 +212,10 @@ public class BBC_news_list extends Fragment {
             return "done";
         }
 
+        /**
+         * This gets called whenever there is something need to be published.
+         * @param values
+         */
         @Override
         protected void onProgressUpdate(Integer... values) {
             bar.setVisibility(View.VISIBLE);
@@ -194,10 +223,13 @@ public class BBC_news_list extends Fragment {
 
         }
 
+        /**
+         * This gets called after the doInBackground has finished its task.
+         * @param s
+         */
         @Override
         protected void onPostExecute(String s) {
             myAdapter.notifyDataSetChanged();
-
             bar.setVisibility(View.INVISIBLE);
         }
     }

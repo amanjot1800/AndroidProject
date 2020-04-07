@@ -42,7 +42,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.Guard;
 import java.util.ArrayList;
 
 import static com.example.androidgroupproject.MyOpener.COL_SECT;
@@ -195,7 +194,7 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(go1);
                 break;
             case R.id.BBC:
-            Intent go2 = new Intent(this, BBC_NewsReader.class);
+            Intent go2 = new Intent(this, BBCNewsReader.class);
             startActivity(go2);
             break;
             case R.id.help:
@@ -233,7 +232,7 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(go1);
                 break;
             case R.id.BBC:
-                Intent go2 = new Intent(this, BBC_NewsReader.class);
+                Intent go2 = new Intent(this, BBCNewsReader.class);
                 startActivity(go2);
                 break;
             case R.id.help:
