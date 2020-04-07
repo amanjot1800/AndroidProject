@@ -50,8 +50,8 @@ public class ImageryDatabase extends AppCompatActivity implements NavigationView
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        ///  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+     // getting the navigation id
         NavigationView navigationView = findViewById(R.id.qqq);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -59,18 +59,22 @@ public class ImageryDatabase extends AppCompatActivity implements NavigationView
         String savedLat = shared.getString("ReserveName", "");
         latitude.setText(savedLat);
         longitude = findViewById(R.id.loni);
+        // using shared prefrence variable
         String savedlong = sha.getString("Reserve", "");
         longitude.setText(savedlong);
         Button btn = findViewById(R.id.subm);
         btn.setOnClickListener(click -> {
+            // checkin the condition the data latitude and the longitude shoul not be empty
             if (!latitude.getText().toString().isEmpty() && !longitude.getText().toString().isEmpty()) {
                 saveShared(latitude.getText().toString());
                 save(longitude.getText().toString());
+                // making intent to go the new activity
                 Intent gotoMain = new Intent(this, ImageryNasaActivity.class);
                 gotoMain.putExtra("shubham", Double.parseDouble(latitude.getText().toString()));
                 gotoMain.putExtra("sharma", Double.parseDouble(longitude.getText().toString()));
                 startActivity(gotoMain);
             } else {
+                // if values are empty show the toast
                 Toast.makeText(this, R.string.qq, Toast.LENGTH_LONG).show();
             }
         });
@@ -91,7 +95,7 @@ public class ImageryDatabase extends AppCompatActivity implements NavigationView
         return true;
     }
 
-
+  // used to save the data in file to access it
     private void saveShared(String stringToSave) {
         SharedPreferences.Editor editor = shared.edit();
         editor.putString("ReserveName", stringToSave);
@@ -104,12 +108,14 @@ public class ImageryDatabase extends AppCompatActivity implements NavigationView
         editor.commit();
     }
 
+    // method used to make the navigation menu
     public boolean onNavigationItemSelected(MenuItem item) {
 
         String message = null;
-
+      /// this is used when to click the help button
         switch (item.getItemId()) {
             case R.id.hlpe:
+                // to sho the description of the help
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
                 alertDialogBuilder.setMessage(R.string.yo)
@@ -118,7 +124,7 @@ public class ImageryDatabase extends AppCompatActivity implements NavigationView
                         })
                         .create().show();
                 break;
-
+            // used to go to the favorites list
             case R.id.shubhamsearch:
                 Intent test = new Intent(this, Test.class);
                 startActivity(test);
@@ -130,23 +136,23 @@ public class ImageryDatabase extends AppCompatActivity implements NavigationView
 
         return false;
     }
-
+//    use to select the items and perform function on it
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+    // used the switch case
         switch (item.getItemId()) {
             case R.id.gur:
-
+               // this goes to the guardian activity
                 Intent gotoGuardian = new Intent(this, Guardian.class);
                 startActivity(gotoGuardian);
                 break;
 
             case R.id.nasaimg:
-
+          // this goes to image of the data activity
                 Intent gotoImageOfTheDay = new Intent(this, ImageOfTheDay.class);
                 startActivity(gotoImageOfTheDay);
                 break;
-
+           // this goes to the bbc news reader
             case R.id.bbc:
                 Intent aa = new Intent(this, BBCNewsReader.class);
                 startActivity(aa);

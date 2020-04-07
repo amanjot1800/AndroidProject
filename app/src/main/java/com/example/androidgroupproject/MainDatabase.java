@@ -28,16 +28,15 @@ public class MainDatabase extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_main_database);
+
         Intent fromMain = getIntent();
          nasa.clear();
         loadDataFromDatabase();
-       // String dt = fromMain.getStringExtra("u");
+     // Getting the data from the intent
         String la = fromMain.getStringExtra("s");
         String lon = fromMain.getStringExtra("h");
         String url = fromMain.getStringExtra("b");
-      //  ListView ls = findViewById(R.id.theListView);
-      //  ls.setAdapter(myAdapter = new MyChat());
+
         boolean xits = false;
         for (ArrayClass ss: nasa ) {
             if (ss.getLongitude().equals(lon) && ss.getLatitude().equals(la) ) {
@@ -46,6 +45,7 @@ public class MainDatabase extends AppCompatActivity {
         }
 
             if (!xits) {
+                // putting data in the content values
                 ContentValues newRowValues = new ContentValues();
                 newRowValues.put(DatabaseNasa.COL_LAT, la);
                 newRowValues.put(DatabaseNasa.COL_LONG, lon);
@@ -63,85 +63,11 @@ public class MainDatabase extends AppCompatActivity {
 
 
 
-     /*   ContentValues newRowValues = new ContentValues();
-        newRowValues.put(DatabaseNasa.COL_LAT, la);
-        newRowValues.put(DatabaseNasa.COL_LONG, lon);
-        newRowValues.put(DatabaseNasa.COL_DATE, dt);
-        long newId = db.insert(DatabaseNasa.IMAGERY_TABLE, null, newRowValues);
-        nasa.add(new ArrayClass(la, lon, dt, newId));
-        myAdapter.notifyDataSetChanged();*/
 
-
-      /*  ls.setOnItemLongClickListener((a, b, c, d) -> {
-            ArrayClass selectedContact = nasa.get(c);
-            View contact_view = getLayoutInflater().inflate(R.layout.alertlayout, null);
-
-            //get the TextViews
-            TextView rowId = contact_view.findViewById(R.id.id);
-            TextView rowName = contact_view.findViewById(R.id.name);
-            TextView rowNam = contact_view.findViewById(R.id.na);
-            TextView dd = contact_view.findViewById(R.id.s);
-
-            rowName.setText("Latitude : " + selectedContact.getLatitude());
-            rowNam.setText("Latitude : " + selectedContact.getLongitude());
-            rowId.setText("id:" + selectedContact.getId());
-          //  dd.setText("DATE - "+ selectedContact.getDate());
-
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            //alertDialogBuilder.setTitle("A title")
-            alertDialogBuilder.setTitle("You clicked on item #" + c)
-                    .setView(contact_view)
-                    .setMessage("Do you want to delete it")
-                    .setPositiveButton("Delete", (click, s) -> {
-                        deleteContact(selectedContact); //remove the contact from database
-                        nasa.remove(c); //remove the contact from contact list
-                     //   myAdapter.notifyDataSetChanged(); //there is one less item so update the list
-                    })
-
-                    .setNegativeButton("Cancel", (click, s) -> {
-
-                    })
-                    .create().show();
-            return true;
-
-
-        });*/
     }
 
 
-   /* private class MyChat extends BaseAdapter {
-        @Override
-        public int getCount() {
-            return nasa.size();
-        }
 
-        @Override
-        public Object getItem(int position) {
-            return nasa.get(position).getUrl();
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return nasa.get(position).getId();
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            LayoutInflater inflater = getLayoutInflater();
-            View newView = inflater.inflate(R.layout.listlayout, parent, false);
-            TextView text = newView.findViewById(R.id.y);
-            text.setText(nasa.get(position).getLatitude().toString());
-            ImageView img = newView.findViewById(R.id.aa);
-          // if (getItem(position).toString() != null) {
-                Picasso.get().load(getItem(position).toString()).into(img);
-                // Picasso.get().load("http://dev.virtualearth.net/REST/V1/Imagery/Map/Birdseye/45.350492,-75.7557243/20?dir=180&ms=500,500&key=AnBLrUpzidXWn25-HE-WmfVmd0QGYfAC8SWc2BSzTFTi2VqebHjb14It1VrPTnfN").into(img);
-                return newView;
-
-
-        }
-    }*/
 
     private void loadDataFromDatabase() {
         //get a database connection:
@@ -176,7 +102,5 @@ public class MainDatabase extends AppCompatActivity {
         }
 
     }
-   /* protected void deleteContact(ArrayClass c) {
-        db.delete(DatabaseNasa.IMAGERY_TABLE, DatabaseNasa.COL_ID + "= ?", new String[]{Long.toString(c.getId())});
-    }*/
+
 }

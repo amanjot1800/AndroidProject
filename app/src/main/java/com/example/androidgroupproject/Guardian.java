@@ -58,6 +58,12 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
     private ProgressBar progressBar;
     SharedPreferences prefs = null;
 
+
+    /**
+     * This method is responsible for initialising a list view and populating the list view with data from AsynkTask thread
+     * When the search button is clicked, the topic in the editText is searched on guardian website and articles are populated into the list.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,10 +147,18 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
         topic.setText(savedString);
     }
 
+    /**
+     * This method takes in an article and deletes it from the current database
+     * @param article object of type article which is to be deleted
+     */
     protected void deleteArticle(Article article)
     {
         db.delete(MyOpener.TABLE_NAME, MyOpener.COL_ID + "= ?", new String[] {Long.toString(article.getId())});
     }
+
+    /**
+     * This method is called in the onCreate method, which loads all the articles from the table in database into the listView
+     */
     private void loadDataFromDatabase()
     {
         //get a database connection:
@@ -179,6 +193,11 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
         //At this point, the contactsList array has loaded every row from the cursor.
     }
 
+    /**
+     *  Called when an item in the navigation menu is selected.
+     * @param item This is the menu item selected
+     * @return true to display the item as the selected item
+     */
     @Override
     public boolean onNavigationItemSelected( MenuItem item) {
 
@@ -212,6 +231,12 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
         // Toast.makeText(this, "NavigationDrawer: " + message, Toast.LENGTH_LONG).show();
         return true;
     }
+
+    /**
+     * Initialize the layout of the navigation layout
+     * @param menu Current menu
+     * @return true to display the item as the selected item
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -219,6 +244,11 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
         return true;
     }
 
+    /**
+     * Called when an item in the Toolbar menu is selected
+     * @param item The item selected
+     * @return true to display the item as the selected item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId())
@@ -249,8 +279,13 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
 
     private class Scraper extends AsyncTask<String, Integer, String> {
 
+        /**
+         * Performs article search in a background thread
+         * @param strings The argument provided inside execute
+         * @return done
+         */
         @Override
-        protected String doInBackground(String... strings) {
+        public String doInBackground(String... strings) {
             try {
                 URL url = new URL(strings[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -291,6 +326,10 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
             return "done";
         }
 
+        /**
+         * Updates the progressbar when doInBackground is executed
+         * @param values
+         */
         @Override
         protected void onProgressUpdate(Integer... values) {
             if (articles.isEmpty())
@@ -299,6 +338,10 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
             progressBar.setProgress(100);
         }
 
+        /**
+         * Updates the listView
+         * @param s returned value of doInBackground
+         */
         @Override
         protected void onPostExecute(String s) {
             adapter.notifyDataSetChanged();
@@ -331,6 +374,11 @@ public class Guardian extends AppCompatActivity implements NavigationView.OnNavi
             return (getItem(position).getId());
         }
     }
+
+    /**
+     * The given argument string is saved in the sharedPreference
+     * @param stringToSave The string to save in sharedPreference
+     */
     private void saveSharedPrefs(String stringToSave)
     {
         SharedPreferences.Editor editor = prefs.edit();

@@ -69,4 +69,13 @@
     <string name ="sa">डेटाबेस में सहेजें</string>
     <string name ="qq">
 कोई मान रिक्त नहीं होना चाहिए</string>
+    <string name ="b">
+अक्षांश </string>
+    <string name ="c">
+देशान्तर </string>
+    <string name ="zx"> पसंदीदा पर जाएं</string>
+    <string name ="qwe">
+सहेजें</string>
+    <string name ="r">आपने आइटम # पर क्लिक किया</string>
+    <string name ="Do">क्या आप इसे हटाना चाहते हैं</string>
 </resources>

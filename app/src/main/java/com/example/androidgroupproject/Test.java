@@ -33,27 +33,26 @@ public class Test extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        boolean isTablet = findViewById(R.id.fragment) != null;
-        ListView ls = findViewById(R.id.list);
+        boolean isTablet = findViewById(R.id.fragment) != null; // to check the condition for the tablet
+        ListView ls = findViewById(R.id.list); // getting the listView
         db=new DatabaseNasa(this).getReadableDatabase();
 
 
-        Cursor results= db.rawQuery("SELECT * FROM Imagery",null);
-        int nameCollat = results.getColumnIndex(DatabaseNasa.COL_LAT);
-        int idColLong = results.getColumnIndex(DatabaseNasa.COL_LONG);
-        int ww = results.getColumnIndex(DatabaseNasa.COL_URL);
+        Cursor results= db.rawQuery("SELECT * FROM Imagery",null); // used to select the data from the database
+        int nameCollat = results.getColumnIndex(DatabaseNasa.COL_LAT); // extracting data from table COL_LAT
+        int idColLong = results.getColumnIndex(DatabaseNasa.COL_LONG);  // extracting data from table COL_LONG
+        int ww = results.getColumnIndex(DatabaseNasa.COL_URL); // extracting data from table COL_Url
       // int date = results.getColumnIndex(DatabaseNasa.COL_DATE);
-        int id = results.getColumnIndex(DatabaseNasa.COL_ID);
+        int id = results.getColumnIndex(DatabaseNasa.COL_ID); // extracting data from table COL_ID
 
           while(results.moveToNext()){
 
               String lat = results.getString(nameCollat);
               String lon = results.getString(idColLong);
               String aa = results.getString(ww);
-             // String da = results.getString(date);
               long ids = results.getLong(id);
 
-              //add the new Contact to the array list:
+              //add the new DATA to the array list:
               nasa.add(new ArrayClass(lat, lon, aa,ids));
           }
         ls.setAdapter(myAdapter = new MyChat());
@@ -91,20 +90,20 @@ public class Test extends AppCompatActivity {
             TextView rowId = contact_view.findViewById(R.id.id);
             TextView rowName = contact_view.findViewById(R.id.name);
             TextView rowNam = contact_view.findViewById(R.id.na);
-
+      // setting the valus of the texts
             rowName.setText(selectedContact.getLatitude());
             rowNam.setText(selectedContact.getLongitude());
             rowId.setText("id:" + selectedContact.getId());
-            //  dd.setText("DATE - "+ selectedContact.getDate());
+
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            //alertDialogBuilder.setTitle("A title")
-            alertDialogBuilder.setTitle("You clicked on item #" + c)
+
+            alertDialogBuilder.setTitle(R.string.r + c)
                     .setView(contact_view)
-                    .setMessage("Do you want to delete it")
+                    .setMessage(R.string.Do)
                     .setPositiveButton("Delete", (click, s) -> {
-                        deleteContact(selectedContact); //remove the contact from database
-                        nasa.remove(c); //remove the contact from contact list
+                        deleteContact(selectedContact); //remove the data from database
+                        nasa.remove(c); //remove the data from from Arraylist
                         myAdapter.notifyDataSetChanged(); //there is one less item so update the list
                     })
 
@@ -139,20 +138,20 @@ public class Test extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            LayoutInflater inflater = getLayoutInflater();
+            LayoutInflater inflater = getLayoutInflater(); // used to inflate the layout
             View newView = inflater.inflate(R.layout.listlayout, parent, false);
             TextView text = newView.findViewById(R.id.y);
             text.setText(nasa.get(position).getLatitude().toString());
             ImageView img = newView.findViewById(R.id.aa);
 
-                Picasso.get().load(getItem(position).toString()).into(img);
+                Picasso.get().load(getItem(position).toString()).into(img); // used to download the image
 
                 return newView;
 
 
         }
     }
-    protected void deleteContact(ArrayClass c) {
+    protected void deleteContact(ArrayClass c) { // used for deleting the data
         db.delete(DatabaseNasa.IMAGERY_TABLE, DatabaseNasa.COL_ID + "= ?", new String[]{Long.toString(c.getId())});
     }
 

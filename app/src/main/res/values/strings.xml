@@ -68,4 +68,10 @@
     <string name="yo">You have to fill the right longitude and latitude and you fill get the image according to the coordinated that you type</string>
     <string name="sa">Save to the database</string>
     <string name="qq">No value should be empty</string>
+    <string name ="b">Latitude </string>
+    <string name ="c">Longitude </string>
+    <string name ="zx"> Go to the Favourites</string>
+    <string name ="qwe">Save</string>
+    <string name ="r">You clicked on item #</string>
+    <string name ="Do">Do you want to delete it</string>
 </resources>
