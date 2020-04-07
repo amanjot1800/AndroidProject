@@ -66,12 +66,20 @@
     <string name ="email">ईमेल - shar0514@algonquinlive.com</string>
     <string name ="yo">आपको सही देशांतर और अक्षांश को भरना होगा और आप उस समन्वित के अनुसार छवि प्राप्त करेंगे जिसे आप टाइप करते हैं</string>
     <string name ="sa">डेटाबेस में सहेजें</string>
-    <string name ="qq">
-कोई मान रिक्त नहीं होना चाहिए</string>
+    <string name ="qq">कोई मान रिक्त नहीं होना चाहिए</string>
     <string name="activity_image_of_day_version">" संस्करण 1.0.2"</string>
     <string name="notesMessage">" नोट जोड़ें:"</string>
     <string name="bbcTitle">" बीबीसी समाचार रीडर (आरएसएस)"</string>
     <string name="nasaHelp">" डेट पिकर से किसी भी तारीख का चयन करें और दिन की NASA छवि देखने के लिए जाएं पर टैप करें। बाद में देखने के लिए छवि और यूआरएल को बचाने के लिए 'सहेजें और देखें' दबाएँ"</string>
     <string name="viewSaved">सहेजे गए चित्र देखें</string>
     <string name="notesHint">" नोट जोड़ने के लिए यहां क्लिक करें ..."</string>
+    <string name ="b">
+अक्षांश </string>
+    <string name ="c">
+देशान्तर </string>
+    <string name ="zx"> पसंदीदा पर जाएं</string>
+    <string name ="qwe">
+सहेजें</string>
+    <string name ="r">आपने आइटम # पर क्लिक किया</string>
+    <string name ="Do">क्या आप इसे हटाना चाहते हैं</string>
 </resources>

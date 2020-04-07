@@ -21,6 +21,10 @@ public class MyOpener extends SQLiteOpenHelper {
 
     ;
 
+    /**
+     * 2 tables are created and initialised using dbQuery
+     * @param db The database used
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -34,6 +38,12 @@ public class MyOpener extends SQLiteOpenHelper {
 //                + COL_SECT + " text);");
     }
 
+    /**
+     * This method gets called when the newVersion is greater than the oldVersion
+     * @param db The database used
+     * @param oldVersion int oldVersion
+     * @param newVersion int NewNumber
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME);

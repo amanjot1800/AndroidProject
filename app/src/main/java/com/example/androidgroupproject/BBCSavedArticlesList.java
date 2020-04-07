@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,10 +21,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class BBC_Saved_Articles_List extends AppCompatActivity {
+public class BBCSavedArticlesList extends AppCompatActivity {
 
 
-    private ArrayList<BBC_SavedArticle> list = new ArrayList<>();
+    private ArrayList<BBCSavedArticle> list = new ArrayList<>();
     private SavedHeadlineAdapter myAdapter;
     SQLiteDatabase db;
     Cursor results;
@@ -36,6 +35,11 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
     SharedPreferences prefs = null;
     EditText typeField;
 
+    /**
+     * This gets called when user clicks on the saved article list. It creates the ListView and populates with the articles
+     * that were saved by the user previously
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +49,7 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
         ListView savedArticles = findViewById(R.id.savedArticles);
         savedArticles.setAdapter( myAdapter = new SavedHeadlineAdapter());
         savedArticles.setOnItemLongClickListener((p, v, position, id)-> {
-            BBC_SavedArticle selectedContact = list.get(position);
+            BBCSavedArticle selectedContact = list.get(position);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(R.string.Remove)
                     .setMessage(R.string.RemoveFromSavedArticles)
@@ -66,7 +70,7 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
             dataToPass.putString(LINK, list.get(position).getLink());
             dataToPass.putString(DATE, list.get(position).getDateOfArticle());
 
-            Intent nextActivity = new Intent(BBC_Saved_Articles_List.this, BBC_SavedArticlesDetails.class);
+            Intent nextActivity = new Intent(BBCSavedArticlesList.this, BBCSavedArticlesDetails.class);
             nextActivity.putExtras(dataToPass);
             startActivity(nextActivity); //make the transition
             Toast.makeText(this, "Saved Article no. "+(position+1), Toast.LENGTH_LONG).show();
@@ -94,18 +98,22 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method is called at the very beginning whenever this class is called.
+     * It gets all the articles from the database and add it to the ListView and hence it populates the ListView.
+     */
     private void loadDataFromDatabase() {
-        BBC_MyOpener dbOpener = new BBC_MyOpener(this);
+        BBCMyOpener dbOpener = new BBCMyOpener(this);
         db = dbOpener.getWritableDatabase();
 
-        String [] columns = {BBC_MyOpener.COL_ID, BBC_MyOpener.COL_TITLE, BBC_MyOpener.COL_DESCRIPTION, BBC_MyOpener.COL_LINK, BBC_MyOpener.COL_DATE};
-        results = db.query(false, BBC_MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
+        String [] columns = {BBCMyOpener.COL_ID, BBCMyOpener.COL_TITLE, BBCMyOpener.COL_DESCRIPTION, BBCMyOpener.COL_LINK, BBCMyOpener.COL_DATE};
+        results = db.query(false, BBCMyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
 
-        int idColIndex = results.getColumnIndex(BBC_MyOpener.COL_ID);
-        int TitleColIndex = results.getColumnIndex(BBC_MyOpener.COL_TITLE);
-        int DescriptionColIndex = results.getColumnIndex(BBC_MyOpener.COL_DESCRIPTION);
-        int LinkColIndex = results.getColumnIndex(BBC_MyOpener.COL_LINK);
-        int DateColIndex = results.getColumnIndex(BBC_MyOpener.COL_DATE);
+        int idColIndex = results.getColumnIndex(BBCMyOpener.COL_ID);
+        int TitleColIndex = results.getColumnIndex(BBCMyOpener.COL_TITLE);
+        int DescriptionColIndex = results.getColumnIndex(BBCMyOpener.COL_DESCRIPTION);
+        int LinkColIndex = results.getColumnIndex(BBCMyOpener.COL_LINK);
+        int DateColIndex = results.getColumnIndex(BBCMyOpener.COL_DATE);
 
 
         while(results.moveToNext())
@@ -116,15 +124,22 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
             String link = results.getString(LinkColIndex);
             String date = results.getString(DateColIndex);
 
-            BBC_SavedArticle loaded = new BBC_SavedArticle(title, description, link, date, id);
+            BBCSavedArticle loaded = new BBCSavedArticle(title, description, link, date, id);
             //add the new Contact to the array list:
             list.add(loaded);
         }
     }
 
-    protected void deleteContact(BBC_SavedArticle s)
+
+    /**
+     * This method get called whenever user click on the delete button to remove the
+     * article from the saved article list. It also deletes it from the database.
+     *
+     * @param s
+     */
+    protected void deleteContact(BBCSavedArticle s)
     {
-        db.delete(BBC_MyOpener.TABLE_NAME, BBC_MyOpener.COL_ID + "= ?", new String[] {Long.toString(s.getId())});
+        db.delete(BBCMyOpener.TABLE_NAME, BBCMyOpener.COL_ID + "= ?", new String[] {Long.toString(s.getId())});
     }
 
     class SavedHeadlineAdapter extends BaseAdapter {
@@ -135,19 +150,26 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
         }
 
         @Override
-        public BBC_SavedArticle getItem(int position) {
+        public BBCSavedArticle getItem(int position) {
             return list.get(position);
         }
 
         @Override
         public long getItemId(int position) { return getItem(position).getId(); }
 
+        /**
+         *This set the ListView to only show the title of the Article.
+         * @param position
+         * @param convertView
+         * @param parent
+         * @return
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
             LayoutInflater inflater = getLayoutInflater();
 
-            BBC_SavedArticle thisRow = getItem(position);
+            BBCSavedArticle thisRow = getItem(position);
             //make a new row:
             View SavedheadlineView = inflater.inflate(R.layout.bbc_headline, parent, false);
             TextView titleView = SavedheadlineView.findViewById(R.id.bbcTitle);
@@ -157,6 +179,11 @@ public class BBC_Saved_Articles_List extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method is called to saved the string passed to the edit text to the file in the device
+     * so that the string is already present there whenever user restart the app.
+     * @param stringToSave
+     */
     private void saveSharedPrefs(String stringToSave)
     {
         SharedPreferences.Editor editor = prefs.edit();

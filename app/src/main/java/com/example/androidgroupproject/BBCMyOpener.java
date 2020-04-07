@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class BBC_MyOpener extends SQLiteOpenHelper {
+public class BBCMyOpener extends SQLiteOpenHelper {
 
     protected final static String DATABASE_NAME = "HeadlinesDB";
     protected final static int VERSION_NUM = 1;
@@ -15,7 +15,7 @@ public class BBC_MyOpener extends SQLiteOpenHelper {
     public final static String COL_DATE = "DATE";
     public final static String COL_ID = "_id";
 
-    public BBC_MyOpener(Context ctx) {
+    public BBCMyOpener(Context ctx) {
         super(ctx, DATABASE_NAME, null, VERSION_NUM);
     }
 

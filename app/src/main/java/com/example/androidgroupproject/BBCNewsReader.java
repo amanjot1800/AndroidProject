@@ -3,12 +3,10 @@ package com.example.androidgroupproject;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -18,10 +16,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
+public class BBCNewsReader extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-public class BBC_NewsReader extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
+    /**
+     * This creates the toolbar, navigationView and its icons.
+     * It also replaces the frame with the required Fragment
+     * @param savedInstanceState \
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,7 @@ public class BBC_NewsReader extends AppCompatActivity implements NavigationView.
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        BBC_news_list dFragment = new BBC_news_list();
+        BBCNewsList dFragment = new BBCNewsList();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.BBCframe, dFragment)
@@ -47,6 +48,11 @@ public class BBC_NewsReader extends AppCompatActivity implements NavigationView.
 
     }
 
+    /**
+     * This inflates a toolbar which contains buttons for user to interact with.
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -55,35 +61,46 @@ public class BBC_NewsReader extends AppCompatActivity implements NavigationView.
 
         return true;
     }
+
+    /**
+     * This is called when user click on one of the toolbar buttons
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String message = null;
         switch (item.getItemId()){
 
+            // This button navigates user to the Guardian news search
             case R.id.goToGuardian:
                 message = "Guardian News Search";
-                Intent gotoGuardian = new Intent(BBC_NewsReader.this, Guardian.class);
+                Intent gotoGuardian = new Intent(BBCNewsReader.this, Guardian.class);
                 startActivity(gotoGuardian);
                 break;
 
+            // This button navigates user to the Nasa Image of the day
             case R.id.goToNasaImageOfTheDay:
                 message = "Nasa Image of the Day";
-                Intent gotoImageOfTheDay = new Intent(BBC_NewsReader.this, ImageOfTheDay.class);
+                Intent gotoImageOfTheDay = new Intent(BBCNewsReader.this, ImageOfTheDay.class);
                 startActivity(gotoImageOfTheDay);
                 break;
 
+            // This button navigates user to the Nasa Imaginary Database
             case R.id.goToNasaImageOfTheDaybbc:
                 message = "Imaginary Database";
-                Intent gotoImaginaryDatabase = new Intent(BBC_NewsReader.this, ImageryDatabase.class);
+                Intent gotoImaginaryDatabase = new Intent(BBCNewsReader.this, ImageryDatabase.class);
                 startActivity(gotoImaginaryDatabase);
                 break;
 
+            // This button navigates user to the BBC saved Articles
             case R.id.goToSavedArticle:
                 message = "Saved Articles";
-                Intent gotoSavedArticles = new Intent(BBC_NewsReader.this, BBC_Saved_Articles_List.class);
+                Intent gotoSavedArticles = new Intent(BBCNewsReader.this, BBCSavedArticlesList.class);
                 startActivity(gotoSavedArticles);
                 break;
 
+            // This button helps the user familiarize with BBC latest news GUI
             case R.id.help:
                 message = "Help";
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -98,40 +115,50 @@ public class BBC_NewsReader extends AppCompatActivity implements NavigationView.
         return true;
     }
 
+    /**
+     * This is called when user click on one of the navigationView buttons
+     * @param item
+     * @return
+     */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         String message = null;
         switch (item.getItemId()){
 
+            // This button navigates user to the Guardian news search
             case R.id.goToGuardian:
                 message = "Guardian News Search";
-                Intent gotoGuardian = new Intent(BBC_NewsReader.this, Guardian.class);
+                Intent gotoGuardian = new Intent(BBCNewsReader.this, Guardian.class);
                 startActivity(gotoGuardian);
                 break;
 
+            // This button navigates user to the Nasa Image of the day
             case R.id.goToNasaImageOfTheDay:
                 message = "Nasa Image of the Day";
-                Intent gotoImageOfTheDay = new Intent(BBC_NewsReader.this, ImageOfTheDay.class);
+                Intent gotoImageOfTheDay = new Intent(BBCNewsReader.this, ImageOfTheDay.class);
                 startActivity(gotoImageOfTheDay);
                 break;
 
+            // This button navigates user to the Nasa Imaginary Database
             case R.id.goToNasaImageOfTheDaybbc:
                 message = "Imaginary Database";
-                Intent gotoImaginaryDatabase = new Intent(BBC_NewsReader.this, ImageryDatabase.class);
+                Intent gotoImaginaryDatabase = new Intent(BBCNewsReader.this, ImageryDatabase.class);
                 startActivity(gotoImaginaryDatabase);
                 break;
 
+            // This button navigates user to the BBC saved Articles
             case R.id.goToSavedArticle:
                 message = "Saved Articles";
-                Intent gotoSavedArticles = new Intent(BBC_NewsReader.this, BBC_Saved_Articles_List.class);
+                Intent gotoSavedArticles = new Intent(BBCNewsReader.this, BBCSavedArticlesList.class);
                 startActivity(gotoSavedArticles);
                 break;
 
+            // This button helps the user familiarize with BBC latest news GUI
             case R.id.help:
                 message = "Help";
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setTitle("Help")
-                        .setIcon(R.drawable.help)
+                        .setIcon(R.drawable.info)
                         .setMessage(R.string.bbc_help)
                         .setPositiveButton("Ok", (c,clk) -> {})
                         .create().show();
