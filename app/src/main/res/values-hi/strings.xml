@@ -41,7 +41,7 @@
     <string name="helpAlert2">अपनी पसंदीदा लेख सूची में सहेजने के लिए किसी लेख पर लंबी क्लिक करें\n</string>
     <string name="helpAlert3">उस लेख के डिटिल्स को खोलने के लिए एक लेख पर क्लिक करें</string>
     <string name="app_name">AndroidGroupProject</string>
-    <string name="nasa">Go to the Nasa Imagery Database</string>
+    <string name="nasa">Nasa Imagery Database</string>
     <string name="nasaImageofDay">" नासा दिन की चित्र"</string>
     <string name="help">मदद</string>
     <string name="bbc">बी बी सी   समाचार वाचक</string>

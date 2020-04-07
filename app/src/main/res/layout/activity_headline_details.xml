@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BBC_HeadlineDetails"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/back">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"

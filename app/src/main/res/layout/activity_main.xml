@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
+    android:orientation="vertical"
+    android:background="@drawable/background">
    <Button
+       android:layout_centerHorizontal="true"
+       android:layout_centerInParent="true"
        android:id="@+id/nasa"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:text ="@string/nasa"/>
 
-   <Button
-       android:id="@+id/nasaImageofDay"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text ="@string/nasaImageofDay"/>
+    <Button
+        android:id="@+id/nasaImageofDay"
+        android:layout_width="201dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nasa"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="0dp"
+        android:text="@string/nasaImageofDay" />
 
 
-   <Button
-       android:id="@+id/goToBBCnewsReader"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="@string/GotoBBCnewsReader"
-       />
+    <Button
+        android:id="@+id/goToBBCnewsReader"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nasaImageofDay"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="0dp"
+        android:text="@string/GotoBBCnewsReader" />
 
     <Button
         android:id="@+id/guardianMain"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text ="@string/the_guardian_news"/>
-</LinearLayout>
+        android:layout_below="@+id/goToBBCnewsReader"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="0dp"
+        android:text="@string/the_guardian_news" />
+</RelativeLayout>
