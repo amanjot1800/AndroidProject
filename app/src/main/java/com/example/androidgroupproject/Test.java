@@ -3,6 +3,7 @@ package com.example.androidgroupproject;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -22,12 +23,17 @@ public class Test extends AppCompatActivity {
     SQLiteDatabase db;
     MyChat myAdapter;
     ArrayList<ArrayClass> nasa=new ArrayList<>();
+    public static final String IMAGEURL = "item";
+    public static final String ITEM_LAT = "LAT";
+    public static final String ID = "id";
+    public static final String ITEM_LONG = "LONG";
+    public static final String ITEM_POSITION = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-
+        boolean isTablet = findViewById(R.id.fragment) != null;
         ListView ls = findViewById(R.id.list);
         db=new DatabaseNasa(this).getReadableDatabase();
 
@@ -54,6 +60,29 @@ public class Test extends AppCompatActivity {
 
 //        new ArrayClass(la, lon, url, dt, newId)
 
+        ls.setOnItemClickListener((list, view, position, q) -> {
+                    Bundle dataToPass = new Bundle();
+                    dataToPass.putString(ITEM_LAT, nasa.get(position).getLatitude());
+                    dataToPass.putString(ITEM_LONG, nasa.get(position).getLongitude());
+                    dataToPass.putString(IMAGEURL, nasa.get(position).getUrl());
+                     dataToPass.putInt(ITEM_POSITION, position);
+                    dataToPass.putLong(ID, q);
+            if (isTablet) {
+                lastfrag dFragment = new lastfrag(); //add a DetailFragment
+                dFragment.setArguments(dataToPass);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment, dFragment) //Add the fragment in FrameLayout
+                        .commit(); //actually load the fragment.
+            }
+            else {
+                Intent nextActivity = new Intent(Test.this, Lastempty.class);
+                nextActivity.putExtras(dataToPass); //send data to next activity
+                startActivity(nextActivity); //make the transition
+            }
+                });
+
+
         ls.setOnItemLongClickListener((a, b, c, d) -> {
             ArrayClass selectedContact = nasa.get(c);
             View contact_view = getLayoutInflater().inflate(R.layout.alertlayout, null);
@@ -62,10 +91,9 @@ public class Test extends AppCompatActivity {
             TextView rowId = contact_view.findViewById(R.id.id);
             TextView rowName = contact_view.findViewById(R.id.name);
             TextView rowNam = contact_view.findViewById(R.id.na);
-            TextView dd = contact_view.findViewById(R.id.s);
 
-            rowName.setText("Latitude : " + selectedContact.getLatitude());
-            rowNam.setText("Latitude : " + selectedContact.getLongitude());
+            rowName.setText(selectedContact.getLatitude());
+            rowNam.setText(selectedContact.getLongitude());
             rowId.setText("id:" + selectedContact.getId());
             //  dd.setText("DATE - "+ selectedContact.getDate());
 
@@ -118,7 +146,7 @@ public class Test extends AppCompatActivity {
             ImageView img = newView.findViewById(R.id.aa);
 
                 Picasso.get().load(getItem(position).toString()).into(img);
-            // Picasso.get().load("https://earthengine.googleapis.com/api/thumb?thumbid=a36d12a495624c09ddfff5cec1d39afb&token=e1dbd920320f88e885c2a062cebe66ec").into(img);
+
                 return newView;
 
 

@@ -53,12 +53,10 @@ public class ImageryNasaActivity extends AppCompatActivity {
        la =fromMain.getDoubleExtra("shubham", 0);
        lng =fromMain.getDoubleExtra("sharma", 0);
         nasaImg = new NasaImagery();
-      //  String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=bG34muTPpUTPQvU5VJ6wUB9EdBWSnJ9Fhn5g5QFx";
-       // String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=CgKHgdvrK5UxpWaugKZYYqIt9pBVcKrff0cYkMvM";
-       // String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon="+ lng+"&lat="+la +"&date=2014-02-01&api_key=DEMO_KEY";
-      //  String ur = "https://api.nasa.gov/planetary/earth/imagery/?lon=100.75&lat=1.5&date=2014-02-01&api_key=DEMO_KEY";
+
         String ur = "http://dev.virtualearth.net/REST/V1/Imagery/Map/Birdseye/"+la+","+lng+"/20?dir=180&ms=500,500&key=AnBLrUpzidXWn25-HE-WmfVmd0QGYfAC8SWc2BSzTFTi2VqebHjb14It1VrPTnfN";
         nasaImg.execute(ur);
+
         data = findViewById(R.id.datas);
 
 
@@ -155,7 +153,7 @@ public class ImageryNasaActivity extends AppCompatActivity {
 
             data.setOnClickListener(click ->{
                 Intent database = new Intent(ImageryNasaActivity.this, MainDatabase.class);
-               // LinearLayout ln = findViewById(R.id.real);
+               LinearLayout ln = findViewById(R.id.real);
                 //
                 database.putExtra("s",tt.getText().toString());
                 database.putExtra("h",th.getText().toString());
@@ -164,7 +162,8 @@ public class ImageryNasaActivity extends AppCompatActivity {
                 database.putExtra("b",url.toString());
 
                 startActivityForResult(database,400);
-                Toast.makeText(ImageryNasaActivity.this,"Save to the database",Toast.LENGTH_LONG);
+                //Toast.makeText(ImageryNasaActivity.this,"Save to the database",Toast.LENGTH_LONG).show();
+                Snackbar.make(ln,R.string.sa,Snackbar.LENGTH_LONG).show();
             });
 
 
