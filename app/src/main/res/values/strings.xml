@@ -8,9 +8,11 @@
     <string name="imageryDatabase">Nasa Earth Imagery</string>
     <string name="amanjot">Author: Amanjot Singh</string>
     <string name="activity_image_of_day">Nasa Image of the Day</string>
+    <string name="activity_image_of_day_version">Version 1.0.2</string>
     <string name="acalendartext"> Select a date from below:  </string>
     <string name="Go"> Go ! </string>
     <string name="nasaMessage"> Select any date from the calendar to see the NASA Image of the day in HD format </string>
+    <string name="notesMessage"> Add notes: </string>
     <string name="savetoDatabase"> Save and View </string>
     <string name="saveOnly"> Save to Database </string>
     <string name="header_url"> URL: </string>
@@ -61,6 +63,7 @@
     <string name="helpAlert2">Long click an article to save it to your favourite article list\n</string>
     <string name="helpAlert3">Click an article to open the deatils of that article</string>
     <string name="nasaHint">Select a Date</string>
+    <string name="notesHint">Click here to add notes...</string>
     <string name="nasaImageDescription">Regular Image Url</string>
     <string name="nasaHide">Back</string>
     <string name="athr">author-Shubham Sharma</string>

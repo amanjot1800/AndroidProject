@@ -90,7 +90,7 @@ public class Test extends AppCompatActivity {
             TextView rowId = contact_view.findViewById(R.id.id);
             TextView rowName = contact_view.findViewById(R.id.name);
             TextView rowNam = contact_view.findViewById(R.id.na);
-
+      // setting the valus of the texts
             rowName.setText(selectedContact.getLatitude());
             rowNam.setText(selectedContact.getLongitude());
             rowId.setText("id:" + selectedContact.getId());
@@ -144,7 +144,7 @@ public class Test extends AppCompatActivity {
             text.setText(nasa.get(position).getLatitude().toString());
             ImageView img = newView.findViewById(R.id.aa);
 
-                Picasso.get().load(getItem(position).toString()).into(img);
+                Picasso.get().load(getItem(position).toString()).into(img); // used to download the image
 
                 return newView;
 

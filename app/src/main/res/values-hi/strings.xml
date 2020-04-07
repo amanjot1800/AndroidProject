@@ -1,29 +1,28 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="guardianPage">Guardian News Search के पास जाओ</string>
+    <string name="guardianPage">" गार्जियन न्यूज सर्च पर जाएं"</string>
     <string name="search_news_article_about">खोज</string>
-    <string name="the_guardian_news">The Guardian समाचार</string>
+    <string name="the_guardian_news">" द गार्जियन न्यूज"</string>
     <string name="search">खोज</string>
     <string name="title">शीर्षक: </string>
     <string name="click_this_url_to_open_the_article_in_browser">ब्राउज़र में लेख खोलने के लिए इस यूआरएल पर क्लिक करें:</string>
     <string name="url">url: </string>
-    <string name="bbc_news_reader">BBC News Reader</string>
-    <string name="nasa_image_of_the_day_search">NASA image of the day search</string>
+    <string name="bbc_news_reader">" बीबीसी न्यूज़ रीडर"</string>
+    <string name="nasa_image_of_the_day_search">दिन खोज की नासा छवि</string>
     <string name="author_jashanjot_pruthi">लेखक : जशनजोत प्रुथी</string>
     <string name="lat">Latitude का मान दर्ज करें</string>
     <string name="lo">Longitude का मान दर्ज करें</string>
     <string name="subm">सबमिट करने के लिए यहां क्लिक करें</string>
     <string name="save_article">लेख सहेजें</string>
     <string name="help_article">मदद</string>
-    <string name="hideFrag">HIDE</string>
+    <string name="hideFrag">छिपाना</string>
     <string name="hello_blank_fragment">हैलो खाली टुकड़ा</string>
-    <string name="GotoBBCnewsReader">BBC समाचार वाचक</string>
+    <string name="GotoBBCnewsReader">"बीबीसी न्यूज़ रीडर "</string>
     <string name="open">खुला हुआ</string>
     <string name="close">बंद करे</string>
     <string name="listTitle">BBC ताज़ा खबर</string>
     <string name="guardianNewsSearch">Guardian समाचार खोज</string>
     <string name="nasaImaginaryDatabase">Nasa काल्पनिक डेटाबेस</string>
-    <string name="bbcTitle">BBC समाचार वाचक(RSS)</string>
-    <string name="bbcVersion">v1.0.1</string>
+    <string name="bbcVersion">बीबीसी समाचार रीडर (आरएसएस)</string>
     <string name="bbcAuthor">लेखक: प्रियांक पटेल</string>
     <string name="saved_article">सहेजे गए लेख</string>
     <string name="enterYourName">अपना नाम दर्ज करें</string>
@@ -33,7 +32,7 @@
     <string name="delete">हटाएं</string>
     <string name="RemoveFromSavedArticles">सहेजे गए लेखों से निकालें?</string>
     <string name="Remove">निकालें?</string>
-    <string name="saveddd_article">Saved Articles</string>
+    <string name="saveddd_article">सहेजे गए लेख</string>
     <string name="bbc_help">यह ऐप बीबीसी से नवीनतम समाचार लाएगा। आप अपने पसंदीदा लेखों को सहेज और हटा भी सकते हैं|</string>
     <string name="ArticleSaved">लेख सहेजा गया</string>
     <string name="favourite_articles">पसंदीदा लेख</string>
@@ -41,7 +40,7 @@
     <string name="helpAlert2">अपनी पसंदीदा लेख सूची में सहेजने के लिए किसी लेख पर लंबी क्लिक करें\n</string>
     <string name="helpAlert3">उस लेख के डिटिल्स को खोलने के लिए एक लेख पर क्लिक करें</string>
     <string name="app_name">AndroidGroupProject</string>
-    <string name="nasa">Nasa Imagery Database</string>
+    <string name="nasa">"नासा इमेजरी डेटाबेस पर जाएं "</string>
     <string name="nasaImageofDay">" नासा दिन की चित्र"</string>
     <string name="help">मदद</string>
     <string name="bbc">बी बी सी   समाचार वाचक</string>
@@ -55,20 +54,25 @@
     <string name="nasaMessage">"एच डी प्रारूप में दिन की नासा छवि देखने के लिए कैलेंडर की किसी भी तारीख का चयन करें"</string>
     <string name="savetoDatabase">सेव करे और देखे</string>
 
-    <string name="saveOnly">"Save to Database "</string>
+    <string name="saveOnly">" डेटाबेस में सहेजें "</string>
     <string name="header_url">यू आर एल :</string>
     <string name="header_date">"मिति: "</string>
     <string name="header_hdurl">" एच डी यू आर एल: "</string>
     <string name="list_heading">विवरण देखने के लिए किसी तारीख का चयन करें</string>
-    <string name="nasaImageDescription">Regular Image Url</string>
-    <string name="nasaHide">Peeche</string>
+    <string name="nasaImageDescription">नियमित छवि यूआरएल</string>
+    <string name="nasaHide">वापस</string>
 
     <string name ="athr">Naam - Shubham Sharma</string>
     <string name ="email">ईमेल - shar0514@algonquinlive.com</string>
     <string name ="yo">आपको सही देशांतर और अक्षांश को भरना होगा और आप उस समन्वित के अनुसार छवि प्राप्त करेंगे जिसे आप टाइप करते हैं</string>
     <string name ="sa">डेटाबेस में सहेजें</string>
-    <string name ="qq">
-कोई मान रिक्त नहीं होना चाहिए</string>
+    <string name ="qq">कोई मान रिक्त नहीं होना चाहिए</string>
+    <string name="activity_image_of_day_version">" संस्करण 1.0.2"</string>
+    <string name="notesMessage">" नोट जोड़ें:"</string>
+    <string name="bbcTitle">" बीबीसी समाचार रीडर (आरएसएस)"</string>
+    <string name="nasaHelp">" डेट पिकर से किसी भी तारीख का चयन करें और दिन की NASA छवि देखने के लिए जाएं पर टैप करें। बाद में देखने के लिए छवि और यूआरएल को बचाने के लिए 'सहेजें और देखें' दबाएँ"</string>
+    <string name="viewSaved">सहेजे गए चित्र देखें</string>
+    <string name="notesHint">" नोट जोड़ने के लिए यहां क्लिक करें ..."</string>
     <string name ="b">
 अक्षांश </string>
     <string name ="c">

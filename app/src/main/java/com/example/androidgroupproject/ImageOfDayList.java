@@ -19,10 +19,16 @@ import java.util.ArrayList;
 
 public class ImageOfDayList extends AppCompatActivity {
 
-    private ArrayList<ImageInformation> imageInformation = new ArrayList<>();
-    private MyListAdapter myAdapter;
-    SQLiteDatabase db;
+    /**
+     * Fragment object used to load fragment into the tablet
+     */
+    ImageOfDayFragment fragment;
 
+
+    /**
+     * This class performs initialization on all fragments
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +36,9 @@ public class ImageOfDayList extends AppCompatActivity {
 
         ListView list = findViewById(R.id.list);
         list.setAdapter(myAdapter = new MyListAdapter());
+
+        boolean isTablet =  findViewById(R.id.frame) != null;
+
 
         loadData();
 
@@ -41,9 +50,23 @@ public class ImageOfDayList extends AppCompatActivity {
             data.putString("date", imageInformation.get(position).getDate());
             data.putString("url", imageInformation.get(position).getUrl());
             data.putString("hdurl", imageInformation.get(position).getHdurl());
-            Intent nextActivity = new Intent(ImageOfDayList.this, EmptyActivity.class);
-            nextActivity.putExtras(data);
-            startActivity(nextActivity);
+
+            if(isTablet)
+            {
+                fragment = new ImageOfDayFragment();
+                data.putBoolean("isTablet", true );
+                fragment.setArguments(data);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frame, fragment)
+                        .commit();
+
+            } else {
+                data.putBoolean("isTablet", false );
+                Intent nextActivity = new Intent(ImageOfDayList.this, EmptyActivity.class);
+                nextActivity.putExtras(data);
+                startActivity(nextActivity);
+            }
         });
 
         list.setOnItemLongClickListener( (p, v, position ,id) -> {
@@ -65,6 +88,26 @@ public class ImageOfDayList extends AppCompatActivity {
 
     }
 
+    /**
+     * The main ArrayList that stores all the data about the image. It stores image data temporaraly before saving to
+     * database. Also, it loads all the data from the database at the start of the Activiry and displays in the
+     * ListView
+     */
+    private ArrayList<ImageInformation> imageInformation = new ArrayList<>();
+    /**
+     * The adpater used to display the imageInformarion ArrayList into the ListView
+     */
+    private MyListAdapter myAdapter;
+
+    /**
+     * primary database object. It is initialized down below
+     */
+    SQLiteDatabase db;
+
+    /**
+     * This method adds data to the SQLiteDatabase and also makes sure that data is not duplicated
+     * by first retrieving the data and them comparing it, and then saving it
+     */
     private void addData(){
 
         if (getIntent().getBooleanExtra("addingData", false)) {
@@ -94,8 +137,15 @@ public class ImageOfDayList extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method simply loads data from the database and populates the ArrayList imageInformation
+     * to be displayed by the ListView
+     */
     private void loadData(){
 
+        /**
+         * The dbOpener object used to save data
+         */
         DbOpener dbOpener = new DbOpener(this);
         db = dbOpener.getWritableDatabase();
 
@@ -120,8 +170,19 @@ public class ImageOfDayList extends AppCompatActivity {
 
     }
 
+    /**
+     * This class is the Adapter class that extends form the BaseAdapter.
+     * It is usd to populate the the ArrayList as well as to inflate the each row of the listview
+     */
     private class MyListAdapter extends BaseAdapter{
 
+        /**
+         * Description copied from interface: android.widget.Adapter
+         * How many items are in the data set represented by this Adapter.
+         * Specified by: getCount in interface Adapter
+         *
+         * @return count of items
+         */
         @Override
         public int getCount() {
             return imageInformation.size();

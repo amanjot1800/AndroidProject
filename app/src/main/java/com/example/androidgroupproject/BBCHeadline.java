@@ -1,20 +1,27 @@
 package com.example.androidgroupproject;
 
 
-public class BBC_SavedArticle {
+public class BBCHeadline {
     private String title;
     private String description;
     private String link;
     private String dateOfArticle;
-    private long id;
+    private long id = 1L;
 
 
-    BBC_SavedArticle(String title, String description, String link , String dateOfArticle, long id ){
+    /**
+     * This constructor sets the required values. This can be used as a ArrayList to store all the
+     * Articles based on @title, @description, @link and @dateOfArticle
+     * @param title of the article
+     * @param description of the article
+     * @param link of the article
+     * @param dateOfArticle that was published
+     */
+    BBCHeadline(String title, String description, String link , String dateOfArticle ){
         this.title= title;
         this.description = description;
         this.link = link;
         this.dateOfArticle = dateOfArticle;
-        this.id = id;
     }
 
     public String getTitle() {
@@ -31,9 +38,7 @@ public class BBC_SavedArticle {
 
     public String getLink(){ return link; }
 
-    public long getId() {
-        return id;
-    }
+    public long getId() { return id; }
 
     public void setTitle(String title) { this.title = title; }
 

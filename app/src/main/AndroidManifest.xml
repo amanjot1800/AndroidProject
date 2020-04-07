@@ -12,12 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Lastempty"></activity>
+        <activity android:name=".Lastempty"/>
         <activity android:name=".EmptyActivity" />
         <activity android:name=".Favourite" />
         <activity android:name=".Phone" />
         <activity android:name=".ImageOfDayList" />
-        <activity android:name=".BBC_Saved_Articles_List" />
+        <activity android:name=".BBCSavedArticlesList" />
         <activity android:name=".ImageOfDayLoading" />
         <activity android:name=".ImageOfTheDay" />
         <activity android:name=".Test" />
@@ -27,9 +27,9 @@
         <activity android:name=".Guardian" />
         <activity android:name=".Article" />
         <activity android:name=".ArticleDetail" />
-        <activity android:name=".BBC_HeadlineDetails" />
-        <activity android:name=".BBC_NewsReader" />
-        <activity android:name=".BBC_SavedArticlesDetails" />
+        <activity android:name=".BBCHeadlineDetails" />
+        <activity android:name=".BBCNewsReader" />
+        <activity android:name=".BBCSavedArticlesDetails" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

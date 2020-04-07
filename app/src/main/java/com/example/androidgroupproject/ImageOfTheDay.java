@@ -8,7 +8,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,10 +26,29 @@ import java.util.Calendar;
 
 public class ImageOfTheDay extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    /**
+     * The calendar which the user selects by the calendar
+     */
     final Calendar pickedCalendar = Calendar.getInstance();
+    /**
+     * This calendar represents the current date of the system
+     */
     final Calendar myCalendar = Calendar.getInstance();
+    /**
+     * The calendar is then converted to following string
+     */
     public String date;
+    /**
+     * prefs object used to save the notes.
+     */
+    SharedPreferences prefs = null;
 
+
+    /**
+     * The first method that is launched when activity is started. It loads the layout which asks the user to
+     * enter the date and some other layouts.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,8 +106,20 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
             }
         });
 
+        prefs = getSharedPreferences("Notes", Context.MODE_PRIVATE);
+        String notes = prefs.getString("notes", "");
+
+        EditText addNotes = findViewById(R.id.addNotes);
+        addNotes.setText(notes);
+
     }
 
+
+    /**
+     * this inflates the menu
+     * @param menu menu to be inflated
+     * @return boolean
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -95,6 +128,11 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
         return true;
     }
 
+    /**
+     * This methods runs when any item is selected in the Options Bar
+     * @param item the item which is selected
+     * @return true if everything is okay
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -106,7 +144,7 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
                 break;
 
             case R.id.item2:
-                Intent go2 = new Intent(this, BBC_NewsReader.class);
+                Intent go2 = new Intent(this, BBCNewsReader.class);
                 startActivity(go2);
                 break;
 
@@ -135,6 +173,11 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
         return true;
     }
 
+    /**
+     * This methods runs when any item is selected in the NavigationView
+     * @param menuItem the menuitem which is selected
+     * @return true if everyting is okay
+     */
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
 
@@ -146,7 +189,7 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
                 break;
 
             case R.id.item2:
-                Intent go2 = new Intent(this, BBC_NewsReader.class);
+                Intent go2 = new Intent(this, BBCNewsReader.class);
                 startActivity(go2);
                 break;
 
@@ -176,6 +219,20 @@ public class ImageOfTheDay extends AppCompatActivity implements NavigationView.O
         drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    /**
+     * This method runs when Activity is paused and it saves the notes data to the SharedPreferences
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        EditText email = findViewById(R.id.addNotes);
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("notes", email.getText().toString());
+        editor.commit();
     }
 }
 

@@ -23,21 +23,43 @@ import java.io.FileNotFoundException;
 
 public class ImageOfDayFragment extends Fragment {
 
+    /**
+     * The bundle in which all the data is stored
+     */
     private Bundle data;
+    /**
+     * Used to stop current activity and other reasons
+     */
     private AppCompatActivity parentActivity;
+    /**
+     * Image set to the fragment after loading from the phone memory
+     */
     Bitmap image;
+    /**
+     * Tells whether to use phone layout or tablet layout
+     */
+    private boolean isTablet;
 
+    /**
+     * Empty Construvtor
+     */
     public ImageOfDayFragment() {
         // Required empty public constructor
     }
 
 
+    /**
+     * Creates the Fragment View
+     * @param inflater infalter object
+     * @param container Container object
+     * @param savedInstanceState Bundle object
+     * @return View to be inflated and used elsewhere
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_nasa_image_of_day, container, false);
         data = getArguments();
-
 
         if (isImageDownloaded(data.getString("date"))){
 
@@ -64,21 +86,36 @@ public class ImageOfDayFragment extends Fragment {
         ImageView imageView = view.findViewById(R.id.frag_imageViewNASA);
         imageView.setImageBitmap(image);
 
+        isTablet = data.getBoolean("isTablet");
+
         Button hide = (Button) view.findViewById(R.id.nasaHide);
         hide.setOnClickListener( clk -> {
-            EmptyActivity activity = (EmptyActivity) getActivity();
-            activity.finish();
+
+            if (!isTablet) {
+                EmptyActivity activity = (EmptyActivity) getActivity();
+                activity.finish();
+            }
+
         });
 
         return view;
     }
 
+    /**
+     *
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         parentActivity = (AppCompatActivity)context;
     }
 
+    /**
+     * This method tells if the image exists in the file system or not
+     * @param date the date to look after the image name
+     * @return true if image exists, otherwise false
+     */
     public boolean isImageDownloaded(String date){
         File file = parentActivity.getBaseContext().getFileStreamPath(date);
         return file.exists();

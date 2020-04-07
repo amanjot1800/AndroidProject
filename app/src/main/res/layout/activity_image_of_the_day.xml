@@ -49,6 +49,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Go" />
 
+            <TextView
+                android:layout_marginTop="40dp"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notesMessage"/>
+
+            <EditText
+                android:id="@+id/addNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:hint="@string/notesHint"/>
+
+
 
         </LinearLayout>
 
